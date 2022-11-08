@@ -1,17 +1,75 @@
 import { StatusBar } from 'expo-status-bar';
-import { Platform, StyleSheet } from 'react-native';
+import { Platform, StyleSheet, SafeAreaView, TextInput, Button } from 'react-native';
+import { useState, useEffect } from 'react';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 
+
+
+
 export default function ModalScreen() {
+  let [isLoading, setIsLoading] = useState(true);
+  let [error, setError] = useState();
+  let [response, setResponse] = useState();
+
+  useEffect(() => {
+    fetch("https://my-json-server.typicode.com/RomanInformatika/schoolevents2/users",
+      {
+        method: 'GET',
+        headers: { 'Content-Type': 'text/plain' }
+      })
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result)
+          setResponse(result);
+          setIsLoading(false);
+        },
+        (error) => {
+          setIsLoading(false);
+          setError(error);
+        }
+      )
+  }, []);
+
+
+  const [pinText, SetPinText] = useState('')
+
+  const onChangeText = (text) => {
+
+    SetPinText(text)
+  }
+
+  const checkAccess = () => {
+
+    for (const tt in response) {
+      if (response[tt].code==pinText){
+        console.log('granted')
+        return 's'
+      }
+      console.log('denied')
+
+    }
+  }
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Modal</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/ModalScreen.tsx" />
+      <Text style={styles.title}>Введите PIN-код</Text>
+      <SafeAreaView>
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeText}
+          value={pinText}
+        />
+        <View style={styles.fixToText}>
+          <Button
+            title="OK"
+            onPress={() => checkAccess()}
+          />
+        </View>
+      </SafeAreaView>
 
-      {/* Use a light status bar on iOS to account for the black space above the modal */}
       <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
     </View>
   );
@@ -23,6 +81,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
   title: {
     fontSize: 20,
     fontWeight: 'bold',
@@ -31,5 +95,10 @@ const styles = StyleSheet.create({
     marginVertical: 30,
     height: 1,
     width: '80%',
+  },
+  fixToText: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
