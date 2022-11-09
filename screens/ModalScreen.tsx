@@ -55,7 +55,7 @@ export default function ModalScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Введите PIN-код</Text>
+      <Text style={styles.title}>Введите PIN-коды</Text>
       <SafeAreaView>
         <TextInput
           style={styles.input}
