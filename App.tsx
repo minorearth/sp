@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-// hello3
-=======
-// hello5
->>>>>>> 493680c6fa390ca49497dc84c150afaaa025b25d
+// hello4
 
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
