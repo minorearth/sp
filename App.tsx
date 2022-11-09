@@ -1,4 +1,4 @@
-// hello7
+// hello8
 
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
