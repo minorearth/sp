@@ -4,11 +4,17 @@ import { useState, useEffect } from 'react';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
+import {  useDispatch } from 'react-redux'
+import { setaccess} from '../redux/userdataSlice'
 
 
 
 
 export default function ModalScreen() {
+
+
+  const dispatch = useDispatch()
+
   let [isLoading, setIsLoading] = useState(true);
   let [error, setError] = useState();
   let [response, setResponse] = useState();
@@ -45,10 +51,15 @@ export default function ModalScreen() {
 
     for (const tt in response) {
       if (response[tt].code==pinText){
-        console.log('granted')
-        return 's'
-      }
-      console.log('denied')
+        // console.log('granted')
+        dispatch(setaccess('granted'))
+
+        // return 's'
+      } else
+      {
+      // console.log('denied')
+      dispatch(setaccess('denied'))}
+
 
     }
   }
