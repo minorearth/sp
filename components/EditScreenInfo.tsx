@@ -13,7 +13,7 @@ export default function EditScreenInfo({ path }: { path: string }) {
           style={styles.getStartedText}
           lightColor="rgba(0,0,0,0.8)"
           darkColor="rgba(255,255,255,0.8)">
-          пытаюсь понять где менять цвет 
+          меняю цвета 
         </Text>
       </View>
     </View>
