@@ -55,7 +55,7 @@ export default function ModalScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Введите PIN-коды</Text>
+      <Text style={styles.title}>Введите PIN-код</Text>
       <SafeAreaView>
         <TextInput
           style={styles.input}
@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#8888FF'
   },
   input: {
     height: 40,
@@ -100,5 +101,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#8888FF'
   },
 });
