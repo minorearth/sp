@@ -115,3 +115,4 @@ const styles = StyleSheet.create({
     backgroundColor: '#8888FF'
   },
 });
+// Тест слияния веток
