@@ -1,24 +1,38 @@
 import { StyleSheet } from 'react-native';
-
+import { StatusBar } from 'expo-status-bar';
+import { useEffect, useState } from 'react';
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 import { useSelector } from 'react-redux';
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
+  let [isLoading, setIsLoading] = useState(true);
+  let [error, setError] = useState();
+  let [response, setResponse] = useState();
 
+  useEffect(() => {
+    fetch("https://school1298.ru/cl/calendar.json",
+      // fetch("https://api.coindesk.com/v1/bpi/currentprice.json",
+      {
+        method: 'GET',
+        headers: { 'Content-Type': 'text/plain' }
+      })
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result.value)
+          setResponse(result);
+          setIsLoading(false);
+        },
+        (error) => {
+          setIsLoading(false);
+          setError(error);
+        }
+      )
+  }, []);
   const count = useSelector((state) => state.userdata.value)
 
-  return (
-    <View style={styles.container}>
-
-      <Text style={styles.title}>Tab One</Text>
-      <Text style={styles.title}>{count}</Text>
-      <View style={styles.separator}></View>
-      <EditScreenInfo path="/screens/TabOneScreen.tsx" />
-    </View>
-  );
-}
 
 const styles = StyleSheet.create({
   container: {

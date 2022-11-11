@@ -1,12 +1,49 @@
-import * as WebBrowser from 'expo-web-browser';
-import { StyleSheet, TouchableOpacity } from 'react-native';
-import {FlatList } from 'react-native';
-import Colors from '../constants/Colors';
-import { MonoText } from './StyledText';
-import { Text, View } from './Themed';
+import { StatusBar } from 'expo-status-bar';
+import { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, ActivityIndicator, FlatList } from 'react-native';
+import { getAccess } from './getAccess';
 
-export default function EditScreenInfo({ path }: { path: string }) {
+export default function App() {
+  let [isLoading, setIsLoading] = useState(true);
+  let [error, setError] = useState();
+  let [response, setResponse] = useState();
+
+  useEffect(() => {
+    fetch("https://school1298.ru/cl/calendar.json",
+      // fetch("https://api.coindesk.com/v1/bpi/currentprice.json",
+      {
+        method: 'GET',
+        headers: { 'Content-Type': 'text/plain' }
+      })
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result.value)
+          setResponse(result);
+          setIsLoading(false);
+        },
+        (error) => {
+          setIsLoading(false);
+          setError(error);
+        }
+      )
+  }, []);
+
+  const getContent = () => {
+    if (isLoading) {
+      return <ActivityIndicator size="large" />;
+    }
+
+    if (error) {
+      return <Text>{error}</Text>
+    }
+    return <Text>Bitcoin (USD): {response["bpi"]["USD"].rate}</Text>;
+  };
+
+  const data2 = [{ Address: 'tt' }, { Address: 'tt2' }]
+
   return (
+    // <View style={styles.container}>
     <View style={styles.container}>
       {/* {getContent()} */}
       {!isLoading && <Text style={styles.library}>{response.value[0].Address}</Text>}
@@ -35,32 +72,6 @@ export default function EditScreenInfo({ path }: { path: string }) {
 }
 
 const styles = StyleSheet.create({
-  getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
-    backgroundColor: '#8888FF'
-  },
-  homeScreenFilename: {
-    marginVertical: 7,
-  },
-  codeHighlightContainer: {
-    borderRadius: 3,
-    paddingHorizontal: 4,
-  },
-  getStartedText: {
-    fontSize: 17,
-    lineHeight: 24,
-    textAlign: 'center',
-  },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpLinkText: {
-    textAlign: 'center',
-  },
-  container: {
-    backgroundColor: '#8888FF'
-  },
   container: {
     flex: 1,
     backgroundColor: '#00FFFF',
@@ -109,3 +120,4 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
 });
+
