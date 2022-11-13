@@ -28,7 +28,7 @@ export default function ModalScreen() {
       .then(res => res.json())
       .then(
         (result) => {
-          // console.log(result)
+          console.log(result)
           setResponse(result);
           setIsLoading(false);
         },

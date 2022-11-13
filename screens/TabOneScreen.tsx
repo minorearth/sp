@@ -15,15 +15,9 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
   let [error, setError] = useState();
   let [response, setResponse] = useState();
   const selectFilter = useSelector((state) => state.filter.value)
-  // console.log(selectFilter)
-  // const ApplyFilter = () => {
-  //   const filter=
-
-
- 
 
   useEffect(() => {
-    console.log(selectFilter)
+    // console.log(selectFilter)
     // console.log(selectFilter)
     fetch("https://school1298.ru/cl/calendar.json",
       // fetch("https://api.coindesk.com/v1/bpi/currentprice.json",
@@ -34,7 +28,7 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
       .then(res => res.json())
       .then(
         (result) => {
-          console.log(selectFilter)
+          console.log(result)
           // setResponse(result);
           setResponse(filterAll(result,selectFilter));
           setIsLoading(false);
@@ -49,7 +43,7 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
 
 
   return (
-    // <View style={styles.container}>
+
     <View style={styles.container}>
       <View style={styles.filter}>
         <ScrollView horizontal>
