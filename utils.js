@@ -1,4 +1,4 @@
-const SintNow= '2022-09-28'
+const SintNow= '2022-08-31'
 export const ISOdateParse = (IsoDate) => {
     var now = new Date(IsoDate);
     const timecur = now.toISOString().substring(0, 10)
@@ -7,7 +7,19 @@ export const ISOdateParse = (IsoDate) => {
  
 }
 
-export const filterByToday = (events) => {
+export const filterAll =(events,filter)=> {
+
+    if (filter=='Сегодня'){
+        console.log(filter)
+        return filterByToday(events)
+        
+    }
+    return events
+
+}
+
+
+const filterByToday = (events) => {
     if (events==undefined){
         return {}
     }
