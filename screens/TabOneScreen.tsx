@@ -47,7 +47,7 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
     <View style={styles.container}>
       <View style={styles.filter}>
         <ScrollView horizontal>
-          <FilterBtn label='Сегодня' />
+          <FilterBtn style={styles.filter1} label='Сегодня' />
           <FilterBtn label='Завтра' />
           <FilterBtn label='Неделя' />
           <FilterBtn label='Месяц' />
@@ -91,27 +91,26 @@ const styles = StyleSheet.create({
   },
   events: {
 
-    backgroundColor: '#78833b',
+    backgroundColor: '#78DBE2',
     justifyContent: "flex-start"
   },
 
   box: {
 
-    backgroundColor: '#c4dfc6',
+    backgroundColor: '#FBCEB1',
     borderRadius: 10,
     margin:5,
     padding: 5,
   },
 
   filter: {
-    // flex: 1,
-    // height: 100,
+    backgroundColor: 'white'
   },
 
 
   filterbtn: {
     borderRadius: 5,
-    backgroundColor: '#ca8aea57',
+    backgroundColor: '#787878',
     margin: 5,
     padding: 5
   },
@@ -150,4 +149,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 10
   },
+  filter1: {
+    backgroundColor: '#B5B8B1'
+  }
 });

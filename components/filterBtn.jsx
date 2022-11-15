@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
 
     filterbtn: {
         borderRadius: 5,
-        backgroundColor: '#ca8aea57',
+        backgroundColor: '#B5B8B1',
         margin: 5,
         padding: 5
     },
