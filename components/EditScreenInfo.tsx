@@ -9,7 +9,7 @@ export default function EditScreenInfo({ path }: { path: string }) {
   return (
     <View style={styles.container}>
       {/* {getContent()} */}
-      {!isLoading && <Text style={styles.library}>{response.value[0].Address}</Text>}
+      {/* {!isLoading && <Text style={styles.library}>{response.value[0].Address}</Text>} */}
       
       <FlatList
         data={response?.value}

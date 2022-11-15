@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
-import {  useDispatch } from 'react-redux'
-import { setaccess} from '../redux/userdataSlice'
+import { useDispatch } from 'react-redux'
+import { setaccess } from '../redux/userdataSlice'
 
 
 
@@ -50,15 +50,15 @@ export default function ModalScreen() {
   const checkAccess = () => {
 
     for (const tt in response) {
-      if (response[tt].code==pinText){
+      if (response[tt].code == pinText) {
         // console.log('granted')
         dispatch(setaccess('granted'))
 
         // return 's'
-      } else
-      {
-      // console.log('denied')
-      dispatch(setaccess('denied'))}
+      } else {
+        // console.log('denied')
+        dispatch(setaccess('denied'))
+      }
 
 
     }
@@ -67,19 +67,17 @@ export default function ModalScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Введите PIN-код</Text>
-      <SafeAreaView>
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangeText}
-          value={pinText}
+      <TextInput
+        style={styles.input}
+        onChangeText={onChangeText}
+        value={pinText}
+      />
+      <View style={styles.fixToText}>
+        <Button
+          title="OK"
+          onPress={() => checkAccess()}
         />
-        <View style={styles.fixToText}>
-          <Button
-            title="OK"
-            onPress={() => checkAccess()}
-          />
-        </View>
-      </SafeAreaView>
+      </View>
 
       <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
     </View>
@@ -91,13 +89,16 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#8888FF'
+    backgroundColor: '#8888FF',
+    width:'100%'
   },
   input: {
+    // flex:2,
     height: 40,
     margin: 12,
     borderWidth: 1,
     padding: 10,
+    width: '50%',
   },
   title: {
     fontSize: 20,
