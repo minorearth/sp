@@ -5,8 +5,9 @@ import EditScreenInfo from '../components/EditScreenInfo';
 // import { Text,} from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 import { useSelector } from 'react-redux';
-import { ISOdateParse, filterAll } from '../utils'
+import { ISOdateParse, filterAll, FormatParallel,FormatClass } from '../utils'
 import { FilterBtn } from '../components/filterBtn'
+import {ClassSwitch} from '../components/classwitch'
 
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
@@ -14,11 +15,9 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
   let [isLoading, setIsLoading] = useState(true);
   let [error, setError] = useState();
   let [response, setResponse] = useState();
-  const selectFilter = useSelector((state) => state.filter.value)
+  const selectFilter = useSelector((state) => state.filter)
 
   useEffect(() => {
-    // console.log(selectFilter)
-    // console.log(selectFilter)
     fetch("https://school1298.ru/cl/calendar.json",
       // fetch("https://api.coindesk.com/v1/bpi/currentprice.json",
       {
@@ -28,9 +27,9 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
       .then(res => res.json())
       .then(
         (result) => {
-          console.log(result)
+          // console.log(result)
           // setResponse(result);
-          setResponse(filterAll(result,selectFilter));
+          setResponse(filterAll(result, selectFilter));
           setIsLoading(false);
         },
         (error) => {
@@ -54,7 +53,9 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
           <FilterBtn label='Все' />
           <FilterBtn label='Прошедшие' />
         </ScrollView>
+        <ClassSwitch/>
       </View>
+
       <View style={styles.events}>
         {/* {getContent()} */}
         {/* {!isLoading && <Text style={styles.library}>{response.value[0].Address}</Text>} */}
@@ -63,9 +64,11 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
           data={response?.value}
           renderItem={(item) => {
             return <View style={styles.box}>
-              <View style={styles.what1}><Text style={styles.what}>{item.item.Group[0].Title}</Text></View>
+              <View style={styles.what1}><Text style={styles.what}>{item.item.Title}</Text></View>
               <View style={styles.where1}><Text style={styles.where}>{item.item.Address}</Text><View /></View>
               <View style={styles.who1}><Text style={styles.who}>{item.item.MainMan.Title}</Text></View>
+              <View style={styles.who1}><Text style={styles.who}>{FormatParallel(item.item.Parallel)}</Text></View>
+              <View style={styles.who1}><Text style={styles.who}>{FormatClass(item.item.Class)}</Text></View>
               <View style={styles.data1}><Text style={styles.data}>{ISOdateParse(item.item.DateStart)}, {item.item.Time}</Text></View>
 
             </View>
@@ -99,7 +102,7 @@ const styles = StyleSheet.create({
 
     backgroundColor: '#FBCEB1',
     borderRadius: 10,
-    margin:5,
+    margin: 5,
     padding: 5,
   },
 

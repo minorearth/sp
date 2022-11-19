@@ -1,9 +1,17 @@
-import React, { useState } from "react";
-import { View, Switch, StyleSheet,Text } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Switch, StyleSheet, Text } from "react-native";
+import { useDispatch } from "react-redux";
+import { Dispatch } from "redux";
+import { setParallels } from "../redux/filterSlice"
 
-export const Filterswitch = (props) => {
+export const ParallelSwitch = (props) => {
     const { label } = props
     const [isEnabled, setIsEnabled] = useState(false);
+    const setParallelD = useDispatch()
+    useEffect(() => {
+        setParallelD(setParallels({[label]: isEnabled}))
+
+    }, [isEnabled])
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
     return (
@@ -27,6 +35,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#8888FF',
         alignItems: "center",
         justifyContent: "flex-start",
-        height:50,
+        height: 50,
     }
 });

@@ -5,7 +5,7 @@ import { setClassName } from '../redux/filterSlice'
 
 export const ClassPicker = () => {
     const setClassD = useDispatch()
-    const [ className, setClassNameh ] = useState()
+    const [ className, setClassNameh ] = useState('9М')
 
     const onChangeText = (text) => {
         setClassNameh(text)
@@ -13,7 +13,6 @@ export const ClassPicker = () => {
     
     useEffect(()=>{
         setClassD(setClassName(className))
-
 
     },[])
 
