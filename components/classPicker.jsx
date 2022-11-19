@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Text, TextInput } from "react-native";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setClassName } from '../redux/filterSlice'
 
 export const ClassPicker = () => {
     const setClassD = useDispatch()
-    const [ className, setClassNameh ] = useState()
+    const [ className, setClassNameh ] = useState('')
+    const ClassNameS=useSelector(state=>state.filter.className)
 
     const onChangeText = (text) => {
         setClassNameh(text)
@@ -14,6 +15,10 @@ export const ClassPicker = () => {
     useEffect(()=>{
         setClassD(setClassName(className))
 
+    },[className])    
+    
+    useEffect(()=>{
+        setClassNameh(ClassNameS)
 
     },[])
 

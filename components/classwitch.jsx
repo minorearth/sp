@@ -1,14 +1,22 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { View, Switch, StyleSheet,Text } from "react-native";
+import { useDispatch } from "react-redux";
+import {toggleMyclass} from '../redux/filterSlice'
 
-export const Filterswitch = (props) => {
+
+export const ClassSwitch = (props) => {
     const { label } = props
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+    const toggleSwitchD=useDispatch()
+    useEffect(()=>{
+        // console.log(isEnabled)
+        toggleSwitchD(toggleMyclass(isEnabled))
+    },[isEnabled])
 
     return (
         <View style={styles.container}>
-            <Text>{label}</Text>
+            <Text>Мой класс</Text>
             <Switch
                 trackColor={{ false: "#767577", true: "#81b0ff" }}
                 thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
