@@ -15,7 +15,7 @@ export const FormatParallel = (data) => {
 export const FormatClass = (data) => {
     // const feed=data==null?' для всех':String(data)
     // return 'Параллели: '+ feed
-    console.log(data)
+    // console.log(data)
     const feed=data.length==0?'Не указаны':String(data.map(item=>item.Title))
     return 'Классы: '+feed
 }
