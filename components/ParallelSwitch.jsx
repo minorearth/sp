@@ -1,37 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { View, Switch, StyleSheet, Text } from "react-native";
-import { useDispatch } from "react-redux";
-import { Dispatch } from "redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setParallels } from "../redux/filterSlice"
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
 export const ParallelSwitch = (props) => {
     const { label } = props
     const [isEnabled, setIsEnabled] = useState(false);   
-    const [Loading, isLoading] = useState(true);
+
     const setParallelD = useDispatch()
-    var loading=true
-
-    const getSetting= async ()=>{
-        // const aaa=await AsyncStorage.getItem('@parallel'+label)
-        // setIsEnabled(aaa=='true')
-        // console.log(aaa)
-    }
-
+    const switchState = useSelector(state=>state.filter.parallels)
 
     useEffect(() => {
-        getSetting()
+        setIsEnabled(switchState[label]==true)
     }, [])
 
     useEffect(() => {
-
         setParallelD(setParallels({[label]: isEnabled}))
 
     }, [isEnabled])
     const toggleSwitch = () => {
-        // AsyncStorage.setItem('@parallel'+label, String(!isEnabled))
         setIsEnabled(previousState => !previousState)
     
     };

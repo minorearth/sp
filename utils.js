@@ -105,7 +105,7 @@ const filterByToday = (events, DateStart, DateEnd, filter) => {
     if (events == undefined) {
         return {}
     }
-    // console.log(filter.myClass)
+    // console.log(filter.parallels)
     const res = {}
     res["value"] = []
     const data3 = events
