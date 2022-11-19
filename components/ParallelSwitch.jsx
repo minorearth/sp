@@ -3,7 +3,7 @@ import { View, Switch, StyleSheet, Text } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setParallels } from "../redux/filterSlice"
 
-
+// crap
 
 export const ParallelSwitch = (props) => {
     const { label } = props
