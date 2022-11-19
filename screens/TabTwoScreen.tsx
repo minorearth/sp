@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import EditScreenInfo from '../components/EditScreenInfo';
+
 import { Text, View } from '../components/Themed';
 import { ParallelSwitch } from '../components/ParallelSwitch'
 import { ClassPicker } from '../components/classPicker'

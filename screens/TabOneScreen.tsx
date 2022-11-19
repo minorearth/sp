@@ -1,7 +1,7 @@
 import { StyleSheet, FlatList, ActivityIndicator, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
-import EditScreenInfo from '../components/EditScreenInfo';
+
 // import { Text,} from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 import { useSelector } from 'react-redux';
