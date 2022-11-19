@@ -39,13 +39,13 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
-    backgroundColor: '#8888FF',
+    backgroundColor: '#659DBD',
     flexDirection: "column"
   }, 
   Parallelcontainer: {
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
-    backgroundColor: '#8888FF',
+    backgroundColor: '#659DBD',
     flexDirection: "column",
     width: '100%'
     

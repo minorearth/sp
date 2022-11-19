@@ -91,13 +91,13 @@ const styles = StyleSheet.create({
   },
   events: {
 
-    backgroundColor: '#78DBE2',
+    backgroundColor: '#8D8741',
     justifyContent: "flex-start"
   },
 
   box: {
 
-    backgroundColor: '#FBCEB1',
+    backgroundColor: '#FBEEC1',
     borderRadius: 10,
     margin:5,
     padding: 5,

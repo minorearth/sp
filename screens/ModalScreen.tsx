@@ -75,6 +75,7 @@ export default function ModalScreen() {
       <View style={styles.fixToText}>
         <Button
           title="OK"
+          color='#BC986A'
           onPress={() => checkAccess()}
         />
       </View>
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#8888FF',
+    backgroundColor: '#FBEEC1',
     width:'100%'
   },
   input: {
@@ -113,7 +114,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#8888FF'
+    backgroundColor: '#FBEEC1'
   },
 });
 // Тест слияния веток

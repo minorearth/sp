@@ -6,6 +6,9 @@ import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 import store from './redux/store';
 import { Provider } from 'react-redux';
+import { Splashscreen } from './components/splashscreen';
+import { Screen2 } from './components/screen2';
+
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -14,9 +17,13 @@ export default function App() {
   if (!isLoadingComplete) {
     return null;
   } else {
-    return (<Provider  store={store}>
+    return (<Provider store={store}>
       <SafeAreaProvider>
-        <Navigation colorScheme={colorScheme} />
+        {false && <Splashscreen />}
+        {true && <Screen2/>}
+
+
+        {false && <Navigation colorScheme={colorScheme} />}
         <StatusBar />
       </SafeAreaProvider>
     </Provider>
