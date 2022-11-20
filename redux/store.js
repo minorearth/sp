@@ -13,6 +13,7 @@ import { persistStore, persistReducer,FLUSH,
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
+  blacklist: ['identityPassed'],
 }
 
 const rootReducer = combineReducers({userdata: userdataReducer, filter: filterReducer})

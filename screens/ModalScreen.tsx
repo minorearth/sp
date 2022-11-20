@@ -2,16 +2,14 @@ import { StatusBar } from 'expo-status-bar';
 import { Platform, StyleSheet, SafeAreaView, TextInput, Button } from 'react-native';
 import { useState, useEffect } from 'react';
 
-import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
-import { useDispatch } from 'react-redux'
-import { setaccess } from '../redux/userdataSlice'
-
+import { useDispatch, useSelector } from 'react-redux'
+import { setaccess, setauthpassed } from '../redux/userdataSlice'
+import { setperson, setidentity } from "../redux/userdataSlice";
 
 
 
 export default function ModalScreen() {
-
 
   const dispatch = useDispatch()
 
@@ -40,49 +38,54 @@ export default function ModalScreen() {
   }, []);
 
 
-  const [pinText, SetPinText] = useState('')
+  const [pinText, SetPinText] = useState('123456789')
 
   const onChangeText = (text) => {
 
     SetPinText(text)
   }
 
+
+
+  // const setidentityD = useDispatch()
+
+
   const checkAccess = () => {
 
     for (const tt in response) {
       if (response[tt].code == pinText) {
-        // console.log('granted')
-        dispatch(setaccess('granted'))
 
+        return dispatch(setaccess(true))
+        // setidentityD(setidentity(true))
         // return 's'
-      } else {
-        // console.log('denied')
-        dispatch(setaccess('denied'))
       }
-
-
     }
   }
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Введите PIN-код</Text>
-      <TextInput
-        style={styles.input}
-        onChangeText={onChangeText}
-        value={pinText}
-      />
-      <View style={styles.fixToText}>
-        <Button
-          title="OK"
-          color='#BC986A'
-          onPress={() => checkAccess()}
+  const identityPassed = useSelector(state => state.userdata.identityPassed)
+  const accesspassed = useSelector(state => state.userdata.access)
+  console.log(identityPassed, accesspassed)
+  if (identityPassed && !accesspassed) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>Введите PIN-код</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeText}
+          value={pinText}
         />
-      </View>
+        <View style={styles.fixToText}>
+          <Button
+            title="OK"
+            color='#BC986A'
+            onPress={() => checkAccess()}
+          />
+        </View>
 
-      <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
-    </View>
-  );
+        {/* <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} /> */}
+      </View>
+    );
+  } else return null
 }
 
 const styles = StyleSheet.create({
@@ -91,7 +94,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#FBEEC1',
-    width:'100%'
+    width: '100%'
   },
   input: {
     // flex:2,

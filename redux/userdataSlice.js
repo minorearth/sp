@@ -3,16 +3,27 @@ import { createSlice } from '@reduxjs/toolkit'
 export const userdataSlice = createSlice({
   name: 'userdata',
   initialState: {
-    value: 'noth',
+    access: false,
+    person: 'noth',
+    identityPassed: false,
+
   },
   reducers: {
     setaccess: (state, action) => {
-      state.value = action.payload
-    },
+      state.access = action.payload
+      console.log(action)
+    },    
+    setidentity: (state, action) => {
+      state.identityPassed = action.payload
+    },    
+    setperson: (state, action) => {
+      state.person = action.payload
+    },    
+
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { setaccess } = userdataSlice.actions
+export const { setaccess,setidentity,setperson,setauthpassed } = userdataSlice.actions
 
 export default userdataSlice.reducer
