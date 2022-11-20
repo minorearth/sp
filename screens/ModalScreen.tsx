@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { Platform, StyleSheet, SafeAreaView, TextInput, Button } from 'react-native';
+import { Platform, StyleSheet, SafeAreaView, TextInput, Button, Alert } from 'react-native';
 import { useState, useEffect } from 'react';
 
 import { Text, View } from '../components/Themed';
@@ -60,6 +60,13 @@ export default function ModalScreen() {
         // return 's'
       }
     }
+    Alert.alert(
+      "Ошибка",
+      "Неверный PIN. Верный-123456789",
+      [
+              { text: "Ну и ладно :(" }
+      ])
+
   }
 
   const identityPassed = useSelector(state => state.userdata.identityPassed)

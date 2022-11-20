@@ -8,8 +8,8 @@ export const Screen2 = () => {
     useEffect(()=>{
 
         setidentityD(setidentity(false))
-        setaccessD(setaccess(false))
-        console.log('тута')
+        // setaccessD(setaccess(false))
+
 
     },[])
 
