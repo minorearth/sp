@@ -7,8 +7,8 @@ import Navigation from './navigation';
 import { persistor } from './redux/store';
 import store from './redux/store';
 import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react'
-import { Text } from 'react-native'
+import { PersistGate } from 'redux-persist/integration/react';
+import { Text } from 'react-native';
 import { Splashscreen } from './components/splashscreen';
 import { Screen2 } from './components/screen2';
 
