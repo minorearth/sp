@@ -24,10 +24,10 @@ export default function App() {
       <PersistGate loading={<Text>Loading...</Text>} persistor={persistor}>
       <SafeAreaProvider>
         {false && <Splashscreen />}
-        {false && <Screen2/>}
+        {true && <Screen2/>}
 
 
-        {true && <Navigation colorScheme={colorScheme} />}
+        {false && <Navigation colorScheme={colorScheme} />}
         <StatusBar />
       </SafeAreaProvider>
     </PersistGate>
