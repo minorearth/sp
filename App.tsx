@@ -20,10 +20,10 @@ export default function App() {
     return (<Provider store={store}>
       <SafeAreaProvider>
         {false && <Splashscreen />}
-        {true && <Screen2/>}
+        {false && <Screen2/>}
 
 
-        {false && <Navigation colorScheme={colorScheme} />}
+        {true && <Navigation colorScheme={colorScheme} />}
         <StatusBar />
       </SafeAreaProvider>
     </Provider>

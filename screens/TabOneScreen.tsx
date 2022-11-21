@@ -63,10 +63,12 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
           data={response?.value}
           renderItem={(item) => {
             return <View style={styles.box}>
-              <View style={styles.what1}><Text style={styles.what}>{item.item.Group[0].Title}</Text></View>
-              <View style={styles.where1}><Text style={styles.where}>{item.item.Address}</Text><View /></View>
+              <View style={styles.data1}><Text style={styles.data}>{item.item.Time} {ISOdateParse(item.item.DateStart)}</Text></View>
+              <View style={styles.two}>
               <View style={styles.who1}><Text style={styles.who}>{item.item.MainMan.Title}</Text></View>
-              <View style={styles.data1}><Text style={styles.data}>{ISOdateParse(item.item.DateStart)}, {item.item.Time}</Text></View>
+              <View style={styles.where1}><Text style={styles.where}>{item.item.Address}</Text><View /></View>
+              </View>
+              <View style={styles.what1}><Text style={styles.what}>{item.item.Group[0].Title}</Text></View>
 
             </View>
           }}
@@ -87,11 +89,13 @@ const styles = StyleSheet.create({
     flex: 1,
     // alignItems: "flex-start",
     // justifyContent: "flex-start",
-    flexDirection: "column"
+    flexDirection: "column",
+    borderLeftColor: '#DAAD86',
+    borderLeftWidth: 3,
   },
   events: {
 
-    backgroundColor: '#8D8741',
+    backgroundColor: '#659DBD',
     justifyContent: "flex-start"
   },
 
@@ -123,33 +127,38 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   who: {
-    fontSize: 12,
+    fontSize: 13,
   },
   data: {
     fontSize: 12,
+    fontStyle: 'italic',
+
   },
   what1: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: 'flex-start',
     // marginTop: 10,
     fontWeight: 'bold',
   },
   where1: {
     flex: 1,
-    alignItems: 'center',
-    marginTop: 10
+    alignItems: 'flex-end',
+    marginTop: 5,
   },
   who1: {
     flex: 1,
-    alignItems: 'center',
-    marginTop: 10
+    alignItems: 'flex-start',
+    marginTop: 5,
   },
   data1: {
     flex: 1,
-    alignItems: 'center',
-    marginTop: 10
+    alignItems: 'flex-end',
+    marginTop: 5,
   },
   filter1: {
     backgroundColor: '#B5B8B1'
-  }
+  },
+  two: {
+    flexDirection: "row",
+  },
 });
