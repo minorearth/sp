@@ -1,8 +1,8 @@
-import React from 'react'
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native'
-import { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { setfilter } from '../redux/filterSlice'
+import React from 'react';
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setfilter } from '../redux/filterSlice';
 // import 
 
 
