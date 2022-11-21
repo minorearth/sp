@@ -7,30 +7,34 @@ import Navigation from './navigation';
 import { persistor } from './redux/store';
 import store from './redux/store';
 import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import { Text } from 'react-native';
+import { PersistGate } from 'redux-persist/integration/react'
+import { Text } from 'react-native'
 import { Splashscreen } from './components/splashscreen';
-import { Screen2 } from './components/screen2';
+import { Screen2 } from './components/Identity';
+import ModalScreen from './screens/ModalScreen'
+
 
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
 
+
+
   if (!isLoadingComplete) {
     return null;
   } else {
     return (<Provider store={store}>
       <PersistGate loading={<Text>Loading...</Text>} persistor={persistor}>
-      <SafeAreaProvider>
-        {false && <Splashscreen />}
-        {false && <Screen2/>}
+        <SafeAreaProvider>
+          {/* {false && <Splashscreen />} */}
+          <Screen2 />
+          <ModalScreen/>
 
-
-        {true && <Navigation colorScheme={colorScheme} />}
-        <StatusBar />
-      </SafeAreaProvider>
-    </PersistGate>
+          <Navigation colorScheme={colorScheme} />
+          <StatusBar />
+        </SafeAreaProvider>
+      </PersistGate>
     </Provider >
     );
   }

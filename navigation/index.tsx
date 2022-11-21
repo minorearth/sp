@@ -18,15 +18,22 @@ import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
+import { useSelector } from 'react-redux';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
-  return (
-    <NavigationContainer
+const identityPassed=useSelector(state=>state.userdata.identityPassed)
+const accesspassed=useSelector(state=>state.userdata.access)
+
+
+  if (identityPassed && accesspassed) {
+    return (<NavigationContainer
       linking={LinkingConfiguration}
       theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <RootNavigator />
     </NavigationContainer>
-  );
+
+    );
+  } else return null
 }
 
 /**
@@ -67,22 +74,22 @@ function BottomTabNavigator() {
         component={TabOneScreen}
         options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
           title: 'Мероприятия',
-          tabBarLabel:() => {return null},
+          tabBarLabel: () => { return null },
           tabBarIcon: ({ color }) => <TabBarIcon name="window-restore" color={color} />,
-          headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate('Modal')}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}>
-              <FontAwesome
-                name="cubes"
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
-          ),
+          // headerRight: () => (
+          //   <Pressable
+          //     onPress={() => navigation.navigate('Modal')}
+          //     style={({ pressed }) => ({
+          //       opacity: pressed ? 0.5 : 1,
+          //     })}>
+          //     <FontAwesome
+          //       name="cubes"
+          //       size={25}
+          //       color={Colors[colorScheme].text}
+          //       style={{ marginRight: 15 }}
+          //     />
+          //   </Pressable>
+          // ),
         })}
       />
       <BottomTab.Screen
@@ -90,7 +97,7 @@ function BottomTabNavigator() {
         component={TabTwoScreen}
         options={{
           title: 'Фильтры',
-          tabBarLabel:() => {return null},
+          tabBarLabel: () => { return null },
           tabBarIcon: ({ color }) => <TabBarIcon name="gears" color={color} />,
         }}
       />
