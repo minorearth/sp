@@ -64,10 +64,14 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
           data={response?.value}
           renderItem={(item) => {
             return <View style={styles.box}>
-              <View style={styles.what1}><Text style={styles.what}>{item.item.Group[0].Title}</Text></View>
-              <View style={styles.where1}><Text style={styles.where}>{item.item.Address}</Text><View /></View>
+              <View style={styles.data1}><Text style={styles.data}> {item.item.Time} {ISOdateParse(item.item.DateStart)}</Text></View>
+              <View style={styles.where1}><Text style={styles.where}>{item.item.Address}</Text></View>
+              <View style={styles.what1}><Text style={styles.what}>{item.item.Title}</Text></View>
+              <View style={styles.line}>
+              <View style={styles.who2}><Text style={styles.who}>{FormatParallel(item.item.Parallel)}</Text></View>
+              <View style={styles.who3}><Text style={styles.who}>{FormatClass(item.item.Class)}</Text></View>
+              </View>
               <View style={styles.who1}><Text style={styles.who}>{item.item.MainMan.Title}</Text></View>
-              <View style={styles.data1}><Text style={styles.data}>{ISOdateParse(item.item.DateStart)}, {item.item.Time}</Text></View>
 
             </View>
           }}
@@ -89,8 +93,6 @@ const styles = StyleSheet.create({
     // alignItems: "flex-start",
     // justifyContent: "flex-start",
     flexDirection: "column",
-    borderLeftColor: '#DAAD86',
-    borderLeftWidth: 3,
   },
   events: {
 
@@ -100,10 +102,13 @@ const styles = StyleSheet.create({
 
   box: {
 
-    backgroundColor: '#FBEEC1',
+    backgroundColor: '#82cbf5',
     borderRadius: 10,
     margin: 5,
     padding: 5,
+    borderLeftColor: '#FBEEC1',
+    borderLeftWidth: 5,
+    borderStyle: 'solid'
   },
 
   filter: {
@@ -120,16 +125,18 @@ const styles = StyleSheet.create({
 
 
   what: {
-    fontSize: 14,
+    fontSize: 16,
   },
   where: {
-    fontSize: 12,
+    fontSize: 13,
+    fontStyle: 'italic',
   },
   who: {
-    fontSize: 13,
+    fontSize: 15,
+    fontStyle: 'italic',
   },
   data: {
-    fontSize: 12,
+    fontSize: 13,
     fontStyle: 'italic',
 
   },
@@ -138,6 +145,10 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     // marginTop: 10,
     fontWeight: 'bold',
+    borderBottomColor: '#fad8bb',
+    borderBottomWidth: 3,
+    borderRadius: 10,
+    borderStyle: 'dotted',
   },
   where1: {
     flex: 1,
@@ -146,7 +157,7 @@ const styles = StyleSheet.create({
   },
   who1: {
     flex: 1,
-    alignItems: 'flex-start',
+    alignItems: 'flex-end',
     marginTop: 5,
   },
   data1: {
@@ -160,4 +171,21 @@ const styles = StyleSheet.create({
   two: {
     flexDirection: "row",
   },
+  line: {
+    borderLeftColor: '#FBEEC1',
+    borderLeftWidth: 3,
+    borderStyle: 'solid',
+    marginLeft: 15,
+    borderRadius: 10,
+    marginTop: 7,
+  },
+  who2: {
+    marginLeft: 5,
+    fontSize: 7,
+  },
+  who3: {
+    marginLeft: 5,
+    fontSize: 7,
+  },
+
 });
