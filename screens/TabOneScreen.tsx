@@ -93,6 +93,7 @@ const styles = StyleSheet.create({
     // alignItems: "flex-start",
     // justifyContent: "flex-start",
     flexDirection: "column",
+
   },
   events: {
 
@@ -113,7 +114,7 @@ const styles = StyleSheet.create({
   },
 
   filter: {
-    backgroundColor: 'white'
+    backgroundColor: '#c4eaff',
   },
 
 

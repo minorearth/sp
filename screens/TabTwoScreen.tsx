@@ -63,7 +63,7 @@ export default function TabTwoScreen() {
 
 const styles = StyleSheet.create({
   exitbtn: {
-    backgroundColor: '#9fdafc',
+    backgroundColor: '#fbeec1',
     borderRadius: 10,
 
   },
