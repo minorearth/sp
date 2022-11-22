@@ -68,10 +68,10 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
               <View style={styles.where1}><Text style={styles.where}>{item.item.Address}</Text></View>
               <View style={styles.what1}><Text style={styles.what}>{item.item.Title}</Text></View>
               <View style={styles.line}>
-              <View style={styles.who2}><Text style={styles.who}>{FormatParallel(item.item.Parallel)}</Text></View>
-              <View style={styles.who3}><Text style={styles.who}>{FormatClass(item.item.Class)}</Text></View>
+              <View style={styles.who2}><Text style={styles.parallel}>{FormatParallel(item.item.Parallel)}</Text></View>
+              <View style={styles.who3}><Text style={styles.class}>{FormatClass(item.item.Class)}</Text></View>
               </View>
-              <View style={styles.who1}><Text style={styles.who}>{item.item.MainMan.Title}</Text></View>
+              <View style={styles.who1}><View style={styles.borderline}><Text style={styles.who}>{item.item.MainMan.Title}</Text></View></View>
 
             </View>
           }}
@@ -102,13 +102,15 @@ const styles = StyleSheet.create({
 
   box: {
 
-    backgroundColor: '#82cbf5',
+    backgroundColor: '#9fdafc',
     borderRadius: 10,
     margin: 5,
     padding: 5,
     borderLeftColor: '#FBEEC1',
     borderLeftWidth: 5,
-    borderStyle: 'solid'
+    borderRightColor: '#FBEEC1',
+    borderRightWidth: 5,
+
   },
 
   filter: {
@@ -125,19 +127,23 @@ const styles = StyleSheet.create({
 
 
   what: {
-    fontSize: 16,
+    fontSize: 18,
   },
   where: {
-    fontSize: 13,
+    fontSize: 14,
     fontStyle: 'italic',
+    marginRight: 5,
   },
   who: {
     fontSize: 15,
     fontStyle: 'italic',
+    marginRight: 5,
+    marginLeft: 5,
   },
   data: {
     fontSize: 13,
     fontStyle: 'italic',
+    marginRight: 5,
 
   },
   what1: {
@@ -159,6 +165,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'flex-end',
     marginTop: 5,
+
   },
   data1: {
     flex: 1,
@@ -187,5 +194,23 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     fontSize: 7,
   },
+  parallel: {
+    fontSize: 14,
+  },
+  class: {
+    fontSize: 14,
+  },
+  borderline: {
+    borderLeftColor: '#f2bf57',
+    borderLeftWidth: 3,
+    borderRadius: 20,
+    borderBottomColor: '#f2bf57',
+    borderBottomWidth: 3,
+    borderRightColor: '#f2bf57',
+    borderRightWidth: 3,
+    borderTopColor: '#f2bf57',
+    borderTopWidth: 3,
+    backgroundColor: '#FBEEC1'
 
+  }
 });
