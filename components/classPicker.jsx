@@ -43,9 +43,10 @@ const styles = StyleSheet.create({
 
         flexDirection: 'column',
         paddingTop: 5,
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
         width: '100%',
         backgroundColor: '#9fdafc',
+        alignItems: 'center',
     },
     caption: {
         fontSize: 20,
