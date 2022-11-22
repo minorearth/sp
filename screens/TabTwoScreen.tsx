@@ -45,16 +45,18 @@ export default function TabTwoScreen() {
         </View>
       </View>
       <ClassPicker />
+      <View style={styles.exit}>
       <TouchableOpacity
         style={styles.exitBtnContainer}
         onPress={DropAuth}
       >
         {/* <View style={styles.exitBtnContainer}> */}
-          <Text style={styles.exitbtn}>Выйти из системы</Text>
+        <Text style={styles.exitbtn}>Выйти из системы</Text>
         {/* </View> */}
 
       </TouchableOpacity>
     </View>
+    </View >
   );
 }
 
@@ -62,27 +64,39 @@ export default function TabTwoScreen() {
 const styles = StyleSheet.create({
   exitbtn: {
     borderRadius: 5,
-    backgroundColor: '#BC986A',
+    backgroundColor: '#659DBD',
     margin: 5,
     padding: 5
+  },
+  exit: {
+    borderLeftColor: '#f2bf57',
+    borderLeftWidth: 3,
+    borderRadius: 20,
+    borderBottomColor: '#f2bf57',
+    borderBottomWidth: 3,
+    borderRightColor: '#f2bf57',
+    borderRightWidth: 3,
+    borderTopColor: '#f2bf57',
+    borderTopWidth: 3,
+    backgroundColor: '#FBEEC1'
   },
   container: {
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
-    backgroundColor: '#659DBD',
+    backgroundColor: '#FBEEC1',
     flexDirection: "column"
   },
   exitBtnContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#659DBD',
+    backgroundColor: '#FBEEC1',
     flexDirection: "column",
     width: '100%'
   },
   Parallelcontainer: {
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
-    backgroundColor: '#659DBD',
+    backgroundColor: '#FBEEC1',
     flexDirection: "column",
     width: '100%'
 

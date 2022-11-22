@@ -101,7 +101,6 @@ const styles = StyleSheet.create({
   },
 
   box: {
-
     backgroundColor: '#9fdafc',
     borderRadius: 10,
     margin: 5,
