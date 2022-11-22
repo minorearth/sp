@@ -20,10 +20,10 @@ export const FilterBtn = (props) => {
     // }, [filter])
     const { label } = props
 
-    return (<TouchableOpacity
+    return (<View style={styles.button}><TouchableOpacity
         onPress={() => setFilterD(setfilter(label))}
     ><Text style={styles.filterbtn}>{label}</Text>
-    </TouchableOpacity>
+    </TouchableOpacity></View>
 
 
 
@@ -36,11 +36,23 @@ export const FilterBtn = (props) => {
 
 const styles = StyleSheet.create({
 
-    filterbtn: {
+    button: {
         borderRadius: 5,
         backgroundColor: '#BC986A',
-        margin: 5,
-        padding: 5
+        padding: 5,
+        marginLeft: 4,
+        borderLeftColor: '#f2bf57',
+        borderLeftWidth: 3,
+        borderRadius: 20,
+        borderBottomColor: '#f2bf57',
+        borderBottomWidth: 3,
+        borderRightColor: '#f2bf57',
+        borderRightWidth: 3,
+        borderTopColor: '#f2bf57',
+        borderTopWidth: 3,
+        backgroundColor: '#FBEEC1',
+        marginBottom: 4,
+        
     },
 
 });
