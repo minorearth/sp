@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         paddingTop: 5,
         justifyContent: 'flex-start',
         width: '100%',
-        backgroundColor: '#FBEEC1',
+        backgroundColor: '#9fdafc',
     },
     caption: {
         fontSize: 20,

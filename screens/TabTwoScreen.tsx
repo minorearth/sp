@@ -63,40 +63,37 @@ export default function TabTwoScreen() {
 
 const styles = StyleSheet.create({
   exitbtn: {
-    borderRadius: 5,
-    backgroundColor: '#659DBD',
-    margin: 5,
-    padding: 5
-  },
-  exit: {
-    borderLeftColor: '#f2bf57',
-    borderLeftWidth: 3,
-    borderRadius: 20,
-    borderBottomColor: '#f2bf57',
-    borderBottomWidth: 3,
-    borderRightColor: '#f2bf57',
-    borderRightWidth: 3,
-    borderTopColor: '#f2bf57',
-    borderTopWidth: 3,
-    backgroundColor: '#FBEEC1'
+    backgroundColor: '#9fdafc',
+    borderRadius: 10,
+
   },
   container: {
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
-    backgroundColor: '#FBEEC1',
-    flexDirection: "column"
+    backgroundColor: '#9fdafc',
+    flexDirection: "column",
+    flex: 1,
   },
   exitBtnContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#FBEEC1',
     flexDirection: "column",
-    width: '100%'
+    width: '100%',
+    backgroundColor: '#9fdafc',
+    borderLeftColor: '#659DBD',
+    borderLeftWidth: 3,
+    borderRadius: 10,
+    borderBottomColor: '#659DBD',
+    borderBottomWidth: 3,
+    borderRightColor: '#659DBD',
+    borderRightWidth: 3,
+    borderTopColor: '#659DBD',
+    borderTopWidth: 3,
   },
   Parallelcontainer: {
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
-    backgroundColor: '#FBEEC1',
+    backgroundColor: '#9fdafc',
     flexDirection: "column",
     width: '100%'
 
