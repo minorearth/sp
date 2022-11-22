@@ -50,7 +50,8 @@ const styles = StyleSheet.create({
     },
     switch: {
         flex: 1,
-        marginBottom: 15
+        marginBottom: 15,
+        marginRight: 20,
     },
     label: {
         flex: 1,
