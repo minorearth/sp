@@ -9,6 +9,7 @@ import { ISOdateParse, filterAll, FormatParallel,FormatClass } from '../utils'
 import { FilterBtn } from '../components/filterBtn'
 import {ClassSwitch} from '../components/classwitch'
 import {FilterBar} from '../components/filterBar'
+import {Event} from '../components/Event'
 
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
@@ -53,24 +54,10 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
       </View>
 
       <View style={styles.events}>
-        {/* {getContent()} */}
-        {/* {!isLoading && <Text style={styles.library}>{response.value[0].Address}</Text>} */}
 
         <FlatList
           data={response?.value}
-          renderItem={(item) => {
-            return <View style={styles.box}>
-              <View style={styles.data1}><Text style={styles.data}> {item.item.Time} {ISOdateParse(item.item.DateStart)}</Text></View>
-              <View style={styles.where1}><Text style={styles.where}>{item.item.Address}</Text></View>
-              <View style={styles.what1}><Text style={styles.what}>{item.item.Title}</Text></View>
-              <View style={styles.line}>
-              <View style={styles.who2}><Text style={styles.parallel}>{FormatParallel(item.item.Parallel)}</Text></View>
-              <View style={styles.who3}><Text style={styles.class}>{FormatClass(item.item.Class)}</Text></View>
-              </View>
-              <View style={styles.who1}><View style={styles.borderline}><Text style={styles.who}>{item.item.MainMan.Title}</Text></View></View>
-
-            </View>
-          }}
+          renderItem={(item) => <Event navigation ={navigation} item={item}/>}
           keyExtractor={(item) => item.id}
           vertical
         />
