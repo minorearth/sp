@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { ISOdateParse, filterAll, FormatParallel,FormatClass } from '../utils'
 import { FilterBtn } from '../components/filterBtn'
 import {ClassSwitch} from '../components/classwitch'
+import {FilterBar} from '../components/filterBar'
 
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
@@ -45,14 +46,9 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
 
     <View style={styles.container}>
       <View style={styles.filter}>
-        <ScrollView horizontal>
-          <FilterBtn style={styles.filter1} label='Сегодня' />
-          <FilterBtn label='Завтра' />
-          <FilterBtn label='Неделя' />
-          <FilterBtn label='Месяц' />
-          <FilterBtn label='Все' />
-          <FilterBtn label='Прошедшие' />
-        </ScrollView>
+      
+         <FilterBar/>
+
         <ClassSwitch/>
       </View>
 
