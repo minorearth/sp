@@ -5,11 +5,10 @@ import { useEffect, useState } from 'react';
 // import { Text,} from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 import { useSelector } from 'react-redux';
-import { ISOdateParse, filterAll, FormatParallel,FormatClass } from '../utils'
-import { FilterBtn } from '../components/filterBtn'
-import {ClassSwitch} from '../components/classwitch'
-import {FilterBar} from '../components/filterBar'
-import {Event} from '../components/Event'
+import { ISOdateParse, filterAll, FormatParallel, FormatClass } from '../utils'
+import { ClassSwitch } from '../components/classwitch'
+import { FilterBar } from '../components/filterBar'
+import { Event } from '../components/Event'
 
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
@@ -29,8 +28,6 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
       .then(res => res.json())
       .then(
         (result) => {
-          // console.log(result)
-          // setResponse(result);
           setResponse(filterAll(result, selectFilter));
           setIsLoading(false);
         },
@@ -47,17 +44,14 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
 
     <View style={styles.container}>
       <View style={styles.filter}>
-      
-         <FilterBar/>
-
-        <ClassSwitch/>
+        <FilterBar />
+        <ClassSwitch />
       </View>
 
       <View style={styles.events}>
-
         <FlatList
           data={response?.value}
-          renderItem={(item) => <Event navigation ={navigation} item={item}/>}
+          renderItem={(item) => <Event navigation={navigation} item={item} />}
           keyExtractor={(item) => item.id}
           vertical
         />

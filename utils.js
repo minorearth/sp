@@ -6,6 +6,22 @@ export const ISOdateParse = (IsoDate) => {
     return timecur
 }
 
+
+export const Period = (IsoDateStart,IsoDateEnd) => {
+    var now = new Date(IsoDateStart);
+    const timecurS = now.toISOString().substring(0, 10)
+    var now = new Date(IsoDateEnd);
+    const timecurE = now.toISOString().substring(0, 10)
+    if (timecurE!='1970-01-01'){
+        return  `c  ${timecurS} по  ${timecurE}`
+    }
+    else{
+        return timecurS
+    }
+    
+
+}
+
 export const FormatParallel = (data) => {
     const feed=data==null?' для всех':String(data)
     return 'Параллели: '+ feed
@@ -111,12 +127,20 @@ const filterByToday = (events, DateStart, DateEnd, filter) => {
     const data3 = events
     const data2 = data3.value
     for (var event in data2) {
-        var eventDate = new Date(data2[event].DateStart);
+        var eventDateS = new Date(data2[event].DateStart);
+        var eventDateE = new Date(data2[event].DateEnd);
         // var classEval = true
         const ParallelEval = CheckParallel(filter.parallels, data2[event].Parallel)
         var classEval = filter.myClass ? Checkclass(filter.className, data2[event].Class) : true
-        if (eventDate.getTime() >= DateStart.getTime()
-            && eventDate.getTime() <= DateEnd.getTime()
+        if (
+            (
+            (eventDateS.getTime() >= DateStart.getTime()
+            && eventDateS.getTime() <= DateEnd.getTime())
+             || 
+            (eventDateE.getTime() >= DateStart.getTime()
+            && eventDateE.getTime() <= DateEnd.getTime())
+            )
+
             && classEval && ParallelEval) {
             res["value"] = [...res["value"], data2[event]]
         }

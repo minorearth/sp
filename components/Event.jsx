@@ -1,5 +1,5 @@
 import React from 'react'
-import { ISOdateParse, filterAll, FormatParallel, FormatClass } from '../utils'
+import { Period, filterAll, FormatParallel, FormatClass } from '../utils'
 import { StyleSheet, FlatList, ActivityIndicator, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 // import {Navi}
 
@@ -8,7 +8,7 @@ import { StyleSheet, FlatList, ActivityIndicator, Text, View, ScrollView, Toucha
 export const Event = ({ item, navigation }) => {
 
     return (<View style={styles.box}>
-        <View style={styles.data1}><Text style={styles.data}> {item.item.Time} {ISOdateParse(item.item.DateStart)}</Text></View>
+        <View style={styles.data1}><Text style={styles.data}> {item.item.Time} {Period(item.item.DateStart,item.item.DateEnd)}</Text></View>
         <View style={styles.where1}><Text style={styles.where}>{item.item.Address}</Text></View>
         <TouchableOpacity onPress={()=>navigation.navigate('Details')}>
             <View style={styles.what1}><Text style={styles.what}>{item.item.Title}</Text></View>
