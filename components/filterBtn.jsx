@@ -24,7 +24,7 @@ export const FilterBtn = (props) => {
     useEffect(() => {
 
         if (filterState == label) {
-            console.log('hello')
+            // console.log('hello')
 
 
         }

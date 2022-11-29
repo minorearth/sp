@@ -17,9 +17,11 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
   let [error, setError] = useState();
   let [response, setResponse] = useState();
   const selectFilter = useSelector((state) => state.filter)
+  const access =useSelector(state=>state.userdata.person)
 
   useEffect(() => {
-    fetch("https://school1298.ru/cl/calendar.json",
+    fetch("https://school1298.ru/cl/teachers/calendar.json",
+    // fetch("https://school1298.ru/cl/calendar.json",
       // fetch("https://api.coindesk.com/v1/bpi/currentprice.json",
       {
         method: 'GET',
@@ -28,7 +30,8 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
       .then(res => res.json())
       .then(
         (result) => {
-          setResponse(filterAll(result, selectFilter));
+          setResponse(filterAll(result, selectFilter,access));
+          // console.log(selectFilter)
           setIsLoading(false);
         },
         (error) => {

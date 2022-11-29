@@ -25,7 +25,11 @@ export const Screen2 = () => {
             setpersonD(setperson('Ученик'))
             setidentityD(setidentity(true))
             setaccessD(setaccess(true))
-            schedulePushNotification('123', '123', '12312', 'Wednesday')
+            const LR= async () => {
+                await schedulePushNotification('123', '123', '12312', 'Wednesday');
+              }
+            LR()
+            
         } else {
             setpersonD(setperson('Учитель'))
             setidentityD(setidentity(true))

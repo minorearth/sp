@@ -4,17 +4,19 @@ import { Text, View } from '../components/Themed';
 import { RootStackScreenProps } from '../types';
 import * as Clipboard from 'expo-clipboard';
 
-export default function DetailsScreen({ navigation }) {
+export default function DetailsScreen({route}) {
+  // const { params}=route.params
   const copyToClipboard = async () => {
     await Clipboard.setStringAsync('hello world');
   };
+  // console.log(route.params)
 
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={copyToClipboard} style={styles.link}>
         <Text style={styles.linkText}>Копировать текст</Text>
       </TouchableOpacity>
-      <Text style={styles.title}>По нашим сведениям, в ваших образовательных организациях отсутствуют ИТ-полигоны и Робоклассы. Предлагаем воспользоваться возможностями лабораторий предпрофессионального образования и посетить с учениками 7-ых классов IT-вертикали учебный день, который проведут специалисты Городского методического центра.</Text>
+      <Text style={styles.title}>{route.params}</Text>
 
     </View>
   );
