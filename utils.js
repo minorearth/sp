@@ -1,4 +1,12 @@
-const SintNow = new Date('2022-08-31T21:00:00.000Z')
+// export const RightNow = new Date('2022-08-31T22:00:00.000Z')
+export const RightNow =new Date()
+const offset=new Date().getTimezoneOffset()
+RightNow.setTime(RightNow.getTime()-offset*60*1000)
+const TodayS = new Date(RightNow.toDateString())
+TodayS.setTime(TodayS.getTime()-offset*60*1000)
+const TodayE = new Date(TodayS.toDateString())
+TodayE.setTime(TodayE.getTime()+24*60*60*1000-offset*60*1000)
+console.log(RightNow,TodayS,TodayE)
 
 export const ISOdateParse = (IsoDate) => {
     var now = new Date(IsoDate);
@@ -41,26 +49,26 @@ export const filterAll = (events, filter, access) => {
     var DateStart = new Date()
     var DateEnd = new Date()
     if (filter.value == 'Сегодня') {
-        DateStart.setTime(SintNow.getTime())
-        DateEnd.setTime(SintNow.getTime())
+        DateStart.setTime(TodayS.getTime())
+        DateEnd.setTime(TodayE.getTime())
     }
     else if (filter.value == 'Завтра') {
-        DateStart.setTime(SintNow.getTime() + 86400000)
-        DateEnd.setTime(SintNow.getTime() + 86400000)
+        DateStart.setTime(TodayE.getTime())
+        DateEnd.setTime(TodayE.getTime() + 86400000)
     } else if (filter.value == 'Неделя') {
-        DateStart.setTime(SintNow.getTime())
-        DateEnd.setTime(SintNow.getTime() + 604800000)
+        DateStart.setTime(TodayS.getTime())
+        DateEnd.setTime(TodayS.getTime() + 604800000)
     }
     else if (filter.value == 'Месяц') {
-        DateStart.setTime(SintNow.getTime())
-        DateEnd.setTime(SintNow.getTime() + 26298000000)
+        DateStart.setTime(TodayS.getTime())
+        DateEnd.setTime(TodayS.getTime() + 26298000000)
     }
     else if (filter.value == 'Прошедшие') {
-        DateStart.setTime(SintNow.getTime() - 262980000000)
-        DateEnd.setTime(SintNow.getTime() - 86400000)
+        DateStart.setTime(TodayS.getTime() - 262980000000)
+        DateEnd.setTime(TodayS.getTime())
     } else if (filter.value == 'Все') {
-        DateStart.setTime(SintNow.getTime() - 262980000000)
-        DateEnd.setTime(SintNow.getTime() + 262980000000)
+        DateStart.setTime(TodayS.getTime() - 262980000000)
+        DateEnd.setTime(TodayS.getTime() + 262980000000)
     }
     return filterByToday(events, DateStart, DateEnd, filter, access)
 
@@ -110,7 +118,29 @@ const CheckAcceess = (visibility, access) => {
 
 
 }
-const filterByToday = (events, DateStart, DateEnd, filter, access) => {
+const fullDate=(day,time)=>{
+    if (time==null){
+        return 'null'
+    }
+    const ret= new Date(day)
+    const [hour,minutes]= time.split(':').map(x=>Number(x))
+    ret.setTime(day.getTime()+(hour*60+minutes)*60*1000)
+    return ret
+
+
+    
+}
+
+export const getSecOffset=(end)=>{
+    const st = new Date()
+    const en = new Date(end)
+    // return Math.round((en,st,en-st+offset*60*1000)/1000)
+    return 300
+
+}
+
+
+export const DataClean = (events) => {
 
     if (events == undefined) {
         return {}
@@ -122,21 +152,51 @@ const filterByToday = (events, DateStart, DateEnd, filter, access) => {
     for (var event in data2) {
         var eventDateS = new Date(data2[event].DateStart);
         var eventDateE = new Date(data2[event].DateEnd);
+        eventDateS.setTime(eventDateS.getTime()-offset*60*1000)
+        eventDateE.setTime(eventDateE.getTime()-offset*60*1000)
+        res["value"] = [...res["value"], {...data2[event], "DateStart": eventDateS, 'DateEnd': eventDateE,"fullDate": fullDate(eventDateS,data2[event].Time)}]
+         }
+    
+    return res
+
+
+}
+
+
+const filterByToday = (events, DateStart, DateEnd, filter, access) => {
+
+    if (events == undefined) {
+        return {}
+    }
+    const res = {}
+    res["value"] = []
+    const data3 = events
+    const data2 = data3.value
+    for (var event in data2) {
+
+        var eventDateS = new Date(data2[event].DateStart);
+        var eventDateE = new Date(data2[event].DateEnd);
+        // eventDateS.setTime(eventDateS.getTime()-offset*60*1000)
+        // eventDateE.setTime(eventDateE.getTime()-offset*60*1000)
         const EventAccess = CheckAcceess(data2[event].Visibility, access)
         // console.log(EventAccess, data2[event].Visibility, access)
         const ParallelEval = CheckParallel(filter.parallels, data2[event].Parallel)
+        console.log(DateStart,DateEnd)
+
         var classEval = filter.myClass ? Checkclass(filter.className, data2[event].Class) : true
         if (
             (
                 (eventDateS.getTime() >= DateStart.getTime()
-                    && eventDateS.getTime() <= DateEnd.getTime())
+                    && eventDateS.getTime() < DateEnd.getTime())
                 ||
                 (eventDateE.getTime() >= DateStart.getTime()
-                    && eventDateE.getTime() <= DateEnd.getTime())
+                    && eventDateE.getTime() < DateEnd.getTime())
             )
 
             && classEval && ParallelEval && EventAccess) {
-            res["value"] = [...res["value"], data2[event]]
+  
+            res["value"] = [...res["value"], {...data2[event]}]
+        
         }
     }
 

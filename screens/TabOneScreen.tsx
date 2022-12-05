@@ -5,23 +5,26 @@ import { useEffect, useState } from 'react';
 // import { Text,} from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 import { useSelector } from 'react-redux';
-import { ISOdateParse, filterAll, FormatParallel, FormatClass } from '../utils'
+import { ISOdateParse, filterAll, FormatParallel, FormatClass,DataClean } from '../utils'
 import { ClassSwitch } from '../components/classwitch'
 import { FilterBar } from '../components/filterBar'
 import { Event } from '../components/Event'
+
+import Notification, { schedulePushNotification } from '../screens/notification'
 
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
 
   let [isLoading, setIsLoading] = useState(true);
   let [error, setError] = useState();
+  let [result, setResult] = useState();
   let [response, setResponse] = useState();
   const selectFilter = useSelector((state) => state.filter)
-  const access =useSelector(state=>state.userdata.person)
+  const access = useSelector(state => state.userdata.person)
 
   useEffect(() => {
     fetch("https://school1298.ru/cl/teachers/calendar.json",
-    // fetch("https://school1298.ru/cl/calendar.json",
+      // fetch("https://school1298.ru/cl/calendar.json",
       // fetch("https://api.coindesk.com/v1/bpi/currentprice.json",
       {
         method: 'GET',
@@ -30,8 +33,8 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
       .then(res => res.json())
       .then(
         (result) => {
-          setResponse(filterAll(result, selectFilter,access));
-          // console.log(selectFilter)
+          setResult(DataClean(result));
+          setResponse(filterAll(result, selectFilter, access));
           setIsLoading(false);
         },
         (error) => {
@@ -39,6 +42,14 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
           setError(error);
         }
       )
+  }, []);
+
+
+  useEffect(() => {
+
+    setResponse(filterAll(result, selectFilter, access));
+
+
   }, [selectFilter]);
 
 
@@ -55,9 +66,11 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
         <FlatList
           data={response?.value}
           renderItem={(item) => <Event navigation={navigation} item={item} />}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.ID}
           vertical
+          refreshing={true}
         />
+        <Notification />
 
 
         <StatusBar style="auto" />

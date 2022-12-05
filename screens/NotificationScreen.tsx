@@ -1,59 +1,69 @@
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity, FlatList, Text, View } from 'react-native';
 import { useEffect, useState } from 'react';
 
 
-import { Text, View } from '../components/Themed';
+
 import { ParallelSwitch } from '../components/ParallelSwitch'
 import { ClassPicker } from '../components/classPicker'
 import { useSelector, useDispatch } from 'react-redux';
 import { setidentity, setaccess } from '../redux/userdataSlice'
 import * as Notifications from "expo-notifications";
+import { iteratorSymbol } from 'immer/dist/internal';
 
-export default function TabTwoScreen() {
+export default function NotificationScreen() {
+  const [NotifList, SetNotifList] = useState()
+  const getNotifications = async () => {
 
-  const setidentityD = useDispatch()
-  const setaccessD = useDispatch()
-
-  const DropAuth = () => {
-    setidentityD(setidentity(false))
-    setaccessD(setaccess(false))
+    const feedback = await Notifications.getAllScheduledNotificationsAsync()
+    // console.log(feedback)
+    SetNotifList(feedback)
   }
+
+  useEffect(() => {
+
+
+    getNotifications()
+
+
+
+  }, [])
+
+  const ClearNotifications = async () => {
+
+    // await Notifications.dismissAllNotificationsAsync()
+    await Notifications.cancelAllScheduledNotificationsAsync()
+  }
+
+  // ClearNotifications()
+
+  const getDateString = (dateMills) => {
+    const DateString = new Date(dateMills)
+     return `${DateString.toLocaleDateString()} ${DateString.toLocaleTimeString()}`
+ }
 
   return (
     <View style={styles.container}>
-      <View style={styles.paral}><Text style={styles.title}>Параллели</Text></View>
-      <View style={styles.Parallelcontainer}>
-        <View style={{ flexDirection: 'row', marginTop: 10, marginRight: 25, marginLeft: 25 }}>
-          <ParallelSwitch label='11' />
-          <ParallelSwitch label='10' />
-          <ParallelSwitch label='9' />
-          <ParallelSwitch label='8' />
-        </View>
-
-        <View style={{ flexDirection: 'row', marginTop: 10, marginRight: 25, marginLeft: 25 }}>
-          <ParallelSwitch label='7' />
-          <ParallelSwitch label='6' />
-          <ParallelSwitch label='7' />
-          <ParallelSwitch label='5' />
-        </View>
-        <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10, marginRight: 25, marginLeft: 25 }}>
-          <ParallelSwitch label='4' />
-          <ParallelSwitch label='3' />
-          <ParallelSwitch label='2' />
-          <ParallelSwitch label='1' />
-        </View>
-      </View>
-      <ClassPicker />
       <TouchableOpacity
         style={styles.exitBtnContainer}
-        onPress={DropAuth}
+        onPress={getNotifications}
       >
-        {/* <View style={styles.exitBtnContainer}> */}
-        <Text style={styles.exitbtn}>Выйти из системы</Text>
-        {/* </View> */}
-
+        <Text style={styles.exitbtn}>Показать все</Text>
+      </TouchableOpacity>      
+      <TouchableOpacity
+        style={styles.exitBtnContainer}
+        onPress={ClearNotifications}
+      >
+        <Text style={styles.exitbtn}>Удалить все уведомления</Text>
       </TouchableOpacity>
+      <FlatList
+        data={NotifList}
+        renderItem={(item) => {
+          // console.log(item.item)
 
+          return (<Text>{`${getDateString(item.item.trigger.value)} ${item.item.content.body}`}</Text>)
+        }}
+        keyExtractor={(item) => item.id}
+      />
     </View >
   );
 }

@@ -1,19 +1,44 @@
-import React from 'react'
-import { Period, filterAll, FormatParallel, FormatClass } from '../utils'
+import React, { useEffect } from 'react'
+import { Period, filterAll, FormatParallel, FormatClass, getSecOffset, RightNow } from '../utils'
 import { StyleSheet, FlatList, ActivityIndicator, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+
 // import {Navi}
+import { schedulePushNotification } from '../screens/notification'
+import * as Notifications from "expo-notifications";
 
 
 
 export const Event = ({ item, navigation }) => {
-    const det=item.item.Description2!=null?'->':''
-    console.log(det)
+    const det = item.item.Description2 != null ? '->' : ''
+    const notificationOffset = 15
 
-    return (<View style={!item.item.Visibility.includes('Учащиеся')?{...styles.box,backgroundColor:'#8397fb'}:{...styles.box}}>
-        <View style={styles.data1}><Text style={styles.data}> {item.item.Time} {Period(item.item.DateStart,item.item.DateEnd)}</Text></View>
+    useEffect(() => {
+        const LR = async (fullDate) => {
+            await schedulePushNotification(fullDate, item.item.Title);
+        }
+
+        if (item.item.fullDate != 'null') {
+            const shdate = new Date(item.item.fullDate)
+            if (shdate > RightNow) {
+                shdate.setTime(shdate.getTime() - 180 * 60 * 1000 - notificationOffset * 60 * 1000)
+                LR(shdate)
+            }
+        }
+
+
+
+
+    }
+
+
+
+        , [])
+
+    return (<View style={!item.item.Visibility.includes('Учащиеся') ? { ...styles.box, backgroundColor: '#8397fb' } : { ...styles.box }}>
+        <View style={styles.data1}><Text style={styles.data}> {item.item.Time} {Period(item.item.DateStart, item.item.DateEnd)}</Text></View>
         <View style={styles.where1}><Text style={styles.where}>{item.item.Address}</Text></View>
-        <TouchableOpacity onPress={()=>navigation.navigate('Details',item.item.Description2)}>
-            <View style={styles.what1}><Text style={styles.what}>{det+item.item.Title}</Text></View>
+        <TouchableOpacity onPress={() => navigation.navigate('Details', item.item.Description2)}>
+            <View style={styles.what1}><Text style={styles.what}>{det + item.item.Title}</Text></View>
         </TouchableOpacity>
         <View style={styles.line}>
             <View style={styles.who2}><Text style={styles.parallel}>{FormatParallel(item.item.Parallel)}</Text></View>
