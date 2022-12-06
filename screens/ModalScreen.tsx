@@ -84,7 +84,7 @@ export default function ModalScreen() {
         <View style={styles.fixToText}>
           <Button
             title="OK"
-            color='#BC986A'
+            color='#0A4563'
             onPress={() => checkAccess()}
           />
         </View>
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#FBEEC1',
+    backgroundColor: '#bee8ff',
     width: '100%'
   },
   input: {

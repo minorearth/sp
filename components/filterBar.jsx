@@ -31,7 +31,7 @@ const styles = StyleSheet.create(
     {
 
         filter1: {
-            backgroundColor: '#B5B8B1'
+            backgroundColor: '#bee8ff'
         },
 
 

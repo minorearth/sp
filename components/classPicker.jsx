@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         paddingTop: 5,
         justifyContent: 'center',
         width: '100%',
-        backgroundColor: '#9fdafc',
+        backgroundColor: '#bee8ff',
         alignItems: 'center',
     },
     caption: {
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         padding: 10,
         width: '25%',
-
+        fontSize: 18,
     },
 });
 

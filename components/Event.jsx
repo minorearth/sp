@@ -31,24 +31,25 @@ const styles = StyleSheet.create({
     },
     events: {
 
-        backgroundColor: '#659DBD',
+        backgroundColor: '#0A4563',
         justifyContent: "flex-start"
     },
 
     box: {
-        backgroundColor: '#9fdafc',
+        backgroundColor: '#bee8ff',
         borderRadius: 10,
-        margin: 5,
+        margin: 10,
         padding: 5,
-        borderLeftColor: '#FBEEC1',
+        borderLeftColor: '#ffffff',
         borderLeftWidth: 5,
-        borderRightColor: '#FBEEC1',
+        borderRightColor: '#ffffff',
         borderRightWidth: 5,
+
 
     },
 
     filter: {
-        backgroundColor: '#c4eaff',
+        backgroundColor: '#bee8ff',
     },
 
 
@@ -85,7 +86,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         // marginTop: 10,
         fontWeight: 'bold',
-        borderBottomColor: '#fad8bb',
+        borderBottomColor: '#0A4563',
         borderBottomWidth: 3,
         borderRadius: 10,
         borderStyle: 'dotted',
@@ -113,7 +114,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
     },
     line: {
-        borderLeftColor: '#FBEEC1',
+        borderLeftColor: '#ffffff',
         borderLeftWidth: 3,
         borderStyle: 'solid',
         marginLeft: 15,
@@ -135,16 +136,16 @@ const styles = StyleSheet.create({
         fontSize: 14,
     },
     borderline: {
-        borderLeftColor: '#f2bf57',
+        borderLeftColor: '#0A4563',
         borderLeftWidth: 3,
         borderRadius: 20,
-        borderBottomColor: '#f2bf57',
+        borderBottomColor: '#0A4563',
         borderBottomWidth: 3,
-        borderRightColor: '#f2bf57',
+        borderRightColor: '#0A4563',
         borderRightWidth: 3,
-        borderTopColor: '#f2bf57',
+        borderTopColor: '#0A4563',
         borderTopWidth: 3,
-        backgroundColor: '#FBEEC1'
+        backgroundColor: '#ffffff'
 
     }
 });

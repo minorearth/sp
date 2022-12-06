@@ -37,14 +37,14 @@ export const Screen2 = () => {
                 <View style={styles.teacher}>
                     <Button style={styles.teach}
                         title="Учитель"
-                        color='#DAAD86'
+                        color='#6a99b3'
                         onPress={() => setIdentity('')}>
                     </Button>
                 </View>
                 <View style={styles.purple}>
                     <Button
                         title="Ученик"
-                        color='#DAAD86'
+                        color='#6a99b3'
                         onPress={() => setIdentity('Ученик')}>
                     </Button>
                 </View>
@@ -58,19 +58,19 @@ export const Screen2 = () => {
 const styles = StyleSheet.create({
     screen2: {
         flex: 1,
-        backgroundColor: '#659DBD',
+        backgroundColor: '#93d8ff',
         justifyContent: 'center',
         flexDirection: "row",
     },
     teacher: {
-        backgroundColor: '#659DBD',
+        backgroundColor: '#17597E',
         justifyContent: 'center',
         alignItems: 'center',
         flex: 1,
 
     },
     purple: {
-        backgroundColor: '#659DBD',
+        backgroundColor: '#17597E',
         justifyContent: 'center',
         alignItems: 'center',
         flex: 1,

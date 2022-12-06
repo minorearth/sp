@@ -74,12 +74,12 @@ const styles = StyleSheet.create({
   },
   events: {
 
-    backgroundColor: '#659DBD',
+    backgroundColor: '#0A4563',
     justifyContent: "flex-start"
   },
 
   box: {
-    backgroundColor: '#9fdafc',
+    backgroundColor: '#bee8ff',
     borderRadius: 10,
     margin: 5,
     padding: 5,
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
 
   filterbtn: {
     borderRadius: 5,
-    backgroundColor: '#787878',
+    backgroundColor: '#0A4563',
     margin: 5,
     padding: 5
   },
