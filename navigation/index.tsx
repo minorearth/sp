@@ -16,13 +16,17 @@ import ModalScreen from '../screens/ModalScreen';
 import DetailsScreen from '../screens/DetailsScreen';
 import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
+import NotificationScreen from '../screens/NotificationScreen';
+
+
+
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import { useSelector } from 'react-redux';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
-const identityPassed=useSelector(state=>state.userdata.identityPassed)
-const accesspassed=useSelector(state=>state.userdata.access)
+  const identityPassed = useSelector(state => state.userdata.identityPassed)
+  const accesspassed = useSelector(state => state.userdata.access)
 
 
   if (identityPassed && accesspassed) {
@@ -99,6 +103,15 @@ function BottomTabNavigator() {
           title: 'Фильтры',
           tabBarLabel: () => { return null },
           tabBarIcon: ({ color }) => <TabBarIcon name="gears" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="NotificationScreen"
+        component={NotificationScreen}
+        options={{
+          title: 'Уведомления',
+          tabBarLabel: () => { return null },
+          tabBarIcon: ({ color }) => <TabBarIcon name="clock-o" color={color} />,
         }}
       />
     </BottomTab.Navigator>

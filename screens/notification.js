@@ -1,7 +1,7 @@
-import Constants from "expo-constants";
+import * as Device from 'expo-device';
 import * as Notifications from "expo-notifications";
 import React, { useState, useEffect, useRef } from "react";
-import {  Platform } from "react-native";
+import { Platform } from "react-native";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -33,9 +33,7 @@ export default function Notification() {
       });
 
     return () => {
-      Notifications.removeNotificationSubscription(
-        notificationListener.current
-      );
+      Notifications.removeNotificationSubscription(notificationListener.current);
       Notifications.removeNotificationSubscription(responseListener.current);
     };
   }, []);
@@ -46,12 +44,17 @@ export default function Notification() {
 }
 
 export async function schedulePushNotification(
-  className,
-  slot,
-  type,
-  day
+  trigger,title
 ) {
-  var time = new Date;
+
+  // var time2 = new Date(Eventdate);
+  // var offset = new Date().getTimezoneOffset();
+  // time2.setTime(time2.getTime()-1000*60*60*offset+1000*60*17)
+  // time2.setTime(Date.ge)
+
+  // console.log(offset);
+
+  // console.log(time2)
   // var time=time2.getTime()
   var days = [
     "Sunday",
@@ -62,22 +65,24 @@ export async function schedulePushNotification(
     "Friday",
     "Saturday",
   ];
-  const weekday = days.indexOf(day);
-  const hours = 0;
-  const minutes = time.getMinutes()+1;
+  // const weekday = days.indexOf(day);
+  // const hours = 0;
+  // const minutes = time.getMinutes()+1;
+
+  // const trigger = new Date(Date.now() + 30 * 1000 + 180 * 3 * 60 * 1000);
+  // trigger.setMinutes(0);
+  // trigger.setSeconds(0);
 
   const id = await Notifications.scheduleNotificationAsync({
     content: {
-      title: className + " " + type,
-      body: slot,
+      title: "You've got mail! 📬",
+      // title: className + " " + type,
+      body: title,
+      data: 'goes here',
+      // body: slot,
       // sound: 'default',
     },
-    trigger: {
-      weekday: weekday,
-      hour: hours,
-      minute: minutes,
-      repeats: true,
-    },
+    trigger,
   });
   // console.log("notif id on scheduling",id,weekday,hours,minutes,weekday)
   return id;
@@ -85,9 +90,8 @@ export async function schedulePushNotification(
 
 async function registerForPushNotificationsAsync() {
   let token;
-  if (Constants.isDevice) {
-    const { status: existingStatus } =
-      await Notifications.getPermissionsAsync();
+  if (Device.isDevice) {
+    const { status: existingStatus } = await Notifications.getPermissionsAsync();
     let finalStatus = existingStatus;
     if (existingStatus !== "granted") {
       const { status } = await Notifications.requestPermissionsAsync();
@@ -108,16 +112,16 @@ async function registerForPushNotificationsAsync() {
       name: "default",
       importance: Notifications.AndroidImportance.MAX,
       vibrationPattern: [0, 250, 250, 250],
-      sound: true,
+      // sound: true,
       lightColor: "#FF231F7C",
-      lockscreenVisibility: Notifications.AndroidNotificationVisibility.PUBLIC,
-      bypassDnd: true,
+      // lockscreenVisibility: Notifications.AndroidNotificationVisibility.PUBLIC,
+      // bypassDnd: true,
     });
   }
 
   return token;
 }
 
-export async function cancelNotification(notifId){
-  await Notifications.cancelScheduledNotificationAsync(notifId);
-}
+// export async function cancelNotification(notifId){
+//   await Notifications.cancelScheduledNotificationAsync(notifId);
+// }

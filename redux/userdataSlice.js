@@ -11,7 +11,6 @@ export const userdataSlice = createSlice({
   reducers: {
     setaccess: (state, action) => {
       state.access = action.payload
-      console.log(action)
     },    
     setidentity: (state, action) => {
       state.identityPassed = action.payload

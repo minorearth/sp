@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Text, Button } from "react-native";
 import { useDispatch } from "react-redux";
 import { setperson, setidentity, setaccess } from "../redux/userdataSlice";
-import Notification, { schedulePushNotification } from '../screens/notification'
+
 
 import { useSelector } from 'react-redux';
 export const Screen2 = () => {
@@ -25,7 +25,8 @@ export const Screen2 = () => {
             setpersonD(setperson('Ученик'))
             setidentityD(setidentity(true))
             setaccessD(setaccess(true))
-            schedulePushNotification('123', '123', '12312', 'Wednesday')
+
+            
         } else {
             setpersonD(setperson('Учитель'))
             setidentityD(setidentity(true))
@@ -48,7 +49,7 @@ export const Screen2 = () => {
                         onPress={() => setIdentity('Ученик')}>
                     </Button>
                 </View>
-                <Notification />
+            
             </View>
 
         )

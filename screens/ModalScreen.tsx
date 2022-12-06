@@ -71,7 +71,7 @@ export default function ModalScreen() {
 
   const identityPassed = useSelector(state => state.userdata.identityPassed)
   const accesspassed = useSelector(state => state.userdata.access)
-  console.log(identityPassed, accesspassed)
+  // console.log(identityPassed, accesspassed)
   if (identityPassed && !accesspassed) {
     return (
       <View style={styles.container}>

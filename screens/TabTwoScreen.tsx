@@ -7,6 +7,7 @@ import { ParallelSwitch } from '../components/ParallelSwitch'
 import { ClassPicker } from '../components/classPicker'
 import { useSelector, useDispatch } from 'react-redux';
 import { setidentity, setaccess } from '../redux/userdataSlice'
+import * as Notifications from "expo-notifications";
 
 export default function TabTwoScreen() {
 
@@ -18,26 +19,24 @@ export default function TabTwoScreen() {
     setaccessD(setaccess(false))
   }
 
-
-
   return (
     <View style={styles.container}>
       <View style={styles.paral}><Text style={styles.title}>Параллели</Text></View>
       <View style={styles.Parallelcontainer}>
-        <View style={{ flexDirection: 'row', marginTop: 10, marginRight: 25, marginLeft: 25}}>
+        <View style={{ flexDirection: 'row', marginTop: 10, marginRight: 25, marginLeft: 25 }}>
           <ParallelSwitch label='11' />
           <ParallelSwitch label='10' />
           <ParallelSwitch label='9' />
           <ParallelSwitch label='8' />
         </View>
 
-        <View style={{ flexDirection: 'row', marginTop: 10, marginRight: 25, marginLeft: 25}}>
+        <View style={{ flexDirection: 'row', marginTop: 10, marginRight: 25, marginLeft: 25 }}>
           <ParallelSwitch label='7' />
           <ParallelSwitch label='6' />
           <ParallelSwitch label='7' />
           <ParallelSwitch label='5' />
         </View>
-        <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10, marginRight: 25, marginLeft: 25}}>
+        <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10, marginRight: 25, marginLeft: 25 }}>
           <ParallelSwitch label='4' />
           <ParallelSwitch label='3' />
           <ParallelSwitch label='2' />
@@ -54,6 +53,7 @@ export default function TabTwoScreen() {
         {/* </View> */}
 
       </TouchableOpacity>
+
     </View >
   );
 }
