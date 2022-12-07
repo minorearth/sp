@@ -29,8 +29,8 @@ export const ParallelSwitch = (props) => {
         <View style={styles.container}>
             <View style={styles.label}><Text>{label}</Text></View>
             <View style={styles.switch}><Switch
-                trackColor={{ false: "#767577", true: "#d678f5" }}
-                thumbColor={isEnabled ? "#f7eba3" : "#f5abf5"}
+                trackColor={{ false: "#767577", true: "#0A4563" }}
+                thumbColor={isEnabled ? "#ffffff" : "#ffffff"}
                 ios_backgroundColor="#3e3e3e"
                 onValueChange={toggleSwitch}
                 value={isEnabled}
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'column',
         // flex: 1,
-        backgroundColor: '#9fdafc',
+        backgroundColor: '#bee8ff',
         alignItems: "center",
         justifyContent: "center",
         height: 50,
@@ -52,8 +52,10 @@ const styles = StyleSheet.create({
         flex: 1,
         marginBottom: 15,
         marginRight: 20,
+        backgroundColor: '#bee8ff'
     },
     label: {
         flex: 1,
+        backgroundColor: '#bee8ff'
     }
 });

@@ -85,128 +85,128 @@ export default function EventsScreen({ navigation }: RootTabScreenProps<'TabOne'
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    // alignItems: "flex-start",
-    // justifyContent: "flex-start",
-    flexDirection: "column",
+      flex: 1,
+      flexDirection: "column",
+      backgroundColor: '#0A4563',
 
   },
   events: {
 
-    backgroundColor: '#659DBD',
-    justifyContent: "flex-start"
+      backgroundColor: '#0A4563',
+      justifyContent: "flex-start"
   },
 
   box: {
-    backgroundColor: '#9fdafc',
-    borderRadius: 10,
-    margin: 5,
-    padding: 5,
-    borderLeftColor: '#FBEEC1',
-    borderLeftWidth: 5,
-    borderRightColor: '#FBEEC1',
-    borderRightWidth: 5,
+      backgroundColor: '#bee8ff',
+      borderRadius: 10,
+      margin: 10,
+      padding: 5,
+      borderLeftColor: '#ffffff',
+      borderLeftWidth: 5,
+      borderRightColor: '#ffffff',
+      borderRightWidth: 5,
+
 
   },
 
   filter: {
-    backgroundColor: '#c4eaff',
+      backgroundColor: '#bee8ff',
   },
 
 
   filterbtn: {
-    borderRadius: 5,
-    backgroundColor: '#787878',
-    margin: 5,
-    padding: 5
+      borderRadius: 5,
+      backgroundColor: '#787878',
+      margin: 5,
+      padding: 5
   },
 
 
   what: {
-    fontSize: 18,
+      fontSize: 18,
   },
   where: {
-    fontSize: 14,
-    fontStyle: 'italic',
-    marginRight: 5,
+      fontSize: 14,
+      fontStyle: 'italic',
+      marginRight: 5,
   },
   who: {
-    fontSize: 15,
-    fontStyle: 'italic',
-    marginRight: 5,
-    marginLeft: 5,
+      fontSize: 15,
+      fontStyle: 'italic',
+      marginRight: 5,
+      marginLeft: 5,
   },
   data: {
-    fontSize: 13,
-    fontStyle: 'italic',
-    marginRight: 5,
+      fontSize: 13,
+      fontStyle: 'italic',
+      marginRight: 5,
 
   },
   what1: {
-    flex: 1,
-    alignItems: 'flex-start',
-    // marginTop: 10,
-    fontWeight: 'bold',
-    borderBottomColor: '#fad8bb',
-    borderBottomWidth: 3,
-    borderRadius: 10,
-    borderStyle: 'dotted',
+      flex: 1,
+      alignItems: 'flex-start',
+      // marginTop: 10,
+      fontWeight: 'bold',
+      borderBottomColor: '#0A4563',
+      borderBottomWidth: 3,
+      borderRadius: 10,
+      borderStyle: 'dotted',
   },
   where1: {
-    flex: 1,
-    alignItems: 'flex-end',
-    marginTop: 5,
+      flex: 1,
+      alignItems: 'flex-end',
+      marginTop: 5,
   },
   who1: {
-    flex: 1,
-    alignItems: 'flex-end',
-    marginTop: 5,
+      flex: 1,
+      alignItems: 'flex-end',
+      marginTop: 5,
 
   },
   data1: {
-    flex: 1,
-    alignItems: 'flex-end',
-    marginTop: 5,
+      flex: 1,
+      alignItems: 'flex-end',
+      marginTop: 5,
   },
   filter1: {
-    backgroundColor: '#B5B8B1'
+      backgroundColor: '#B5B8B1'
   },
   two: {
-    flexDirection: "row",
+      flexDirection: "row",
   },
   line: {
-    borderLeftColor: '#FBEEC1',
-    borderLeftWidth: 3,
-    borderStyle: 'solid',
-    marginLeft: 15,
-    borderRadius: 10,
-    marginTop: 7,
+      borderLeftColor: '#ffffff',
+      borderLeftWidth: 3,
+      borderStyle: 'solid',
+      marginLeft: 15,
+      borderRadius: 10,
+      marginTop: 7,
   },
   who2: {
-    marginLeft: 5,
-    fontSize: 7,
+      marginLeft: 5,
+      fontSize: 7,
   },
   who3: {
-    marginLeft: 5,
-    fontSize: 7,
+      marginLeft: 5,
+      fontSize: 7,
   },
   parallel: {
-    fontSize: 14,
+      fontSize: 14,
   },
   class: {
-    fontSize: 14,
+      fontSize: 14,
   },
   borderline: {
-    borderLeftColor: '#f2bf57',
-    borderLeftWidth: 3,
-    borderRadius: 20,
-    borderBottomColor: '#f2bf57',
-    borderBottomWidth: 3,
-    borderRightColor: '#f2bf57',
-    borderRightWidth: 3,
-    borderTopColor: '#f2bf57',
-    borderTopWidth: 3,
-    backgroundColor: '#FBEEC1'
+      borderLeftColor: '#0A4563',
+      borderLeftWidth: 3,
+      borderRadius: 20,
+      borderBottomColor: '#0A4563',
+      borderBottomWidth: 3,
+      borderRightColor: '#0A4563',
+      borderRightWidth: 3,
+      borderTopColor: '#0A4563',
+      borderTopWidth: 3,
+      backgroundColor: '#ffffff'
 
   }
 });
