@@ -45,10 +45,10 @@ export const FormatClass = (data) => {
 }
 
 
-export const filterAll = (events, filter, access,HiddenItems) => {
+export const filterAll = (events, filter, access,HiddenItems,hide) => {
     var DateStart = new Date()
     var DateEnd = new Date()
-    console.log(filter,access)
+    // console.log(filter,access)
     if (filter.value == 'Сегодня') {
         DateStart.setTime(TodayS.getTime())
         DateEnd.setTime(TodayE.getTime())
@@ -71,7 +71,7 @@ export const filterAll = (events, filter, access,HiddenItems) => {
         DateStart.setTime(TodayS.getTime() - 262980000000)
         DateEnd.setTime(TodayS.getTime() + 262980000000)
     }
-    return filterByToday(events, DateStart, DateEnd, filter, access,HiddenItems)
+    return filterByToday(events, DateStart, DateEnd, filter, access,HiddenItems,hide)
 
 
 
@@ -166,7 +166,7 @@ export const DataClean = (events) => {
 }
 
 
-const filterByToday = (events, DateStart, DateEnd, filter, access,HiddenItems) => {
+const filterByToday = (events, DateStart, DateEnd, filter, access,HiddenItems,hide) => {
 
     if (events == undefined) {
         return {}
@@ -175,18 +175,20 @@ const filterByToday = (events, DateStart, DateEnd, filter, access,HiddenItems) =
     res["value"] = []
     const data3 = events
     const data2 = data3.value
-    console.log( DateStart, DateEnd, filter, access,HiddenItems)
+    // console.log( DateStart, DateEnd, filter, access,HiddenItems)
     for (var event in data2) {
 
         var eventDateS = new Date(data2[event].DateStart);
         var eventDateE = new Date(data2[event].DateEnd);
-        const hidden = data2[event].hidden
+        // const hidden = data2[event].hidden
         
         // eventDateS.setTime(eventDateS.getTime()-offset*60*1000)
         // eventDateE.setTime(eventDateE.getTime()-offset*60*1000)
         const EventAccess = CheckAcceess(data2[event].Visibility, access)
-        // console.log(EventAccess, data2[event].Visibility, access)
+        // console.log(hide,hide?hiddenI:!hiddenI)
         const ParallelEval = CheckParallel(filter.parallels, data2[event].Parallel)
+        const hiddenI=HiddenItems[data2[event].Id]==true?true:false
+       
 
         var classEval = filter.myClass ? Checkclass(filter.className, data2[event].Class) : true
         if (
@@ -198,8 +200,7 @@ const filterByToday = (events, DateStart, DateEnd, filter, access,HiddenItems) =
                     && eventDateE.getTime() < DateEnd.getTime())
             )
 
-            && classEval && ParallelEval && EventAccess && !HiddenItems[data2[event].Id]) {
-
+            && classEval && ParallelEval && EventAccess && (hide?hiddenI:!hiddenI)) {
             res["value"] = [...res["value"], { ...data2[event] }]
 
         }

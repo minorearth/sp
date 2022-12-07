@@ -14,16 +14,18 @@ import Notification, { schedulePushNotification } from '../notification'
 
 
 export default function HiddenEventsScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
+  const result = useSelector((state) => state.userdata.items)
   const HiddenItems=useSelector(state=>state.userdata.hiddenItems)
   let [response, setResponse] = useState();
   // const selectFilter = useSelector((state) => state.filter)
   // const refreshItems = useSelector((state) => state.filter.refreshItems)
+  const refreshItems = useSelector((state) => state.filter.refreshItems)
 
   useEffect(() => {
-    // const b={"className": "noth", "myClass": false, "parallels": {"1": true, "10": true, "11": true, "2": true, "3": true, "4": true, "5": true, "6": true, "7": true, "8": true, "9": true}, "refreshItems": true, "value": "Все"}
-    // setResponse(filterAll(result, b, 'Учитель',HiddenItems));
+    const b={"className": "noth", "myClass": false, "parallels": {"1": true, "10": true, "11": true, "2": true, "3": true, "4": true, "5": true, "6": true, "7": true, "8": true, "9": true}, "refreshItems": true, "value": "Все"}
+    setResponse(filterAll(result, b, 'Учитель',HiddenItems,true));
 
-  }, []);
+  }, [refreshItems]);
 
 
 

@@ -20,6 +20,7 @@ export const ParallelSwitch = (props) => {
         setParallelD(setParallels({[label]: isEnabled}))
 
     }, [isEnabled])
+
     const toggleSwitch = () => {
         setIsEnabled(previousState => !previousState)
     
@@ -29,8 +30,8 @@ export const ParallelSwitch = (props) => {
         <View style={styles.container}>
             <View style={styles.label}><Text>{label}</Text></View>
             <View style={styles.switch}><Switch
-                trackColor={{ false: "#767577", true: "#0A4563" }}
-                thumbColor={isEnabled ? "#ffffff" : "#ffffff"}
+                trackColor={{ false: "#767577", true: "#d678f5" }}
+                thumbColor={isEnabled ? "#f7eba3" : "#f5abf5"}
                 ios_backgroundColor="#3e3e3e"
                 onValueChange={toggleSwitch}
                 value={isEnabled}
@@ -52,10 +53,10 @@ const styles = StyleSheet.create({
         flex: 1,
         marginBottom: 15,
         marginRight: 20,
-        backgroundColor: '#bee8ff'
+        // backgroundColor: '#bee8ff'
     },
     label: {
         flex: 1,
-        backgroundColor: '#bee8ff'
+        // backgroundColor: '#bee8ff'
     }
 });
