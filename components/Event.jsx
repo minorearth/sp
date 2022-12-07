@@ -1,9 +1,13 @@
 import React, { useEffect } from 'react'
 import { Period, filterAll, FormatParallel, FormatClass, getSecOffset, RightNow } from '../utils'
-import { StyleSheet, FlatList, ActivityIndicator, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, FlatList, ActivityIndicator, Text, View, ScrollView, TouchableOpacity, Alert } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
+import { useDispatch } from 'react-redux';
+import { sethiddenitems } from '../redux/userdataSlice';
+import { setrefreshItems } from '../redux/filterSlice';
 
 // import {Navi}
-import { schedulePushNotification } from '../screens/notification'
+import { schedulePushNotification } from '../notification'
 import * as Notifications from "expo-notifications";
 
 
@@ -29,14 +33,50 @@ export const Event = ({ item, navigation }) => {
 
 
     }
-
-
-
         , [])
 
+    
+    const HideItemsD=useDispatch()
+    const RefreshItemsD = useDispatch()
+
+    const HideItem=()=>{
+        HideItemsD(sethiddenitems(item.item.Id))
+        RefreshItemsD(setrefreshItems())
+        alert(item.item.Id)
+
+
+
+    }
+
+    const RemoveAlert = () => {
+        Alert.alert('Алерт', 'Скрыть?',
+        [
+            {
+                text: "Да",
+                onPress: HideItem,
+            }, {
+                text: "Нет",
+                onPress: () => {},
+            }
+        ], { cancelable: true, })
+    }
+
     return (<View style={!item.item.Visibility.includes('Учащиеся') ? { ...styles.box, backgroundColor: '#8397fb' } : { ...styles.box }}>
-        <View style={styles.data1}><Text style={styles.data}> {item.item.Time} {Period(item.item.DateStart, item.item.DateEnd)}</Text></View>
-        <View style={styles.where1}><Text style={styles.where}>{item.item.Address}</Text></View>
+        <View>
+            <View>
+
+                <FontAwesome name="eye-slash" size={24} color="black" onPress={RemoveAlert} />
+
+            </View>
+            <View>
+                <View style={styles.data1}>
+                    <Text style={styles.data}> {item.item.Time} {Period(item.item.DateStart, item.item.DateEnd)}</Text>
+                </View>
+                <View style={styles.where1}>
+                    <Text style={styles.where}>{item.item.Address}</Text>
+                </View>
+            </View>
+        </View>
         <TouchableOpacity onPress={() => navigation.navigate('Details', item.item.Description2)}>
             <View style={styles.what1}><Text style={styles.what}>{det + item.item.Title}</Text></View>
         </TouchableOpacity>
@@ -44,7 +84,11 @@ export const Event = ({ item, navigation }) => {
             <View style={styles.who2}><Text style={styles.parallel}>{FormatParallel(item.item.Parallel)}</Text></View>
             <View style={styles.who3}><Text style={styles.class}>{FormatClass(item.item.Class)}</Text></View>
         </View>
-        <View style={styles.who1}><View style={styles.borderline}><Text style={styles.who}>{item.item.MainMan.Title}</Text></View></View>
+        <View style={styles.who1}>
+            <View style={styles.borderline}>
+                <Text style={styles.who}>{item.item.MainMan.Title}</Text>
+            </View>
+        </View>
 
     </View>)
 }

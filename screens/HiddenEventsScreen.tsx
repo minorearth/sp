@@ -10,57 +10,30 @@ import { ClassSwitch } from '../components/classwitch'
 import { FilterBar } from '../components/filterBar'
 import { Event } from '../components/Event'
 
-import Notification, { schedulePushNotification } from '../screens/notification'
+import Notification, { schedulePushNotification } from '../notification'
 
 
-export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
-
-  let [isLoading, setIsLoading] = useState(true);
-  let [error, setError] = useState();
-  let [result, setResult] = useState();
+export default function HiddenEventsScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
+  const HiddenItems=useSelector(state=>state.userdata.hiddenItems)
   let [response, setResponse] = useState();
-  const selectFilter = useSelector((state) => state.filter)
-  const access = useSelector(state => state.userdata.person)
+  // const selectFilter = useSelector((state) => state.filter)
+  // const refreshItems = useSelector((state) => state.filter.refreshItems)
 
   useEffect(() => {
-    fetch("https://school1298.ru/cl/teachers/calendar.json",
-      // fetch("https://school1298.ru/cl/calendar.json",
-      // fetch("https://api.coindesk.com/v1/bpi/currentprice.json",
-      {
-        method: 'GET',
-        headers: { 'Content-Type': 'text/plain' }
-      })
-      .then(res => res.json())
-      .then(
-        (result) => {
-          setResult(DataClean(result));
-          setResponse(filterAll(result, selectFilter, access));
-          setIsLoading(false);
-        },
-        (error) => {
-          setIsLoading(false);
-          setError(error);
-        }
-      )
+    // const b={"className": "noth", "myClass": false, "parallels": {"1": true, "10": true, "11": true, "2": true, "3": true, "4": true, "5": true, "6": true, "7": true, "8": true, "9": true}, "refreshItems": true, "value": "Все"}
+    // setResponse(filterAll(result, b, 'Учитель',HiddenItems));
+
   }, []);
-
-
-  useEffect(() => {
-
-    setResponse(filterAll(result, selectFilter, access));
-
-
-  }, [selectFilter]);
 
 
 
   return (
 
     <View style={styles.container}>
-      <View style={styles.filter}>
+      {/* <View style={styles.filter}>
         <FilterBar />
         <ClassSwitch />
-      </View>
+      </View> */}
 
       <View style={styles.events}>
         <FlatList
@@ -70,10 +43,8 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
           vertical
           refreshing={true}
         />
-        <Notification />
 
 
-        <StatusBar style="auto" />
       </View>
     </View>
   );

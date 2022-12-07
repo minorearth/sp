@@ -12,11 +12,12 @@ import { ColorSchemeName, Pressable } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import ModalScreen from '../screens/ModalScreen';
+import PinScreen from '../screens/PinScreen';
 import DetailsScreen from '../screens/DetailsScreen';
-import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
+import EventsScreen from '../screens/EventsScreen';
+import SettingsScreen from '../screens/SettingsScreen';
 import NotificationScreen from '../screens/NotificationScreen';
+import HiddenEventsScreen from '../screens/HiddenEventsScreen';
 
 
 
@@ -51,9 +52,6 @@ function RootNavigator() {
     <Stack.Navigator>
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="Details" component={DetailsScreen} options={{ title: 'Описание мероприятия!' }} />
-      {/* <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
-      </Stack.Group> */}
     </Stack.Navigator>
   );
 }
@@ -75,7 +73,7 @@ function BottomTabNavigator() {
       }}>
       <BottomTab.Screen
         name="TabOne"
-        component={TabOneScreen}
+        component={EventsScreen}
         options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
           title: 'Мероприятия',
           tabBarLabel: () => { return null },
@@ -98,7 +96,7 @@ function BottomTabNavigator() {
       />
       <BottomTab.Screen
         name="TabTwo"
-        component={TabTwoScreen}
+        component={SettingsScreen}
         options={{
           title: 'Фильтры',
           tabBarLabel: () => { return null },
@@ -113,7 +111,17 @@ function BottomTabNavigator() {
           tabBarLabel: () => { return null },
           tabBarIcon: ({ color }) => <TabBarIcon name="clock-o" color={color} />,
         }}
+      />      
+      <BottomTab.Screen
+        name="HiddenEventsScreen"
+        component={HiddenEventsScreen}
+        options={{
+          title: 'Скрытые мероприятия',
+          tabBarLabel: () => { return null },
+          tabBarIcon: ({ color }) => <TabBarIcon name="clock-o" color={color} />,
+        }}
       />
+
     </BottomTab.Navigator>
   );
 }

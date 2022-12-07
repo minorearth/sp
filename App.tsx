@@ -11,7 +11,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { Text } from 'react-native'
 import { Splashscreen } from './components/splashscreen';
 import { Screen2 } from './components/Identity';
-import ModalScreen from './screens/ModalScreen'
+import PinScreen from './screens/PinScreen'
 
 
 
@@ -29,7 +29,7 @@ export default function App() {
         <SafeAreaProvider>
           {/* {false && <Splashscreen />} */}
           <Screen2 />
-          <ModalScreen/>
+          <PinScreen/>
 
           <Navigation colorScheme={colorScheme} />
           <StatusBar />

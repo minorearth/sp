@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setidentity, setaccess } from '../redux/userdataSlice'
 import * as Notifications from "expo-notifications";
 
-export default function TabTwoScreen() {
+export default function SettingsScreen() {
 
   const setidentityD = useDispatch()
   const setaccessD = useDispatch()

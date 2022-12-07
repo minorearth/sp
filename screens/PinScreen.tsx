@@ -9,7 +9,7 @@ import { setperson, setidentity } from "../redux/userdataSlice";
 
 
 
-export default function ModalScreen() {
+export default function PinScreen() {
 
   const dispatch = useDispatch()
 

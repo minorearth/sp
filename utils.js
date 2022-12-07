@@ -1,12 +1,12 @@
 // export const RightNow = new Date('2022-08-31T22:00:00.000Z')
-export const RightNow =new Date()
-const offset=new Date().getTimezoneOffset()
-RightNow.setTime(RightNow.getTime()-offset*60*1000)
+export const RightNow = new Date()
+const offset = new Date().getTimezoneOffset()
+RightNow.setTime(RightNow.getTime() - offset * 60 * 1000)
 const TodayS = new Date(RightNow.toDateString())
-TodayS.setTime(TodayS.getTime()-offset*60*1000)
+TodayS.setTime(TodayS.getTime() - offset * 60 * 1000)
 const TodayE = new Date(TodayS.toDateString())
-TodayE.setTime(TodayE.getTime()+24*60*60*1000-offset*60*1000)
-console.log(RightNow,TodayS,TodayE)
+TodayE.setTime(TodayE.getTime() + 24 * 60 * 60 * 1000 - offset * 60 * 1000)
+
 
 export const ISOdateParse = (IsoDate) => {
     var now = new Date(IsoDate);
@@ -45,9 +45,10 @@ export const FormatClass = (data) => {
 }
 
 
-export const filterAll = (events, filter, access) => {
+export const filterAll = (events, filter, access,HiddenItems) => {
     var DateStart = new Date()
     var DateEnd = new Date()
+    console.log(filter,access)
     if (filter.value == 'Сегодня') {
         DateStart.setTime(TodayS.getTime())
         DateEnd.setTime(TodayE.getTime())
@@ -70,7 +71,7 @@ export const filterAll = (events, filter, access) => {
         DateStart.setTime(TodayS.getTime() - 262980000000)
         DateEnd.setTime(TodayS.getTime() + 262980000000)
     }
-    return filterByToday(events, DateStart, DateEnd, filter, access)
+    return filterByToday(events, DateStart, DateEnd, filter, access,HiddenItems)
 
 
 
@@ -118,20 +119,20 @@ const CheckAcceess = (visibility, access) => {
 
 
 }
-const fullDate=(day,time)=>{
-    if (time==null){
+const fullDate = (day, time) => {
+    if (time == null) {
         return 'null'
     }
-    const ret= new Date(day)
-    const [hour,minutes]= time.split(':').map(x=>Number(x))
-    ret.setTime(day.getTime()+(hour*60+minutes)*60*1000)
+    const ret = new Date(day)
+    const [hour, minutes] = time.split(':').map(x => Number(x))
+    ret.setTime(day.getTime() + (hour * 60 + minutes) * 60 * 1000)
     return ret
 
 
-    
+
 }
 
-export const getSecOffset=(end)=>{
+export const getSecOffset = (end) => {
     const st = new Date()
     const en = new Date(end)
     // return Math.round((en,st,en-st+offset*60*1000)/1000)
@@ -141,7 +142,7 @@ export const getSecOffset=(end)=>{
 
 
 export const DataClean = (events) => {
-
+    // console.log(HiddenItems)
     if (events == undefined) {
         return {}
     }
@@ -152,18 +153,20 @@ export const DataClean = (events) => {
     for (var event in data2) {
         var eventDateS = new Date(data2[event].DateStart);
         var eventDateE = new Date(data2[event].DateEnd);
-        eventDateS.setTime(eventDateS.getTime()-offset*60*1000)
-        eventDateE.setTime(eventDateE.getTime()-offset*60*1000)
-        res["value"] = [...res["value"], {...data2[event], "DateStart": eventDateS, 'DateEnd': eventDateE,"fullDate": fullDate(eventDateS,data2[event].Time)}]
-         }
-    
+        eventDateS.setTime(eventDateS.getTime() - offset * 60 * 1000)
+        eventDateE.setTime(eventDateE.getTime() - offset * 60 * 1000)
+        
+        // res["value"] = [...res["value"], { ...data2[event], "hidden": HiddenItems[data2[event].Id] == undefined ? false : true, "DateStart": eventDateS, 'DateEnd': eventDateE, "fullDate": fullDate(eventDateS, data2[event].Time) }]
+        res["value"] = [...res["value"], { ...data2[event], "DateStart": eventDateS, 'DateEnd': eventDateE, "fullDate": fullDate(eventDateS, data2[event].Time) }]
+    }
+
     return res
 
 
 }
 
 
-const filterByToday = (events, DateStart, DateEnd, filter, access) => {
+const filterByToday = (events, DateStart, DateEnd, filter, access,HiddenItems) => {
 
     if (events == undefined) {
         return {}
@@ -172,16 +175,18 @@ const filterByToday = (events, DateStart, DateEnd, filter, access) => {
     res["value"] = []
     const data3 = events
     const data2 = data3.value
+    console.log( DateStart, DateEnd, filter, access,HiddenItems)
     for (var event in data2) {
 
         var eventDateS = new Date(data2[event].DateStart);
         var eventDateE = new Date(data2[event].DateEnd);
+        const hidden = data2[event].hidden
+        
         // eventDateS.setTime(eventDateS.getTime()-offset*60*1000)
         // eventDateE.setTime(eventDateE.getTime()-offset*60*1000)
         const EventAccess = CheckAcceess(data2[event].Visibility, access)
         // console.log(EventAccess, data2[event].Visibility, access)
         const ParallelEval = CheckParallel(filter.parallels, data2[event].Parallel)
-        console.log(DateStart,DateEnd)
 
         var classEval = filter.myClass ? Checkclass(filter.className, data2[event].Class) : true
         if (
@@ -193,10 +198,10 @@ const filterByToday = (events, DateStart, DateEnd, filter, access) => {
                     && eventDateE.getTime() < DateEnd.getTime())
             )
 
-            && classEval && ParallelEval && EventAccess) {
-  
-            res["value"] = [...res["value"], {...data2[event]}]
-        
+            && classEval && ParallelEval && EventAccess && !HiddenItems[data2[event].Id]) {
+
+            res["value"] = [...res["value"], { ...data2[event] }]
+
         }
     }
 
