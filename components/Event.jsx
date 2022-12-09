@@ -42,14 +42,11 @@ export const Event = ({ item, navigation }) => {
     const HideItem=()=>{
         HideItemsD(sethiddenitems(item.item.Id))
         RefreshItemsD(setrefreshItems())
-        alert(item.item.Id)
-
-
-
+        // alert(item.item.Id)
     }
 
     const RemoveAlert = () => {
-        Alert.alert('Алерт', 'Скрыть?',
+        Alert.alert('Предупреждение', 'Скрыть?',
         [
             {
                 text: "Да",

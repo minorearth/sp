@@ -6,7 +6,6 @@ import { setfilter } from '../redux/filterSlice';
 // import 
 
 
-
 export const FilterBtn = (props) => {
     const { onClick } = props
     const { filterState } = props
