@@ -4,7 +4,7 @@ export const userdataSlice = createSlice({
   name: 'userdata',
   initialState: {
     access: false,
-    person: 'noth',
+    person: '',
     identityPassed: false,
     hiddenItems: {},
     items:{}
@@ -21,7 +21,7 @@ export const userdataSlice = createSlice({
       state.person = action.payload
     },       
     sethiddenitems: (state, action) => {
-      
+      // state.hiddenItems={}
       state.hiddenItems[action.payload]=true
 
     },       

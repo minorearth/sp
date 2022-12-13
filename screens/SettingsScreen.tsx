@@ -33,11 +33,11 @@ export default function SettingsScreen() {
         <View style={{ flexDirection: 'row', marginTop: 10, marginRight: 25, marginLeft: 25 }}>
           <ParallelSwitch label='7' />
           <ParallelSwitch label='6' />
-          <ParallelSwitch label='7' />
           <ParallelSwitch label='5' />
+          <ParallelSwitch label='4' />
         </View>
         <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10, marginRight: 25, marginLeft: 25 }}>
-          <ParallelSwitch label='4' />
+
           <ParallelSwitch label='3' />
           <ParallelSwitch label='2' />
           <ParallelSwitch label='1' />

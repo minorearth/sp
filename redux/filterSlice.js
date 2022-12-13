@@ -3,8 +3,8 @@ import { createSlice } from '@reduxjs/toolkit'
 export const filterSlice = createSlice({
   name: 'filter',
   initialState: {
-    value: 'noth',
-    className: 'noth',
+    value: '',
+    className: '',
     myClass: false,
     refreshItems: true,
 

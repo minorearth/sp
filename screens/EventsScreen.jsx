@@ -14,7 +14,7 @@ import { setitems } from '../redux/userdataSlice';
 import Notification, { schedulePushNotification } from '../notification'
 
 
-export default function EventsScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
+export default function EventsScreen({ navigation }) {
   const HiddenItems=useSelector(state=>state.userdata.hiddenItems)
   // console.log(HiddenItems)
 

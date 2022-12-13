@@ -9,11 +9,12 @@
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash2.png",
-      "resizeMode": "cover",
+      "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/8c4ee8e3-af23-4c10-9a31-ab32a8b3e62d"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -23,7 +24,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.dayfireacad.myapp"
@@ -35,6 +36,9 @@
       "eas": {
         "projectId": "8c4ee8e3-af23-4c10-9a31-ab32a8b3e62d"
       }
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
     }
   }
 }

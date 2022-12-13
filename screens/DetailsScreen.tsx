@@ -9,8 +9,6 @@ export default function DetailsScreen({route}) {
   const copyToClipboard = async () => {
     await Clipboard.setStringAsync('hello world');
   };
-  // console.log(route.params)
-
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={copyToClipboard} style={styles.link}>

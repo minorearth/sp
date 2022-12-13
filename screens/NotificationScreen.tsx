@@ -1,45 +1,27 @@
 import { StyleSheet, TouchableOpacity, FlatList, Text, View } from 'react-native';
 import { useEffect, useState } from 'react';
-
-
-
-import { ParallelSwitch } from '../components/ParallelSwitch'
-import { ClassPicker } from '../components/classPicker'
-import { useSelector, useDispatch } from 'react-redux';
-import { setidentity, setaccess } from '../redux/userdataSlice'
 import * as Notifications from "expo-notifications";
-import { iteratorSymbol } from 'immer/dist/internal';
+import {getDateString} from '../utils'
+import { NotificationRequest } from 'expo-notifications';
 
 export default function NotificationScreen() {
-  const [NotifList, SetNotifList] = useState()
+  const [NotifList, SetNotifList] = useState<NotificationRequest[]>()
+  
   const getNotifications = async () => {
-
     const feedback = await Notifications.getAllScheduledNotificationsAsync()
-    // console.log(feedback)
     SetNotifList(feedback)
   }
 
   useEffect(() => {
-
-
     getNotifications()
-
-
-
   }, [])
 
   const ClearNotifications = async () => {
-
     // await Notifications.dismissAllNotificationsAsync()
     await Notifications.cancelAllScheduledNotificationsAsync()
   }
-
   // ClearNotifications()
 
-  const getDateString = (dateMills) => {
-    const DateString = new Date(dateMills)
-     return `${DateString.toLocaleDateString()} ${DateString.toLocaleTimeString()}`
- }
 
   return (
     <View style={styles.container}>
@@ -58,8 +40,6 @@ export default function NotificationScreen() {
       <FlatList
         data={NotifList}
         renderItem={(item) => {
-          // console.log(item.item)
-
           return (<Text>{`${getDateString(item.item.trigger.value)} ${item.item.content.body}`}</Text>)
         }}
         keyExtractor={(item) => item.id}

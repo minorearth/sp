@@ -22,7 +22,7 @@ export default function HiddenEventsScreen({ navigation }: RootTabScreenProps<'T
   const refreshItems = useSelector((state) => state.filter.refreshItems)
 
   useEffect(() => {
-    const b={"className": "noth", "myClass": false, "parallels": {"1": true, "10": true, "11": true, "2": true, "3": true, "4": true, "5": true, "6": true, "7": true, "8": true, "9": true}, "refreshItems": true, "value": "Все"}
+    const b={"className": "", "myClass": false, "parallels": {"1": true, "10": true, "11": true, "2": true, "3": true, "4": true, "5": true, "6": true, "7": true, "8": true, "9": true}, "refreshItems": true, "value": "Все"}
     setResponse(filterAll(result, b, 'Учитель',HiddenItems,true));
 
   }, [refreshItems]);

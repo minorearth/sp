@@ -8,6 +8,11 @@ const TodayE = new Date(TodayS.toDateString())
 TodayE.setTime(TodayE.getTime() + 24 * 60 * 60 * 1000 - offset * 60 * 1000)
 
 
+export const getDateString = (dateMills) => {
+    const DateString = new Date(dateMills)
+     return `${DateString.toLocaleDateString()} ${DateString.toLocaleTimeString()}`
+ }
+
 export const ISOdateParse = (IsoDate) => {
     var now = new Date(IsoDate);
     const timecur = now.toISOString().substring(0, 10)
@@ -48,10 +53,12 @@ export const FormatClass = (data) => {
 export const filterAll = (events, filter, access,HiddenItems,hide) => {
     var DateStart = new Date()
     var DateEnd = new Date()
-    // console.log(filter,access)
+    console.log(filter.value)
     if (filter.value == 'Сегодня') {
         DateStart.setTime(TodayS.getTime())
         DateEnd.setTime(TodayE.getTime())
+        console.log('1',DateStart,DateEnd)
+ 
     }
     else if (filter.value == 'Завтра') {
         DateStart.setTime(TodayE.getTime())
@@ -71,6 +78,7 @@ export const filterAll = (events, filter, access,HiddenItems,hide) => {
         DateStart.setTime(TodayS.getTime() - 262980000000)
         DateEnd.setTime(TodayS.getTime() + 262980000000)
     }
+    console.log('2',DateStart,DateEnd)
     return filterByToday(events, DateStart, DateEnd, filter, access,HiddenItems,hide)
 
 
@@ -153,8 +161,17 @@ export const DataClean = (events) => {
     for (var event in data2) {
         var eventDateS = new Date(data2[event].DateStart);
         var eventDateE = new Date(data2[event].DateEnd);
+        if (data2[event].Id=='373'){
+            console.log('3',eventDateS,eventDateE,data2[event].DateStart,data2[event].DateStart)
+
+        }
+      
         eventDateS.setTime(eventDateS.getTime() - offset * 60 * 1000)
         eventDateE.setTime(eventDateE.getTime() - offset * 60 * 1000)
+        if (data2[event].Id=='373'){
+            console.log('3',eventDateS,eventDateE)
+
+        }
         
         // res["value"] = [...res["value"], { ...data2[event], "hidden": HiddenItems[data2[event].Id] == undefined ? false : true, "DateStart": eventDateS, 'DateEnd': eventDateE, "fullDate": fullDate(eventDateS, data2[event].Time) }]
         res["value"] = [...res["value"], { ...data2[event], "DateStart": eventDateS, 'DateEnd': eventDateE, "fullDate": fullDate(eventDateS, data2[event].Time) }]
@@ -171,14 +188,19 @@ const filterByToday = (events, DateStart, DateEnd, filter, access,HiddenItems,hi
     if (events == undefined) {
         return {}
     }
+
     const res = {}
     res["value"] = []
     const data3 = events
     const data2 = data3.value
+
+
     // console.log( DateStart, DateEnd, filter, access,HiddenItems)
     for (var event in data2) {
+   
 
         var eventDateS = new Date(data2[event].DateStart);
+
         var eventDateE = new Date(data2[event].DateEnd);
         // const hidden = data2[event].hidden
         
@@ -192,6 +214,11 @@ const filterByToday = (events, DateStart, DateEnd, filter, access,HiddenItems,hi
        
 
         var classEval = filter.myClass ? Checkclass(filter.className, data2[event].Class) : true
+        if (data2[event].Id=='373'){
+            console.log(classEval,ParallelEval,EventAccess,DateStart, DateEnd,eventDateS,data2[event])
+            
+            
+            }
         if (
             (
                 (eventDateS.getTime() >= DateStart.getTime()
