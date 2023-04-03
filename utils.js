@@ -53,11 +53,11 @@ export const FormatClass = (data) => {
 export const filterAll = (events, filter, access,HiddenItems,hide) => {
     var DateStart = new Date()
     var DateEnd = new Date()
-    console.log(filter.value)
+    // console.log(filter.value)
     if (filter.value == 'Сегодня') {
         DateStart.setTime(TodayS.getTime())
         DateEnd.setTime(TodayE.getTime())
-        console.log('1',DateStart,DateEnd)
+        // console.log('1',DateStart,DateEnd)
  
     }
     else if (filter.value == 'Завтра') {
@@ -78,7 +78,7 @@ export const filterAll = (events, filter, access,HiddenItems,hide) => {
         DateStart.setTime(TodayS.getTime() - 262980000000)
         DateEnd.setTime(TodayS.getTime() + 262980000000)
     }
-    console.log('2',DateStart,DateEnd)
+    // console.log('2',DateStart,DateEnd)
     return filterByToday(events, DateStart, DateEnd, filter, access,HiddenItems,hide)
 
 
@@ -162,14 +162,14 @@ export const DataClean = (events) => {
         var eventDateS = new Date(data2[event].DateStart);
         var eventDateE = new Date(data2[event].DateEnd);
         if (data2[event].Id=='373'){
-            console.log('3',eventDateS,eventDateE,data2[event].DateStart,data2[event].DateStart)
+            // console.log('3',eventDateS,eventDateE,data2[event].DateStart,data2[event].DateStart)
 
         }
       
         eventDateS.setTime(eventDateS.getTime() - offset * 60 * 1000)
         eventDateE.setTime(eventDateE.getTime() - offset * 60 * 1000)
         if (data2[event].Id=='373'){
-            console.log('3',eventDateS,eventDateE)
+            // console.log('3',eventDateS,eventDateE)
 
         }
         
@@ -215,7 +215,7 @@ const filterByToday = (events, DateStart, DateEnd, filter, access,HiddenItems,hi
 
         var classEval = filter.myClass ? Checkclass(filter.className, data2[event].Class) : true
         if (data2[event].Id=='373'){
-            console.log(classEval,ParallelEval,EventAccess,DateStart, DateEnd,eventDateS,data2[event])
+            // console.log(classEval,ParallelEval,EventAccess,DateStart, DateEnd,eventDateS,data2[event])
             
             
             }

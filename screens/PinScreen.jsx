@@ -8,6 +8,27 @@ import { setaccess, setauthpassed } from '../redux/userdataSlice'
 import { setperson, setidentity } from "../redux/userdataSlice";
 
 
+export const checkPin = async (pin) => {
+
+  var myHeaders = new Headers();
+  myHeaders.append("X-Hasura-Role", "anonymous");
+  myHeaders.append("content-type", "application/json");
+  var requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+  };
+  const response = await fetch(`https://inform250.school1298.ru/api/rest/checkpin?pin=${encodeURIComponent(pin)}`, requestOptions).then(
+    response => response.json())
+  return response
+
+
+  // .then(response => response.text())
+  // .catch(error => console.log('error', error));
+
+}
+
+
 
 export default function PinScreen() {
 
@@ -17,28 +38,28 @@ export default function PinScreen() {
   let [error, setError] = useState();
   let [response, setResponse] = useState();
 
-  useEffect(() => {
-    fetch("https://my-json-server.typicode.com/RomanInformatika/schoolevents2/users",
-      {
-        method: 'GET',
-        headers: { 'Content-Type': 'text/plain' }
-      })
-      .then(res => res.json())
-      .then(
-        (result) => {
-          // console.log(result)
-          setResponse(result);
-          setIsLoading(false);
-        },
-        (error) => {
-          setIsLoading(false);
-          setError(error);
-        }
-      )
-  }, []);
+  // useEffect(() => {
+  //   fetch("https://my-json-server.typicode.com/RomanInformatika/schoolevents2/users",
+  //     {
+  //       method: 'GET',
+  //       headers: { 'Content-Type': 'text/plain' }
+  //     })
+  //     .then(res => res.json())
+  //     .then(
+  //       (result) => {
+  //         // console.log(result)
+  //         setResponse(result);
+  //         setIsLoading(false);
+  //       },
+  //       (error) => {
+  //         setIsLoading(false);
+  //         setError(error);
+  //       }
+  //     )
+  // }, []);
 
 
-  const [pinText, SetPinText] = useState('123456789')
+  const [pinText, SetPinText] = useState('12345')
 
   const onChangeText = (text) => {
 
@@ -50,28 +71,29 @@ export default function PinScreen() {
   // const setidentityD = useDispatch()
 
 
-  const checkAccess = () => {
+  const checkAccess = async () => {
 
-    for (const tt in response) {
-      if (response[tt].code == pinText) {
 
-        return dispatch(setaccess(true))
-        // setidentityD(setidentity(true))
-        // return 's'
-      }
+    const resp = await checkPin(pinText)
+    if (resp['new_eventsusers'].length != 0) {
+
+      return dispatch(setaccess(true))
+      // setidentityD(setidentity(true))
+      // return 's'
     }
+
     Alert.alert(
       "Ошибка",
-      "Неверный PIN. Верный-123456789",
+      "Неверный PIN",
       [
-              { text: "Ну и ладно :(" }
+        { text: "Ну и ладно :(" }
       ])
 
   }
 
   const identityPassed = useSelector(state => state.userdata.identityPassed)
   const accesspassed = useSelector(state => state.userdata.access)
-  // console.log(identityPassed, accesspassed)
+
   if (identityPassed && !accesspassed) {
     return (
       <View style={styles.container}>

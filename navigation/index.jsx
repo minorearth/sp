@@ -18,16 +18,29 @@ import EventsScreen from '../screens/EventsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import NotificationScreen from '../screens/NotificationScreen';
 import HiddenEventsScreen from '../screens/HiddenEventsScreen';
+import { useEffect } from 'react';
+import { setName } from '../redux/store';
 
 
 
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setTaskCompleted,getTaskCompletedUserList } from '../API/api';
 
-export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
+export default function Navigation({ colorScheme }) {
   const identityPassed = useSelector(state => state.userdata.identityPassed)
   const accesspassed = useSelector(state => state.userdata.access)
+
+  const setUserName = useDispatch()
+  useEffect(()=>{
+
+    // setUserName(setName({firstname:'Иван', lastname:'Иванович', surname:'Иванов'}))
+    setTaskCompleted('10Н','Петр Петрович Петров','999')
+    getTaskCompletedUserList('11Т','12312')
+
+
+  },[])
 
 
   if (identityPassed && accesspassed) {
@@ -41,11 +54,7 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
   } else return null
 }
 
-/**
- * A root stack navigator is often used for displaying modals on top of all other content.
- * https://reactnavigation.org/docs/modal
- */
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const Stack = createNativeStackNavigator();
 
 function RootNavigator() {
   return (
@@ -56,11 +65,7 @@ function RootNavigator() {
   );
 }
 
-/**
- * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
- * https://reactnavigation.org/docs/bottom-tab-navigator
- */
-const BottomTab = createBottomTabNavigator<RootTabParamList>();
+const BottomTab = createBottomTabNavigator();
 
 function BottomTabNavigator() {
   const colorScheme = useColorScheme();
@@ -74,24 +79,11 @@ function BottomTabNavigator() {
       <BottomTab.Screen
         name="TabOne"
         component={EventsScreen}
-        options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
+        options={({ navigation }) => ({
           title: 'Мероприятия',
           tabBarLabel: () => { return null },
           tabBarIcon: ({ color }) => <TabBarIcon name="window-restore" color={color} />,
-          // headerRight: () => (
-          //   <Pressable
-          //     onPress={() => navigation.navigate('Modal')}
-          //     style={({ pressed }) => ({
-          //       opacity: pressed ? 0.5 : 1,
-          //     })}>
-          //     <FontAwesome
-          //       name="cubes"
-          //       size={25}
-          //       color={Colors[colorScheme].text}
-          //       style={{ marginRight: 15 }}
-          //     />
-          //   </Pressable>
-          // ),
+
         })}
       />
       <BottomTab.Screen
@@ -130,9 +122,6 @@ function BottomTabNavigator() {
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
  */
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
+function TabBarIcon(props) {
   return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
 }

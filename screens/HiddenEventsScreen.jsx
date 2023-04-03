@@ -13,7 +13,7 @@ import { Event } from '../components/Event'
 import Notification, { schedulePushNotification } from '../notification'
 
 
-export default function HiddenEventsScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
+export default function HiddenEventsScreen({ navigation }) {
   const result = useSelector((state) => state.userdata.items)
   const HiddenItems=useSelector(state=>state.userdata.hiddenItems)
   let [response, setResponse] = useState();

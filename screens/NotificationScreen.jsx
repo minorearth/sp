@@ -5,7 +5,7 @@ import {getDateString} from '../utils'
 import { NotificationRequest } from 'expo-notifications';
 
 export default function NotificationScreen() {
-  const [NotifList, SetNotifList] = useState<NotificationRequest[]>()
+  const [NotifList, SetNotifList] = useState()
   
   const getNotifications = async () => {
     const feedback = await Notifications.getAllScheduledNotificationsAsync()

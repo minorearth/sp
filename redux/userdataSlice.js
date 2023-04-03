@@ -7,7 +7,9 @@ export const userdataSlice = createSlice({
     person: '',
     identityPassed: false,
     hiddenItems: {},
-    items:{}
+    items:{},
+    name: {firstname:'', lastname:'', surname:''},
+
 
   },
   reducers: {
@@ -19,6 +21,9 @@ export const userdataSlice = createSlice({
     },    
     setperson: (state, action) => {
       state.person = action.payload
+    },       
+    setName: (state, action) => {
+      state.surName = action.payload
     },       
     sethiddenitems: (state, action) => {
       // state.hiddenItems={}
@@ -36,6 +41,6 @@ export const userdataSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { setaccess,setidentity,setperson,setauthpassed,sethiddenitems,setitems } = userdataSlice.actions
+export const { setaccess,setidentity,setperson,setauthpassed,sethiddenitems,setitems,setName} = userdataSlice.actions
 
 export default userdataSlice.reducer
