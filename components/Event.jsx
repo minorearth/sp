@@ -40,6 +40,7 @@ export const Event = ({ item, navigation }) => {
     const RefreshItemsD = useDispatch()
 
     const HideItem=()=>{
+        console.log(item.item.Id)
         HideItemsD(sethiddenitems(item.item.Id))
         RefreshItemsD(setrefreshItems())
         // alert(item.item.Id)

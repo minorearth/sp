@@ -16,6 +16,7 @@ import Notification, { schedulePushNotification } from '../notification'
 export default function HiddenEventsScreen({ navigation }) {
   const result = useSelector((state) => state.userdata.items)
   const HiddenItems=useSelector(state=>state.userdata.hiddenItems)
+  console.log(HiddenItems,'вот')
   let [response, setResponse] = useState();
   // const selectFilter = useSelector((state) => state.filter)
   // const refreshItems = useSelector((state) => state.filter.refreshItems)

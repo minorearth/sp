@@ -210,8 +210,15 @@ const filterByToday = (events, DateStart, DateEnd, filter, access,HiddenItems,hi
         // console.log(hide,hide?hiddenI:!hiddenI)
         const ParallelEval = CheckParallel(filter.parallels, data2[event].Parallel)
        //Вот тут
-        const hiddenI=HiddenItems[data2[event].Id]==undefined?false:true
-       
+       console.log(HiddenItems,'adf')
+       let hiddenI=false
+       if (HiddenItems!=undefined){
+
+        let hiddenI=HiddenItems[data2[event].Id]=='undefined'?false:true
+
+       }
+    // const 
+    //    const hiddenI=false
 
         var classEval = filter.myClass ? Checkclass(filter.className, data2[event].Class) : true
         if (data2[event].Id=='373'){
