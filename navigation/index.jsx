@@ -18,6 +18,7 @@ import EventsScreen from '../screens/EventsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import NotificationScreen from '../screens/NotificationScreen';
 import HiddenEventsScreen from '../screens/HiddenEventsScreen';
+import { GetTaskCompletedUserList } from '../screens/ScreenEventHistory';
 import { useEffect } from 'react';
 import { setName } from '../redux/store';
 
@@ -26,7 +27,7 @@ import { setName } from '../redux/store';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import { useDispatch, useSelector } from 'react-redux';
-import { setTaskCompleted,getTaskCompletedUserList } from '../API/api';
+// import { setTaskCompleted, getTaskCompletedUserList } from '../API/api';
 
 export default function Navigation({ colorScheme }) {
   const identityPassed = useSelector(state => state.userdata.identityPassed)
@@ -36,8 +37,8 @@ export default function Navigation({ colorScheme }) {
   useEffect(()=>{
 
     // setUserName(setName({firstname:'Иван', lastname:'Иванович', surname:'Иванов'}))
-    setTaskCompleted('10Н','Петр Петрович Петров','999')
-    getTaskCompletedUserList('11Т','12312')
+    // setTaskCompleted('10Н','Петр Петрович Петров','999')
+    // getTaskCompletedUserList('11Т','12312')
 
 
   },[])
@@ -61,6 +62,8 @@ function RootNavigator() {
     <Stack.Navigator>
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="Details" component={DetailsScreen} options={{ title: 'Описание мероприятия!' }} />
+      <Stack.Screen name="ScreenEventHistory" component={GetTaskCompletedUserList} options={{ title: 'История вып задачи!' }} />
+
     </Stack.Navigator>
   );
 }
