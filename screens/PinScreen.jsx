@@ -22,10 +22,6 @@ export const checkPin = async (pin) => {
     response => response.json())
   return response
 
-
-  // .then(response => response.text())
-  // .catch(error => console.log('error', error));
-
 }
 
 
@@ -37,27 +33,6 @@ export default function PinScreen() {
   let [isLoading, setIsLoading] = useState(true);
   let [error, setError] = useState();
   let [response, setResponse] = useState();
-
-  // useEffect(() => {
-  //   fetch("https://my-json-server.typicode.com/RomanInformatika/schoolevents2/users",
-  //     {
-  //       method: 'GET',
-  //       headers: { 'Content-Type': 'text/plain' }
-  //     })
-  //     .then(res => res.json())
-  //     .then(
-  //       (result) => {
-  //         // console.log(result)
-  //         setResponse(result);
-  //         setIsLoading(false);
-  //       },
-  //       (error) => {
-  //         setIsLoading(false);
-  //         setError(error);
-  //       }
-  //     )
-  // }, []);
-
 
   const [pinText, SetPinText] = useState('12345')
 

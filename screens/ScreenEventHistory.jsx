@@ -6,8 +6,7 @@ import { View, Text } from 'react-native';
 
 
 export const GetTaskCompletedUserList = (props) => {
-    // const userName = props.route.params.new_taskscomlpeted
-    console.log(props.route.params.new_taskscomlpeted,'sdasdasd')
+    const userName = props.route.params.new_taskscomlpeted
     return (<View style={styles.container}>
         {userName.map(item => (<Text>{item.username}</Text>))}
     </View>)

@@ -1,37 +1,34 @@
 import React, { useEffect } from 'react'
-import { Period, filterAll, FormatParallel, FormatClass, getSecOffset, RightNow } from '../utils'
+import { Period, filterAll, FormatParallel, FormatClass,  RightNow } from '../utils'
 import { StyleSheet, FlatList, ActivityIndicator, Text, View, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { useDispatch } from 'react-redux';
 import { sethiddenitems } from '../redux/userdataSlice';
 import { setrefreshItems } from '../redux/filterSlice';
-import {getTaskCompletedUserList} from '../API/api';
+import { getTaskCompletedUserList } from '../API/api';
 
 // import {Navi}
 import { schedulePushNotification } from '../notification'
 import * as Notifications from "expo-notifications";
 
-const InsertTask=(Id,UserName, className)=>{
+const InsertTask = (Id, UserName, className) => {
     var myHeaders = new Headers();
     myHeaders.append("X-Hasura-Role", "anonymous");
     myHeaders.append("content-type", "application/json");
 
     var requestOptions = {
-    method: 'POST',
-    headers: myHeaders,
-    redirect: 'follow'
+        method: 'POST',
+        headers: myHeaders,
+        redirect: 'follow'
     };
 
     fetch(`https://inform250.school1298.ru/api/rest/new?classid=${className}&username=${UserName}&taskid=${Id}`, requestOptions)
-    .then(response => response.text())
-    .then(result => console.log(result))
-    .catch(error => console.log('error', error));
+
 
 }
 
 export const Event = ({ item, navigation }) => {
-    // console.log(item)
-    const det = item.item.Description2 != null ? '->' : ''
+    const det = item.item.Description2 != null ? '' : ''
     const notificationOffset = 15
 
     useEffect(() => {
@@ -53,58 +50,44 @@ export const Event = ({ item, navigation }) => {
     }
         , [])
 
-    
-    const HideItemsD=useDispatch()
+
+    const HideItemsD = useDispatch()
     const RefreshItemsD = useDispatch()
 
-    const HideItem=()=>{
-        console.log(item.item.Id)
+    const HideItem = () => {
         HideItemsD(sethiddenitems(item.item.Id))
         RefreshItemsD(setrefreshItems())
-        // alert(item.item.Id)
     }
 
     const ModalScreenEvent = () => {
         Alert.alert('Выполнение задачи', 'Сохранить?',
-        [
-            {
-                text: "Да",
-                onPress: ()=>InsertTask(item.item.Id, 'Anka_nebo', '10T'),
-            }, {
-                text: "Нет",
-                onPress: () => {},
-            }
-        ], { cancelable: true, })
+            [
+                {
+                    text: "Да",
+                    onPress: () => InsertTask(item.item.Id, 'Anka_nebo', '10T'),
+                }, {
+                    text: "Нет",
+                    onPress: () => { },
+                }
+            ], { cancelable: true, })
 
     }
 
     const RemoveAlert = () => {
         Alert.alert('Предупреждение', 'Скрыть?',
-        [
-            {
-                text: "Да",
-                onPress: HideItem,
-            }, {
-                text: "Нет",
-                onPress: () => {},
-            }
-        ], { cancelable: true, })
+            [
+                {
+                    text: "Да",
+                    onPress: HideItem,
+                }, {
+                    text: "Нет",
+                    onPress: () => { },
+                }
+            ], { cancelable: true, })
     }
 
-    const NavigateToHist = async ()=>{
+    const NavigateToHist = async () => {
         const hist = await getTaskCompletedUserList('10T', '323')
-        console.log(hist)
-        // const ZU={
-        //     "new_taskscomlpeted": [
-        //         {
-        //             "username": "Anka_nebo"
-        //         },
-        //         {
-        //             "username": "Anka_nebo2"
-        //         }
-        //     ]
-        //   }
-
         navigation.navigate('ScreenEventHistory', hist)
     }
 
@@ -116,13 +99,13 @@ export const Event = ({ item, navigation }) => {
 
             </View>
             <View>
-                <FontAwesome name="eye-slash" size={24} color="black" onPress={ModalScreenEvent}/>
+                <FontAwesome name="eye-slash" size={24} color="black" onPress={ModalScreenEvent} />
             </View>
             <View>
                 <View style={styles.data1}>
-                    <Text style={styles.data}> {item.item.Time} {Period(item.item.DateStart, item.item.DateEnd)}</Text>
+                    <Text style={styles.data}> {Period(item.item)}</Text>
                 </View>
-                <TouchableOpacity style={styles.where1} onPress={()=>NavigateToHist()}>
+                <TouchableOpacity style={styles.where1} onPress={() => NavigateToHist()}>
                     <Text style={styles.where}>{item.item.Address}</Text>
                 </TouchableOpacity >
             </View>
@@ -136,7 +119,7 @@ export const Event = ({ item, navigation }) => {
         </View>
         <View style={styles.who1}>
             <View style={styles.borderline}>
-                <Text style={styles.who}>{item.item.MainMan.Title+item.item.Id}</Text>
+                <Text style={styles.who}>{item.item.MainMan.Title + item.item.Id}</Text>
             </View>
         </View>
 

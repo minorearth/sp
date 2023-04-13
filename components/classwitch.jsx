@@ -10,7 +10,6 @@ export const ClassSwitch = (props) => {
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
     const toggleSwitchD=useDispatch()
     useEffect(()=>{
-        // console.log(isEnabled)
         toggleSwitchD(toggleMyclass(isEnabled))
     },[isEnabled])
 

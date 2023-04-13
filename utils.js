@@ -10,8 +10,8 @@ TodayE.setTime(TodayE.getTime() + 24 * 60 * 60 * 1000 - offset * 60 * 1000)
 
 export const getDateString = (dateMills) => {
     const DateString = new Date(dateMills)
-     return `${DateString.toLocaleDateString()} ${DateString.toLocaleTimeString()}`
- }
+    return `${DateString.toLocaleDateString()} ${DateString.toLocaleTimeString()}`
+}
 
 export const ISOdateParse = (IsoDate) => {
     var now = new Date(IsoDate);
@@ -20,16 +20,16 @@ export const ISOdateParse = (IsoDate) => {
 }
 
 
-export const Period = (IsoDateStart, IsoDateEnd) => {
-    var now = new Date(IsoDateStart);
+export const Period = (item) => {
+    var now = new Date(item.DateStart);
     const timecurS = now.toISOString().substring(0, 10)
-    var now = new Date(IsoDateEnd);
+    var now = new Date(item.DateEnd);
     const timecurE = now.toISOString().substring(0, 10)
     if (timecurE != '1970-01-01') {
-        return `c  ${timecurS} по  ${timecurE}`
+        return `c  ${item.Time==null?'':item.Time}  ${timecurS}  по ${item.EndTime==null?'':item.EndTime} ${timecurE}`
     }
     else {
-        return timecurS
+        return  `${item.Time==null?'':item.Time}  ${timecurS}`
     }
 
 
@@ -42,48 +42,49 @@ export const FormatParallel = (data) => {
 
 
 export const FormatClass = (data) => {
-    // const feed=data==null?' для всех':String(data)
-    // return 'Параллели: '+ feed
-    // console.log(data)
     const feed = data.length == 0 ? 'Не указаны' : String(data.map(item => item.Title))
     return 'Классы: ' + feed
 }
 
 
-export const filterAll = (events, filter, access,HiddenItems,hide) => {
+export const calcPeriodS = (TodayS, filter) => {
+    if (filter == 'Неделя' || filter == 'Месяц' || filter == 'Сегодня') {
+        return TodayS.getTime()
+    }
+    if (filter == 'Завтра') {
+        return TodayS.getTime()+86400000
+    }
+    else if (filter == 'Прошедшие' || filter == 'Все') {
+        return TodayS.getTime() - 262980000000
+    }
+}
+
+export const calcPeriodE = (TodayS, TodayE, filter) => {
+    if (filter == 'Сегодня') {
+        return TodayE.getTime()
+    }
+    else if (filter == 'Завтра') {
+        return TodayE.getTime() + 86400000
+    } else if (filter == 'Неделя') {
+        return TodayS.getTime() + 604800000
+    }
+    else if (filter == 'Месяц') {
+        return TodayS.getTime() + 26298000000
+    }
+    else if (filter == 'Прошедшие') {
+        return TodayS.getTime()
+    } else if (filter == 'Все') {
+        return TodayS.getTime() + 262980000000
+    }
+}
+
+export const filterAll = (events, filter, ClassParallel, access, HiddenItems, hide) => {
     var DateStart = new Date()
     var DateEnd = new Date()
-    // console.log(filter.value)
-    if (filter.value == 'Сегодня') {
-        DateStart.setTime(TodayS.getTime())
-        DateEnd.setTime(TodayE.getTime())
-        // console.log('1',DateStart,DateEnd)
- 
-    }
-    else if (filter.value == 'Завтра') {
-        DateStart.setTime(TodayE.getTime())
-        DateEnd.setTime(TodayE.getTime() + 86400000)
-    } else if (filter.value == 'Неделя') {
-        DateStart.setTime(TodayS.getTime())
-        DateEnd.setTime(TodayS.getTime() + 604800000)
-    }
-    else if (filter.value == 'Месяц') {
-        DateStart.setTime(TodayS.getTime())
-        DateEnd.setTime(TodayS.getTime() + 26298000000)
-    }
-    else if (filter.value == 'Прошедшие') {
-        DateStart.setTime(TodayS.getTime() - 262980000000)
-        DateEnd.setTime(TodayS.getTime())
-    } else if (filter.value == 'Все') {
-        DateStart.setTime(TodayS.getTime() - 262980000000)
-        DateEnd.setTime(TodayS.getTime() + 262980000000)
-    }
-    // console.log('2',DateStart,DateEnd)
-    return filterByToday(events, DateStart, DateEnd, filter, access,HiddenItems,hide)
+    DateStart.setTime(calcPeriodS(TodayS, filter.value))
+    DateEnd.setTime(calcPeriodE(TodayS, TodayE, filter.value))
+    return { 'value': events.value.filter(item => isVisible(item, DateStart, DateEnd, filter, ClassParallel, access, HiddenItems, hide)) }
 
-
-
-    // return events
 
 }
 
@@ -100,23 +101,19 @@ const CheckParallel = (parallelsfilter, parallels) => {
     if (parallels != null) {
         if (parallels[0] != 'Все') {
             const flt = Object.keys(parallelsfilter).filter(h => parallelsfilter[h] == true)
-            // console.log(parallels, flt, parallels.filter(item => flt.includes(item)).length > 0)
             return parallels.filter(item => flt.includes(item)).length > 0
         }
         else {
-            // console.log(parallels, true)
             return true
         }
     }
     else {
-        // console.log(parallels, false)
         return false
     }
 
 }
 const CheckAcceess = (visibility, access) => {
 
-    // console.log(!visibility.includes('Учащиеся') && access == 'Учитель' ? true : false)
     if (visibility == null) {
         return false
     } else if (!visibility.includes('Учащиеся') && access == 'Учитель') {
@@ -127,122 +124,64 @@ const CheckAcceess = (visibility, access) => {
 
 
 }
+// fullDate для создания нотификаций
 const fullDate = (day, time) => {
-    if (time == null) {
+    if (time == null || !time.includes(':')) {
         return 'null'
     }
     const ret = new Date(day)
     const [hour, minutes] = time.split(':').map(x => Number(x))
     ret.setTime(day.getTime() + (hour * 60 + minutes) * 60 * 1000)
     return ret
-
-
-
 }
-
-export const getSecOffset = (end) => {
-    const st = new Date()
-    const en = new Date(end)
-    // return Math.round((en,st,en-st+offset*60*1000)/1000)
-    return 300
-
-}
-
 
 export const DataClean = (events) => {
-    // console.log(HiddenItems)
-    if (events == undefined) {
-        return {}
-    }
     const res = {}
     res["value"] = []
-    const data3 = events
-    const data2 = data3.value
+    const data2 = events.value
     for (var event in data2) {
         var eventDateS = new Date(data2[event].DateStart);
         var eventDateE = new Date(data2[event].DateEnd);
-        if (data2[event].Id=='373'){
-            // console.log('3',eventDateS,eventDateE,data2[event].DateStart,data2[event].DateStart)
-
-        }
-      
+        // data2[event].Id == '373' && console.log('3', eventDateS, eventDateE, data2[event].DateStart, data2[event].DateStart)
         eventDateS.setTime(eventDateS.getTime() - offset * 60 * 1000)
         eventDateE.setTime(eventDateE.getTime() - offset * 60 * 1000)
-        if (data2[event].Id=='373'){
-            // console.log('3',eventDateS,eventDateE)
-
-        }
-        
-        // res["value"] = [...res["value"], { ...data2[event], "hidden": HiddenItems[data2[event].Id] == undefined ? false : true, "DateStart": eventDateS, 'DateEnd': eventDateE, "fullDate": fullDate(eventDateS, data2[event].Time) }]
         res["value"] = [...res["value"], { ...data2[event], "DateStart": eventDateS, 'DateEnd': eventDateE, "fullDate": fullDate(eventDateS, data2[event].Time) }]
     }
-
     return res
+}
+
+export const extractClassParallel = (className) => {
+
+    return className != '' ? className.split('').filter(letter => '1234567890'.includes(letter)).join('') : undefined
+}
+
+const isVisible = (event, DateStart, DateEnd, filter, ClassParallel, access, HiddenItems, hide) => {
+
+    var eventDateS = new Date(event.DateStart);
+    var eventDateE = new Date(event.DateEnd);
+    const EventAccess = CheckAcceess(event.Visibility, access)
+    const filtersCorrParallels = CheckParallel(filter.parallels, event.Parallel)
+    //Вот тут
+    hiddenI = HiddenItems[event.Id] == undefined ? false : true
+    var classInClasses = filter.myClassToggle && Checkclass(filter.className, event.Class)
+    const MyParallelInPrarallels = ClassParallel != undefined ? CheckParallel({ [ClassParallel]: true }, event.Parallel) : false
+    const superfilter = filter.myClassToggle ? MyParallelInPrarallels || classInClasses : filtersCorrParallels
+    event.Id=='375'&&console.log(superfilter,EventAccess,hiddenI,eventDateS,eventDateE,DateStart, DateEnd)
+
+    return (
+        (
+            (eventDateS.getTime() >= DateStart.getTime()
+                && eventDateS.getTime() < DateEnd.getTime())
+            ||
+            (eventDateE.getTime() >= DateStart.getTime()
+                && eventDateE.getTime() < DateEnd.getTime())
+        )
+        && superfilter && EventAccess && (hide ? hiddenI : !hiddenI))
+
 
 
 }
 
 
-const filterByToday = (events, DateStart, DateEnd, filter, access,HiddenItems,hide) => {
-
-    if (events == undefined) {
-        return {}
-    }
-
-    const res = {}
-    res["value"] = []
-    const data3 = events
-    const data2 = data3.value
 
 
-    // console.log( DateStart, DateEnd, filter, access,HiddenItems)
-    for (var event in data2) {
-   
-
-        var eventDateS = new Date(data2[event].DateStart);
-
-        var eventDateE = new Date(data2[event].DateEnd);
-        // const hidden = data2[event].hidden
-        
-        // eventDateS.setTime(eventDateS.getTime()-offset*60*1000)
-        // eventDateE.setTime(eventDateE.getTime()-offset*60*1000)
-        const EventAccess = CheckAcceess(data2[event].Visibility, access)
-        // console.log(hide,hide?hiddenI:!hiddenI)
-        const ParallelEval = CheckParallel(filter.parallels, data2[event].Parallel)
-       //Вот тут
-    //    console.log(HiddenItems,'adf')
-       let hiddenI=false
-       if (HiddenItems!=undefined){
-
-        let hiddenI=HiddenItems[data2[event].Id]=='undefined'?false:true
-
-       }
-    // const 
-    //    const hiddenI=false
-
-        var classEval = filter.myClass ? Checkclass(filter.className, data2[event].Class) : true
-        if (data2[event].Id=='373'){
-            // console.log(classEval,ParallelEval,EventAccess,DateStart, DateEnd,eventDateS,data2[event])
-            
-            
-            }
-        if (
-            (
-                (eventDateS.getTime() >= DateStart.getTime()
-                    && eventDateS.getTime() < DateEnd.getTime())
-                ||
-                (eventDateE.getTime() >= DateStart.getTime()
-                    && eventDateE.getTime() < DateEnd.getTime())
-            )
-
-            && classEval && ParallelEval && EventAccess && (hide?hiddenI:!hiddenI)) {
-            res["value"] = [...res["value"], { ...data2[event] }]
-
-        }
-    }
-
-    return res
-
-
-}
-filterByToday()

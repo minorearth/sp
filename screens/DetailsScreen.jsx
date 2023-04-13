@@ -1,11 +1,9 @@
 import { StyleSheet, TouchableOpacity } from 'react-native';
 
 import { Text, View } from '../components/Themed';
-import { RootStackScreenProps } from '../types';
 import * as Clipboard from 'expo-clipboard';
 
 export default function DetailsScreen({route}) {
-  // const { params}=route.params
   const copyToClipboard = async () => {
     await Clipboard.setStringAsync('hello world');
   };
@@ -15,7 +13,6 @@ export default function DetailsScreen({route}) {
         <Text style={styles.linkText}>Копировать текст</Text>
       </TouchableOpacity>
       <Text style={styles.title}>{route.params}</Text>
-
     </View>
   );
 }

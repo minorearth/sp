@@ -3,7 +3,6 @@ import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-nati
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setfilter } from '../redux/filterSlice';
-// import 
 
 
 export const FilterBtn = (props) => {
@@ -21,14 +20,8 @@ export const FilterBtn = (props) => {
    
 
     useEffect(() => {
-
         if (filterState == label) {
-            // console.log('hello')
-
-
         }
-
-
     }, [filterState])
 
     const { label } = props

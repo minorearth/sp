@@ -29,7 +29,6 @@ export default function Notification() {
 
     responseListener.current =
       Notifications.addNotificationResponseReceivedListener((response) => {
-        // console.log(response);
       });
 
     return () => {
@@ -44,18 +43,9 @@ export default function Notification() {
 }
 
 export async function schedulePushNotification(
-  trigger,title
+  trigger, title
 ) {
 
-  // var time2 = new Date(Eventdate);
-  // var offset = new Date().getTimezoneOffset();
-  // time2.setTime(time2.getTime()-1000*60*60*offset+1000*60*17)
-  // time2.setTime(Date.ge)
-
-  // console.log(offset);
-
-  // console.log(time2)
-  // var time=time2.getTime()
   var days = [
     "Sunday",
     "Monday",
@@ -65,14 +55,6 @@ export async function schedulePushNotification(
     "Friday",
     "Saturday",
   ];
-  // const weekday = days.indexOf(day);
-  // const hours = 0;
-  // const minutes = time.getMinutes()+1;
-
-  // const trigger = new Date(Date.now() + 30 * 1000 + 180 * 3 * 60 * 1000);
-  // trigger.setMinutes(0);
-  // trigger.setSeconds(0);
-
   const id = await Notifications.scheduleNotificationAsync({
     content: {
       title: "You've got mail! 📬",
@@ -84,7 +66,6 @@ export async function schedulePushNotification(
     },
     trigger,
   });
-  // console.log("notif id on scheduling",id,weekday,hours,minutes,weekday)
   return id;
 }
 
@@ -102,7 +83,6 @@ async function registerForPushNotificationsAsync() {
       return;
     }
     token = (await Notifications.getExpoPushTokenAsync()).data;
-    // console.log(token);
   } else {
     alert("Must use physical device for Push Notifications");
   }

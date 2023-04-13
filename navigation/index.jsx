@@ -34,14 +34,14 @@ export default function Navigation({ colorScheme }) {
   const accesspassed = useSelector(state => state.userdata.access)
 
   const setUserName = useDispatch()
-  useEffect(()=>{
+  useEffect(() => {
 
     // setUserName(setName({firstname:'Иван', lastname:'Иванович', surname:'Иванов'}))
     // setTaskCompleted('10Н','Петр Петрович Петров','999')
     // getTaskCompletedUserList('11Т','12312')
 
 
-  },[])
+  }, [])
 
 
   if (identityPassed && accesspassed) {
@@ -90,24 +90,6 @@ function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={SettingsScreen}
-        options={{
-          title: 'Фильтры',
-          tabBarLabel: () => { return null },
-          tabBarIcon: ({ color }) => <TabBarIcon name="gears" color={color} />,
-        }}
-      />
-      <BottomTab.Screen
-        name="NotificationScreen"
-        component={NotificationScreen}
-        options={{
-          title: 'Уведомления',
-          tabBarLabel: () => { return null },
-          tabBarIcon: ({ color }) => <TabBarIcon name="clock-o" color={color} />,
-        }}
-      />      
-      <BottomTab.Screen
         name="HiddenEventsScreen"
         component={HiddenEventsScreen}
         options={{
@@ -116,6 +98,25 @@ function BottomTabNavigator() {
           tabBarIcon: ({ color }) => <TabBarIcon name="eye-slash" color={color} />,
         }}
       />
+      <BottomTab.Screen
+        name="TabTwo"
+        component={SettingsScreen}
+        options={{
+          title: 'Фильтры',
+          tabBarLabel: () => { return null },
+          tabBarIcon: ({ color }) => <TabBarIcon name="gears" color={color} />,
+        }}
+      />
+      {/* <BottomTab.Screen
+        name="NotificationScreen"
+        component={NotificationScreen}
+        options={{
+          title: 'Уведомления',
+          tabBarLabel: () => { return null },
+          tabBarIcon: ({ color }) => <TabBarIcon name="clock-o" color={color} />,
+        }}
+      />       */}
+
 
     </BottomTab.Navigator>
   );

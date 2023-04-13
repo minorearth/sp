@@ -16,14 +16,11 @@ import Notification, { schedulePushNotification } from '../notification'
 export default function HiddenEventsScreen({ navigation }) {
   const result = useSelector((state) => state.userdata.items)
   const HiddenItems=useSelector(state=>state.userdata.hiddenItems)
-  console.log(HiddenItems,'вот')
   let [response, setResponse] = useState();
-  // const selectFilter = useSelector((state) => state.filter)
-  // const refreshItems = useSelector((state) => state.filter.refreshItems)
   const refreshItems = useSelector((state) => state.filter.refreshItems)
 
   useEffect(() => {
-    const b={"className": "", "myClass": false, "parallels": {"1": true, "10": true, "11": true, "2": true, "3": true, "4": true, "5": true, "6": true, "7": true, "8": true, "9": true}, "refreshItems": true, "value": "Все"}
+    const b={"className": "", "myClassToggle": false, "parallels": {"1": true, "10": true, "11": true, "2": true, "3": true, "4": true, "5": true, "6": true, "7": true, "8": true, "9": true}, "refreshItems": true, "value": "Все"}
     setResponse(filterAll(result, b, 'Учитель',HiddenItems,true));
 
   }, [refreshItems]);
@@ -33,11 +30,6 @@ export default function HiddenEventsScreen({ navigation }) {
   return (
 
     <View style={styles.container}>
-      {/* <View style={styles.filter}>
-        <FilterBar />
-        <ClassSwitch />
-      </View> */}
-
       <View style={styles.events}>
         <FlatList
           data={response?.value}

@@ -6,21 +6,21 @@ import { setClassName } from '../redux/filterSlice'
 export const ClassPicker = () => {
     const setClassD = useDispatch()
     const [ className, setClassNameh ] = useState('')
-    const ClassNameS=useSelector(state=>state.filter.className)
+    const classNameS=useSelector(state=>state.filter.className)
 
-    const onChangeText = (text) => {
-        setClassNameh(text)
-    }
+    // const onChangeText = (text) => {
+    //     setClassNameh(text)
+    // }
     
-    useEffect(()=>{
-        setClassD(setClassName(className))
+    // useEffect(()=>{
+    //     setClassD(setClassName(className))
 
-    },[className])    
+    // },[className])    
     
-    useEffect(()=>{
-        setClassNameh(ClassNameS)
+    // useEffect(()=>{
+    //     setClassNameh(ClassNameS)
 
-    },[])
+    // },[])
 
     //   const [selectedValue, setSelectedValue] = useState();
     return (
@@ -28,8 +28,8 @@ export const ClassPicker = () => {
         <View style={styles.container}>
             <Text style={styles.caption}>Выберите класс</Text>
             <TextInput style={styles.input}
-                onChangeText={onChangeText}
-                value={className}
+                onChangeText={(text)=>setClassD(setClassName(text))}
+                value={classNameS}
 
             />
 
