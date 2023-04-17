@@ -2,12 +2,13 @@ import { StyleSheet, FlatList, ActivityIndicator, Text, View, ScrollView, Toucha
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ISOdateParse, filterAll, FormatParallel, FormatClass, DataClean,extractClassParallel } from '../utils'
+import { ISOdateParse, filterAll, FormatParallel, FormatClass, DataClean, extractClassParallel } from '../utils'
 import { ClassSwitch } from '../components/classwitch'
 import { FilterBar } from '../components/filterBar'
 import { Event } from '../components/Event'
 import { setitems } from '../redux/userdataSlice';
 import Notification, { schedulePushNotification } from '../notification'
+import { getEvents } from '../API/api';
 
 
 export default function EventsScreen({ navigation }) {
@@ -15,37 +16,38 @@ export default function EventsScreen({ navigation }) {
   const HiddenItems = useSelector(state => state.userdata.hiddenItems)
   const [isLoading, setIsLoading] = useState(true);
   const [response, setResponse] = useState();
-  const selectFilter = useSelector((state) => state.filter)
+
+
+
   const result = useSelector((state) => state.userdata.items)
   const refreshItems = useSelector((state) => state.filter.refreshItems)
   const access = useSelector(state => state.userdata.person)
   const setitemsD = useDispatch()
+  const selectFilter = useSelector((state) => state.filter)
 
-  useEffect(() => {
-    fetch("https://school1298.ru/cl/teachers/calendar.json",
-      {
-        method: 'GET',
-        headers: { 'Content-Type': 'text/plain' }
-      })
-      .then(res => res.json())
-      .then(result => {
-        setitemsD(setitems(DataClean(result)))
-        setIsLoading(false);
-      }
-      )
-  }, []);
+  const loadData = async () => {
+    const result = await getEvents()
+    setitemsD(setitems(DataClean(result)))
+    setIsLoading(false);
+    refreshData()
+  }
 
-
-  useEffect(() => {
+  const refreshData = () => {
     
-    if (HiddenItems != undefined && result !=undefined) {
-      
+    if (!isLoading&&HiddenItems != undefined && result != undefined) {
       const ClassParallel = extractClassParallel(selectFilter.className)
-      console.log(HiddenItems)
-      setResponse(filterAll(result, selectFilter,ClassParallel, access, HiddenItems, false));
-    } else
-    console.log('crap')
-  }, [selectFilter, refreshItems]);
+      setResponse(filterAll(result, selectFilter, ClassParallel, access, HiddenItems, false));
+    }
+
+  }
+
+  useEffect(() => {
+    refreshData()
+  }, [refreshItems]);
+
+  useEffect(() => {
+    loadData()
+  }, []);
 
 
 

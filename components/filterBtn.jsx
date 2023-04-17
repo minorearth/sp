@@ -3,21 +3,19 @@ import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-nati
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setfilter } from '../redux/filterSlice';
+import { setrefreshItems } from '../redux/filterSlice';
 
 
 export const FilterBtn = (props) => {
     const { onClick } = props
     const { filterState } = props
-
+    const RefreshItemsD=useDispatch()
     const setFilterD = useDispatch()
     const setFilter = () => {
-
         setFilterD(setfilter(label))
         onClick(label)
-
-
+        RefreshItemsD(setrefreshItems())
     }
-   
 
     useEffect(() => {
         if (filterState == label) {

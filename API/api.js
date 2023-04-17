@@ -17,6 +17,20 @@ export const getTaskCompletedUserList = async (classid, taskid) => {
     const res = await fetch(`https://inform250.school1298.ru/api/rest/gettaskexecutors?classid=${encodeURIComponent(classid)}&taskid=${encodeURIComponent(taskid)}`, requestOptions)
         .then(response => response.json())
         .then(result => result)
-        .catch(error => {});
+        .catch(error => { });
     return res
+}
+
+
+export const getEvents = async () => {
+    console.log('API called')
+    const res = await fetch("https://school1298.ru/cl/teachers/calendar.json",
+        {
+            method: 'GET',
+            headers: { 'Content-Type': 'text/plain' }
+        })
+        .then(res => res.json())
+        .then(result => result)
+    return res
+
 }

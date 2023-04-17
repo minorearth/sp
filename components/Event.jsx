@@ -15,7 +15,6 @@ const InsertTask = (Id, UserName, className) => {
     var myHeaders = new Headers();
     myHeaders.append("X-Hasura-Role", "anonymous");
     myHeaders.append("content-type", "application/json");
-
     var requestOptions = {
         method: 'POST',
         headers: myHeaders,
