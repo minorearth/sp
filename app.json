@@ -31,14 +31,14 @@
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
-    },
+    }
     // "extra": {
     //   "eas": {
     //     "projectId": "8c4ee8e3-af23-4c10-9a31-ab32a8b3e62d"
     //   }
     // },
-    "runtimeVersion": {
-      "policy": "sdkVersion"
-    }
+    // "runtimeVersion": {
+    //   "policy": "sdkVersion"
+    // }
   }
 }

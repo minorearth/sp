@@ -37,8 +37,11 @@ export default function EventsScreen({ navigation }) {
 
 
   useEffect(() => {
+    
     if (HiddenItems != undefined && result !=undefined) {
+      
       const ClassParallel = extractClassParallel(selectFilter.className)
+      console.log(HiddenItems)
       setResponse(filterAll(result, selectFilter,ClassParallel, access, HiddenItems, false));
     } else
     console.log('crap')
