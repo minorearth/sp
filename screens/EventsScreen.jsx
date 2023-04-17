@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     margin: 10,
     padding: 5,
     borderLeftColor: '#ffffff',
-    borderLeftWidth: 5,
+    borderLeftWidths: 5,
     borderRightColor: '#ffffff',
     borderRightWidth: 5,
   },
