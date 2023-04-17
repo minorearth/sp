@@ -20,8 +20,8 @@ export default function HiddenEventsScreen({ navigation }) {
   const refreshItems = useSelector((state) => state.filter.refreshItems)
 
   useEffect(() => {
-    const b={"className": "", "myClassToggle": false, "parallels": {"1": true, "10": true, "11": true, "2": true, "3": true, "4": true, "5": true, "6": true, "7": true, "8": true, "9": true}, "refreshItems": true, "value": "Все"}
-    setResponse(filterAll(result, b, 'Учитель',HiddenItems,true));
+    const filter={"className": "", "myClassToggle": false, "parallels": {"1": true, "10": true, "11": true, "2": true, "3": true, "4": true, "5": true, "6": true, "7": true, "8": true, "9": true}, "refreshItems": true, "value": "Все"}
+    setResponse(filterAll(result, filter,"", 'Учитель',HiddenItems,true));
 
   }, [refreshItems]);
 

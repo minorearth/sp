@@ -64,7 +64,7 @@ export default function EventsScreen({ navigation }) {
           keyExtractor={(item) => item.ID}
           vertical
           refreshing={true}
-          contentContainerStyle={{ paddingBottom: 1000 }}
+          contentContainerStyle={{ paddingBottom: 200 }}
         />
         <Notification />
         <StatusBar style="auto" />

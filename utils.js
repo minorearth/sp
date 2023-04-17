@@ -26,10 +26,10 @@ export const Period = (item) => {
     var now = new Date(item.DateEnd);
     const timecurE = now.toISOString().substring(0, 10)
     if (timecurE != '1970-01-01') {
-        return `c  ${item.Time==null?'':item.Time}  ${timecurS}  по ${item.EndTime==null?'':item.EndTime} ${timecurE}`
+        return `c  ${item.Time == null ? '' : item.Time}  ${timecurS}  по ${item.EndTime == null ? '' : item.EndTime} ${timecurE}`
     }
     else {
-        return  `${item.Time==null?'':item.Time}  ${timecurS}`
+        return `${item.Time == null ? '' : item.Time}  ${timecurS}`
     }
 
 
@@ -52,7 +52,7 @@ export const calcPeriodS = (TodayS, filter) => {
         return TodayS.getTime()
     }
     if (filter == 'Завтра') {
-        return TodayS.getTime()+86400000
+        return TodayS.getTime() + 86400000
     }
     else if (filter == 'Прошедшие' || filter == 'Все') {
         return TodayS.getTime() - 262980000000
@@ -157,16 +157,29 @@ export const extractClassParallel = (className) => {
 
 const isVisible = (event, DateStart, DateEnd, filter, ClassParallel, access, HiddenItems, hide) => {
 
+    hiddenI = HiddenItems[event.Id] == undefined ? false : true
+    // console.log(hide, hiddenI)
+    if (hide && hiddenI) {
+        return true
+    } else if (hide && !hiddenI) {
+        return false
+    } else if (!hide && hiddenI) {
+        return false
+    }
+    // hiddenI : !hiddenI
+
+
     var eventDateS = new Date(event.DateStart);
     var eventDateE = new Date(event.DateEnd);
     const EventAccess = CheckAcceess(event.Visibility, access)
     const filtersCorrParallels = CheckParallel(filter.parallels, event.Parallel)
     //Вот тут
-    hiddenI = HiddenItems[event.Id] == undefined ? false : true
+
     var classInClasses = filter.myClassToggle && Checkclass(filter.className, event.Class)
     const MyParallelInPrarallels = ClassParallel != undefined ? CheckParallel({ [ClassParallel]: true }, event.Parallel) : false
     const superfilter = filter.myClassToggle ? MyParallelInPrarallels || classInClasses : filtersCorrParallels
-    event.Id=='375'&&console.log(superfilter,EventAccess,hiddenI,eventDateS,eventDateE,DateStart, DateEnd)
+
+    event.Id == '375' && console.log(superfilter, EventAccess, hiddenI, eventDateS, eventDateE, DateStart, DateEnd)
 
     return (
         (
@@ -176,7 +189,7 @@ const isVisible = (event, DateStart, DateEnd, filter, ClassParallel, access, Hid
             (eventDateE.getTime() >= DateStart.getTime()
                 && eventDateE.getTime() < DateEnd.getTime())
         )
-        && superfilter && EventAccess && (hide ? hiddenI : !hiddenI))
+        && superfilter && EventAccess)
 
 
 

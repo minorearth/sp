@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from "react";
 import { View, Switch, StyleSheet,Text } from "react-native";
 import { useDispatch } from "react-redux";
-import {toggleMyclass} from '../redux/filterSlice'
+import {toggleMyclass,setrefreshItems} from '../redux/filterSlice'
 
 
 export const ClassSwitch = (props) => {
@@ -9,8 +9,10 @@ export const ClassSwitch = (props) => {
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
     const toggleSwitchD=useDispatch()
+    const RefreshItemsD=useDispatch()
     useEffect(()=>{
         toggleSwitchD(toggleMyclass(isEnabled))
+        RefreshItemsD(setrefreshItems())
     },[isEnabled])
 
     return (

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Switch, StyleSheet, Text } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { setParallels } from "../redux/filterSlice"
+import { setParallels, setrefreshItems } from "../redux/filterSlice"
 
 // crap
 
@@ -21,8 +21,12 @@ export const ParallelSwitch = (props) => {
 
     }, [isEnabled])
 
+ 
+
     const toggleSwitch = () => {
         setIsEnabled(previousState => !previousState)
+        // console.log('asdasd')
+
     
     };
 
