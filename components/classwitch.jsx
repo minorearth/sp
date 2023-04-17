@@ -19,7 +19,7 @@ export const ClassSwitch = (props) => {
         <View style={styles.container}>
             <Text style={styles.text}>  Мой класс</Text>
             <Switch
-                trackColor={{ false: "#767577", true: "#0A4563" }}
+                trackColor={{ false: "#0A4563", true: "#AAAAAA" }}
                 thumbColor={isEnabled ? "#ffffff" : "#ffffff"}
                 ios_backgroundColor="#3e3e3e"
                 onValueChange={toggleSwitch}
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#bee8ff',
         alignItems: "center",
         justifyContent: "flex-start",
-        height:50,
+        height: 50,
     },
     text: {
         fontSize: 16,

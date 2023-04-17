@@ -34,8 +34,8 @@ export const ParallelSwitch = (props) => {
         <View style={styles.container}>
             <View style={styles.label}><Text>{label}</Text></View>
             <View style={styles.switch}><Switch
-                trackColor={{ false: "#767577", true: "#d678f5" }}
-                thumbColor={isEnabled ? "#f7eba3" : "#f5abf5"}
+                trackColor={{ false: "#767577", true: "#0A4563" }}
+                thumbColor={isEnabled ? "#FFFFFF" : "#FFFFFF"}
                 ios_backgroundColor="#3e3e3e"
                 onValueChange={toggleSwitch}
                 value={isEnabled}

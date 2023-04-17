@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { useEffect, useState } from 'react';
 
 
@@ -44,6 +44,12 @@ export default function SettingsScreen() {
         </View>
       </View>
       <ClassPicker />
+      <View style={styles.containerinicialize}><Text style={styles.inicialize}>Введите фимилию, имя</Text></View>
+      <View style={styles.textinput}>
+        <TextInput style={styles.input}>
+          
+        </TextInput>
+      </View>
       <TouchableOpacity
         style={styles.exitBtnContainer}
         onPress={DropAuth}
@@ -53,7 +59,7 @@ export default function SettingsScreen() {
         {/* </View> */}
 
       </TouchableOpacity>
-
+      
     </View >
   );
 }
@@ -85,6 +91,7 @@ const styles = StyleSheet.create({
     borderTopColor: '#0A4563',
     borderTopWidth: 3,
     justifyContent: 'center',
+
   },
   Parallelcontainer: {
     alignItems: 'center',
@@ -109,4 +116,36 @@ const styles = StyleSheet.create({
      justifyContent: 'center', 
      backgroundColor: '#bee8ff',
   },
+  textinput: {
+    alignItems: 'center',
+    flexDirection: "column",
+    width: 100,
+    height: 40,
+    margin: 10,
+    marginBottom: 15,
+    backgroundColor: "#bee8ff",
+    borderLeftColor: '#000000',
+    borderLeftWidth: 1,
+    borderBottomColor: '#000000',
+    borderBottomWidth: 1,
+    borderRightColor: '#000000',
+    borderRightWidth: 1,
+    borderTopColor: '#000000',
+    borderTopWidth: 1,
+    justifyContent: "center"
+  },
+  // input: {
+  //   margin: 15,
+  // },
+  inicialize: {
+    textAlign: "center",
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  containerinicialize: {
+    justifyContent: "center",
+    alignContent: "center",
+    backgroundColor: "#bee8ff"
+  }
+
 });
