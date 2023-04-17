@@ -18,6 +18,7 @@ export const getTaskCompletedUserList = async (classid, taskid) => {
         .then(response => response.json())
         .then(result => result)
         .catch(error => { });
+    console.log(res)
     return res
 }
 

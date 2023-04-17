@@ -3,16 +3,19 @@ import { useEffect, useState } from 'react';
 
 
 import { Text, View } from '../components/Themed';
+import { ScrollView } from 'react-native';
 import { ParallelSwitch } from '../components/ParallelSwitch'
 import { ClassPicker } from '../components/classPicker'
 import { useSelector, useDispatch } from 'react-redux';
-import { setidentity, setaccess } from '../redux/userdataSlice'
+import { setidentity, setaccess, setName } from '../redux/userdataSlice'
 import * as Notifications from "expo-notifications";
 
 export default function SettingsScreen() {
 
   const setidentityD = useDispatch()
   const setaccessD = useDispatch()
+  const setNameD= useDispatch()
+  const name= useSelector(state=>state.userdata.name)
 
   const DropAuth = () => {
     setidentityD(setidentity(false))
@@ -20,47 +23,56 @@ export default function SettingsScreen() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.paral}><Text style={styles.title}>Параллели</Text></View>
-      <View style={styles.Parallelcontainer}>
-        <View style={{ flexDirection: 'row', marginTop: 10, marginRight: 25, marginLeft: 25 }}>
-          <ParallelSwitch label='11' />
-          <ParallelSwitch label='10' />
-          <ParallelSwitch label='9' />
-          <ParallelSwitch label='8' />
+
+    <ScrollView >
+      <View style={styles.container}>
+
+        <View style={styles.paral}><Text style={styles.title}>Параллели</Text></View>
+        <View style={styles.Parallelcontainer}>
+          <View style={{ flexDirection: 'row', marginTop: 10, marginRight: 25, marginLeft: 25 }}>
+            <ParallelSwitch label='11' />
+            <ParallelSwitch label='10' />
+            <ParallelSwitch label='9' />
+            <ParallelSwitch label='8' />
+          </View>
+
+          <View style={{ flexDirection: 'row', marginTop: 10, marginRight: 25, marginLeft: 25 }}>
+            <ParallelSwitch label='7' />
+            <ParallelSwitch label='6' />
+            <ParallelSwitch label='5' />
+            <ParallelSwitch label='4' />
+          </View>
+          <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10, marginRight: 25, marginLeft: 25 }}>
+
+            <ParallelSwitch label='3' />
+            <ParallelSwitch label='2' />
+            <ParallelSwitch label='1' />
+          </View>
+        </View>
+        <ClassPicker />
+        <View style={styles.containerinicialize}><Text style={styles.inicialize}>Введите фамилию, имя</Text></View>
+        <View style={{ ...styles.textinput, width: '80%' }}>
+          <TextInput 
+          onChangeText={(text)=>setNameD(setName(text))}
+          style={styles.input}
+          value={name}
+          >
+
+          </TextInput>
         </View>
 
-        <View style={{ flexDirection: 'row', marginTop: 10, marginRight: 25, marginLeft: 25 }}>
-          <ParallelSwitch label='7' />
-          <ParallelSwitch label='6' />
-          <ParallelSwitch label='5' />
-          <ParallelSwitch label='4' />
-        </View>
-        <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10, marginRight: 25, marginLeft: 25 }}>
+        <TouchableOpacity
+          style={styles.exitBtnContainer}
+          onPress={DropAuth}
+        >
+          {/* <View style={styles.exitBtnContainer}> */}
+          <Text style={styles.exitbtn}>Выйти из системы</Text>
+          {/* </View> */}
 
-          <ParallelSwitch label='3' />
-          <ParallelSwitch label='2' />
-          <ParallelSwitch label='1' />
-        </View>
+        </TouchableOpacity>
       </View>
-      <ClassPicker />
-      <View style={styles.containerinicialize}><Text style={styles.inicialize}>Введите фимилию, имя</Text></View>
-      <View style={styles.textinput}>
-        <TextInput style={styles.input}>
-          
-        </TextInput>
-      </View>
-      <TouchableOpacity
-        style={styles.exitBtnContainer}
-        onPress={DropAuth}
-      >
-        {/* <View style={styles.exitBtnContainer}> */}
-        <Text style={styles.exitbtn}>Выйти из системы</Text>
-        {/* </View> */}
+    </ScrollView >
 
-      </TouchableOpacity>
-      
-    </View >
   );
 }
 
@@ -91,6 +103,7 @@ const styles = StyleSheet.create({
     borderTopColor: '#0A4563',
     borderTopWidth: 3,
     justifyContent: 'center',
+    // paddingBottom: 300
 
   },
   Parallelcontainer: {
@@ -112,17 +125,15 @@ const styles = StyleSheet.create({
     borderRadius: 25,
   },
   paral: {
-     alignItems: 'center',
-     justifyContent: 'center', 
-     backgroundColor: '#bee8ff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#bee8ff',
   },
   textinput: {
     alignItems: 'center',
-    flexDirection: "column",
     width: 100,
     height: 40,
     margin: 10,
-    marginBottom: 15,
     backgroundColor: "#bee8ff",
     borderLeftColor: '#000000',
     borderLeftWidth: 1,
@@ -132,7 +143,9 @@ const styles = StyleSheet.create({
     borderRightWidth: 1,
     borderTopColor: '#000000',
     borderTopWidth: 1,
-    justifyContent: "center"
+    justifyContent: "center",
+    textAlign:"center",
+    borderRadius: 5
   },
   // input: {
   //   margin: 15,
@@ -144,7 +157,7 @@ const styles = StyleSheet.create({
   },
   containerinicialize: {
     justifyContent: "center",
-    alignContent: "center",
+    // alignContent: "center",
     backgroundColor: "#bee8ff"
   }
 

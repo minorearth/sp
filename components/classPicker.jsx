@@ -5,18 +5,18 @@ import { setClassName } from '../redux/filterSlice'
 
 export const ClassPicker = () => {
     const setClassD = useDispatch()
-    const [ className, setClassNameh ] = useState('')
-    const classNameS=useSelector(state=>state.filter.className)
+    const [className, setClassNameh] = useState('')
+    const classNameS = useSelector(state => state.filter.className)
 
     // const onChangeText = (text) => {
     //     setClassNameh(text)
     // }
-    
+
     // useEffect(()=>{
     //     setClassD(setClassName(className))
 
     // },[className])    
-    
+
     // useEffect(()=>{
     //     setClassNameh(ClassNameS)
 
@@ -27,8 +27,10 @@ export const ClassPicker = () => {
 
         <View style={styles.container}>
             <Text style={styles.caption}>Выберите класс</Text>
+            <Text style={{ fontStyle: 'italic' }}>Класс с буквой без пробела, например, 10Т. Буква кириллицей</Text>
+
             <TextInput style={styles.input}
-                onChangeText={(text)=>setClassD(setClassName(text))}
+                onChangeText={(text) => setClassD(setClassName(text))}
                 value={classNameS}
 
             />
@@ -62,6 +64,8 @@ const styles = StyleSheet.create({
         padding: 10,
         width: '25%',
         fontSize: 18,
+        borderRadius: 5,
+        textAlign: 'center',
     },
 });
 

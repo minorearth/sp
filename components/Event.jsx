@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
-import { Period, filterAll, FormatParallel, FormatClass,  RightNow } from '../utils'
+import { Period, filterAll, FormatParallel, FormatClass, RightNow } from '../utils'
 import { StyleSheet, FlatList, ActivityIndicator, Text, View, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { sethiddenitems } from '../redux/userdataSlice';
 import { setrefreshItems } from '../redux/filterSlice';
 import { getTaskCompletedUserList } from '../API/api';
@@ -58,12 +58,19 @@ export const Event = ({ item, navigation }) => {
         RefreshItemsD(setrefreshItems())
     }
 
+    const name = useSelector(state => state.userdata.name)
+    const classTitle = useSelector(state => state.filter.className)
+
     const ModalScreenEvent = () => {
-        Alert.alert('Выполнение задачи', 'Сохранить?',
+        Alert.alert('Выполнение задачи', 'Проинформировать о выполнении и скрыть?',
             [
                 {
                     text: "Да",
-                    onPress: () => InsertTask(item.item.Id, 'Anka_nebo', '10T'),
+                    onPress: () => {
+                        // console.log(item.item.Id, name, classTitle)
+                        InsertTask(item.item.Id, name, classTitle)
+                        HideItem()
+                    },
                 }, {
                     text: "Нет",
                     onPress: () => { },
@@ -85,28 +92,32 @@ export const Event = ({ item, navigation }) => {
             ], { cancelable: true, })
     }
 
-    const NavigateToHist = async () => {
-        const hist = await getTaskCompletedUserList('10T', '323')
+    const NavigateToHist = async (id, classname) => {
+        console.log(classname, id)
+        const hist = await getTaskCompletedUserList(classname, id)
         navigation.navigate('ScreenEventHistory', hist)
     }
 
     return (<View style={!item.item.Visibility.includes('Учащиеся') ? { ...styles.box, backgroundColor: '#8397fb' } : { ...styles.box }}>
         <View>
-            <View>
+            <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                <View>
 
-                <FontAwesome name="eye-slash" size={24} color="black" onPress={RemoveAlert} />
+                    <FontAwesome name="eye-slash" size={24} color="black" onPress={RemoveAlert} />
 
-            </View>
-            <View>
-                <FontAwesome name="eye-slash" size={24} color="black" onPress={ModalScreenEvent} />
+                </View>
+
+                <View>
+                    <FontAwesome name="send" size={24} color="black" onPress={ModalScreenEvent} />
+                </View>
             </View>
             <View>
                 <View style={styles.data1}>
                     <Text style={styles.data}> {Period(item.item)}</Text>
                 </View>
-                <TouchableOpacity style={styles.where1} onPress={() => NavigateToHist()}>
+                <View style={styles.where1} >
                     <Text style={styles.where}>{item.item.Address}</Text>
-                </TouchableOpacity >
+                </View >
             </View>
         </View>
         <TouchableOpacity onPress={() => navigation.navigate('Details', item.item.Description2)}>
@@ -116,9 +127,16 @@ export const Event = ({ item, navigation }) => {
             <View style={styles.who2}><Text style={styles.parallel}>{FormatParallel(item.item.Parallel)}</Text></View>
             <View style={styles.who3}><Text style={styles.class}>{FormatClass(item.item.Class)}</Text></View>
         </View>
-        <View style={styles.who1}>
-            <View style={styles.borderline}>
-                <Text style={styles.who}>{item.item.MainMan.Title + item.item.Id}</Text>
+        <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 5, }}>
+            <TouchableOpacity onPress={() => NavigateToHist(item.item.Id, classTitle)}>
+                <FontAwesome name="list-alt" size={24} color="black" />
+            </TouchableOpacity >
+
+
+            <View style={styles.who1}>
+                <View style={styles.borderline}>
+                    <Text style={styles.who}>{item.item.MainMan.Title}</Text>
+                </View>
             </View>
         </View>
 
@@ -187,7 +205,6 @@ const styles = StyleSheet.create({
     what1: {
         flex: 1,
         alignItems: 'flex-start',
-        // marginTop: 10,
         fontWeight: 'bold',
         borderBottomColor: '#0A4563',
         borderBottomWidth: 3,
@@ -200,9 +217,9 @@ const styles = StyleSheet.create({
         marginTop: 5,
     },
     who1: {
-        flex: 1,
-        alignItems: 'flex-end',
-        marginTop: 5,
+        // flex: 1,
+        // alignItems: 'flex-end',
+        // marginTop: 5,
 
     },
     data1: {

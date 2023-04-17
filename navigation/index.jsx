@@ -62,7 +62,7 @@ function RootNavigator() {
     <Stack.Navigator>
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="Details" component={DetailsScreen} options={{ title: 'Описание мероприятия!' }} />
-      <Stack.Screen name="ScreenEventHistory" component={GetTaskCompletedUserList} options={{ title: 'История вып задачи!' }} />
+      <Stack.Screen name="ScreenEventHistory" component={GetTaskCompletedUserList} options={{ title: 'История выполнения задачи!' }} />
 
     </Stack.Navigator>
   );
