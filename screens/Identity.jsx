@@ -7,15 +7,10 @@ import { setperson, setidentity, setaccess } from "../redux/userdataSlice";
 import { useSelector } from 'react-redux';
 export const Screen2 = () => {
     useEffect(() => {
-
         setidentityD(setidentity(false))
-        // setaccessD(setaccess(false))
-
-
     }, [])
 
     const identityPassed = useSelector(state => state.userdata.identityPassed)
-
     const setpersonD = useDispatch()
     const setidentityD = useDispatch()
     const setaccessD = useDispatch()
@@ -25,8 +20,6 @@ export const Screen2 = () => {
             setpersonD(setperson('Ученик'))
             setidentityD(setidentity(true))
             setaccessD(setaccess(true))
-
-            
         } else {
             setpersonD(setperson('Учитель'))
             setidentityD(setidentity(true))
@@ -36,10 +29,10 @@ export const Screen2 = () => {
         return (
             <View style={styles.screen2}>
                 <View style={styles.teacher}>
-                    <Button style={styles.teach}
+                    <Button style={styles.teacher}
                         title="Учитель"
                         color='#6a99b3'
-                        onPress={() => setIdentity('')}>
+                        onPress={() => setIdentity('Учитель')}>
                     </Button>
                 </View>
                 <View style={styles.purple}>

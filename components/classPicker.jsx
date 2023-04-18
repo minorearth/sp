@@ -8,34 +8,15 @@ export const ClassPicker = () => {
     const [className, setClassNameh] = useState('')
     const classNameS = useSelector(state => state.filter.className)
 
-    // const onChangeText = (text) => {
-    //     setClassNameh(text)
-    // }
-
-    // useEffect(()=>{
-    //     setClassD(setClassName(className))
-
-    // },[className])    
-
-    // useEffect(()=>{
-    //     setClassNameh(ClassNameS)
-
-    // },[])
-
-    //   const [selectedValue, setSelectedValue] = useState();
     return (
 
         <View style={styles.container}>
             <Text style={styles.caption}>Выберите класс</Text>
             <Text style={{ fontStyle: 'italic' }}>Класс с буквой без пробела, например, 10Т. Буква кириллицей</Text>
-
             <TextInput style={styles.input}
                 onChangeText={(text) => setClassD(setClassName(text))}
                 value={classNameS}
-
             />
-
-
         </View>
     )
 }
@@ -57,15 +38,15 @@ const styles = StyleSheet.create({
 
     },
     input: {
-        // flex:2,
         height: 40,
-        margin: 12,
+        margin: 5,
         borderWidth: 1,
-        padding: 10,
         width: '25%',
         fontSize: 18,
         borderRadius: 5,
         textAlign: 'center',
+        backgroundColor: "#FFFFFF"
+        
     },
 });
 

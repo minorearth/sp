@@ -14,8 +14,8 @@ export default function SettingsScreen() {
 
   const setidentityD = useDispatch()
   const setaccessD = useDispatch()
-  const setNameD= useDispatch()
-  const name= useSelector(state=>state.userdata.name)
+  const setNameD = useDispatch()
+  const name = useSelector(state => state.userdata.name)
 
   const DropAuth = () => {
     setidentityD(setidentity(false))
@@ -25,52 +25,44 @@ export default function SettingsScreen() {
   return (
 
     // <ScrollView >
-      <View style={styles.container}>
+    <View style={styles.container}>
+      <TouchableOpacity
+        style={styles.exitBtnContainer}
+        onPress={DropAuth}
+      >
+        <Text style={styles.exitbtn}>Выйти</Text>
+      </TouchableOpacity>
 
-        <View style={styles.paral}><Text style={styles.title}>Параллели</Text></View>
-        <View style={styles.Parallelcontainer}>
-          <View style={{ flexDirection: 'row', marginTop: 10, marginRight: 25, marginLeft: 25 }}>
-            <ParallelSwitch label='11' />
-            <ParallelSwitch label='10' />
-            <ParallelSwitch label='9' />
-            <ParallelSwitch label='8' />
-          </View>
-
-          <View style={{ flexDirection: 'row', marginTop: 10, marginRight: 25, marginLeft: 25 }}>
-            <ParallelSwitch label='7' />
-            <ParallelSwitch label='6' />
-            <ParallelSwitch label='5' />
-            <ParallelSwitch label='4' />
-          </View>
-          <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10, marginRight: 25, marginLeft: 25 }}>
-
-            <ParallelSwitch label='3' />
-            <ParallelSwitch label='2' />
-            <ParallelSwitch label='1' />
-          </View>
+      <View style={styles.containerinicialize}><Text style={styles.inicialize}>Введите фамилию, имя</Text></View>
+      <TextInput style={styles.textinput }
+        onChangeText={(text) => setNameD(setName(text))}
+        // style={styles.input}
+        value={name}
+      >
+      </TextInput>
+      <ClassPicker />
+      <View style={styles.paral}><Text style={styles.title}>Параллели</Text></View>
+      <View style={styles.Parallelcontainer}>
+        <View style={{ flexDirection: 'row', marginTop: 10, marginRight: 25, marginLeft: 25 }}>
+          <ParallelSwitch label='11' />
+          <ParallelSwitch label='10' />
+          <ParallelSwitch label='9' />
+          <ParallelSwitch label='8' />
         </View>
-        <ClassPicker />
-        <View style={styles.containerinicialize}><Text style={styles.inicialize}>Введите фамилию, имя</Text></View>
-        <View style={{ ...styles.textinput, width: '80%' }}>
-          <TextInput 
-          onChangeText={(text)=>setNameD(setName(text))}
-          style={styles.input}
-          value={name}
-          >
-
-          </TextInput>
+        <View style={{ flexDirection: 'row', marginTop: 10, marginRight: 25, marginLeft: 25 }}>
+          <ParallelSwitch label='7' />
+          <ParallelSwitch label='6' />
+          <ParallelSwitch label='5' />
+          <ParallelSwitch label='4' />
         </View>
-
-        <TouchableOpacity
-          style={styles.exitBtnContainer}
-          onPress={DropAuth}
-        >
-          {/* <View style={styles.exitBtnContainer}> */}
-          <Text style={styles.exitbtn}>Выйти из системы</Text>
-          {/* </View> */}
-
-        </TouchableOpacity>
+        <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10, marginRight: 25, marginLeft: 25 }}>
+          <ParallelSwitch label='3' />
+          <ParallelSwitch label='2' />
+          <ParallelSwitch label='1' />
+        </View>
       </View>
+
+    </View>
     // </ScrollView >
 
   );
@@ -89,9 +81,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   exitBtnContainer: {
-    alignItems: 'center',
+    alignItems: 'flex-end',
     flexDirection: "column",
-    width: '40%',
     backgroundColor: '#ffffff',
     borderLeftColor: '#0A4563',
     borderLeftWidth: 3,
@@ -102,9 +93,9 @@ const styles = StyleSheet.create({
     borderRightWidth: 3,
     borderTopColor: '#0A4563',
     borderTopWidth: 3,
-    justifyContent: 'center',
-    // paddingBottom: 300
-
+    padding: 3,
+    margin: 3,
+    alignSelf: 'flex-end'
   },
   Parallelcontainer: {
     alignItems: 'center',
@@ -112,7 +103,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#bee8ff',
     flexDirection: "column",
     width: '100%'
-
   },
   title: {
     fontSize: 20,
@@ -130,26 +120,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#bee8ff',
   },
   textinput: {
-    alignItems: 'center',
-    // width: 100,
+    width: '80%',
+    fontSize: 18,
+    backgroundColor: "#FFFFFF",
     height: 40,
     margin: 10,
-    backgroundColor: "#bee8ff",
-    borderLeftColor: '#000000',
-    borderLeftWidth: 1,
-    borderBottomColor: '#000000',
-    borderBottomWidth: 1,
-    borderRightColor: '#000000',
-    borderRightWidth: 1,
-    borderTopColor: '#000000',
-    borderTopWidth: 1,
-    justifyContent: "center",
-    textAlign:"center",
+    borderColor: '#000000',
+    borderWidth: 1,
+    textAlign: "center",
     borderRadius: 5
   },
-  // input: {
-  //   margin: 15,
-  // },
   inicialize: {
     textAlign: "center",
     fontSize: 18,
@@ -157,7 +137,6 @@ const styles = StyleSheet.create({
   },
   containerinicialize: {
     justifyContent: "center",
-    // alignContent: "center",
     backgroundColor: "#bee8ff"
   }
 

@@ -6,8 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { sethiddenitems } from '../redux/userdataSlice';
 import { setrefreshItems } from '../redux/filterSlice';
 import { getTaskCompletedUserList } from '../API/api';
-
-// import {Navi}
 import { schedulePushNotification } from '../notification'
 import * as Notifications from "expo-notifications";
 
@@ -20,10 +18,7 @@ const InsertTask = (Id, UserName, className) => {
         headers: myHeaders,
         redirect: 'follow'
     };
-
     fetch(`https://inform250.school1298.ru/api/rest/new?classid=${className}&username=${UserName}&taskid=${Id}`, requestOptions)
-
-
 }
 
 export const Event = ({ item, navigation }) => {
@@ -34,7 +29,6 @@ export const Event = ({ item, navigation }) => {
         const LR = async (fullDate) => {
             await schedulePushNotification(fullDate, item.item.Title);
         }
-
         if (item.item.fullDate != 'null') {
             const shdate = new Date(item.item.fullDate)
             if (shdate > RightNow) {
@@ -42,13 +36,8 @@ export const Event = ({ item, navigation }) => {
                 LR(shdate)
             }
         }
-
-
-
-
     }
         , [])
-
 
     const HideItemsD = useDispatch()
     const RefreshItemsD = useDispatch()
@@ -90,26 +79,17 @@ export const Event = ({ item, navigation }) => {
                 }
             ], { cancelable: true, })
     }
-
     const NavigateToHist = async (id, classname) => {
         const hist = await getTaskCompletedUserList(classname, id)
         navigation.navigate('ScreenEventHistory', hist)
     }
-
     const access = useSelector(state => state.userdata.person)
 
     return (<View style={!item.item.Visibility.includes('Учащиеся') ? { ...styles.box, backgroundColor: '#8397fb' } : { ...styles.box }}>
         <View>
             <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-                <View>
-
-                    <FontAwesome name="eye-slash" size={24} color="black" onPress={RemoveAlert} />
-
-                </View>
-
-                <View>
-                    <FontAwesome name="send" size={24} color="black" onPress={ModalScreenEvent} />
-                </View>
+                <FontAwesome name="eye-slash" size={24} color="black" onPress={RemoveAlert} />
+                {access != 'Учитель' && <FontAwesome name="send" size={24} color="black" onPress={ModalScreenEvent} />}
             </View>
             <View>
                 <View style={styles.data1}>
@@ -120,7 +100,7 @@ export const Event = ({ item, navigation }) => {
                 </View >
             </View>
         </View>
-        <TouchableOpacity onPress={() => navigation.navigate('Details', access=='Учитель'?item.item.Description2:item.item.Description)}>
+        <TouchableOpacity onPress={() => navigation.navigate('Details', access == 'Учитель' ? item.item.Description2 : item.item.Description)}>
             <View style={styles.what1}><Text style={styles.what}>{det + item.item.Title}</Text></View>
         </TouchableOpacity>
         <View style={styles.line}>
@@ -128,12 +108,9 @@ export const Event = ({ item, navigation }) => {
             <View style={styles.who3}><Text style={styles.class}>{FormatClass(item.item.Class)}</Text></View>
         </View>
         <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 5, }}>
-            {access=='Учитель'&&<TouchableOpacity onPress={() => NavigateToHist(item.item.Id, classTitle)}>
+            {access == 'Учитель' && <TouchableOpacity onPress={() => NavigateToHist(item.item.Id, classTitle)}>
                 <FontAwesome name="list-alt" size={24} color="black" />
             </TouchableOpacity >}
-            
-
-
             <View style={styles.who1}>
                 <View style={styles.borderline}>
                     <Text style={styles.who}>{item.item.MainMan.Title}</Text>

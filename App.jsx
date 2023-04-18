@@ -9,8 +9,8 @@ import store from './redux/store';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react'
 import { Text } from 'react-native'
-import { Splashscreen } from './components/splashscreen';
-import { Screen2 } from './components/Identity';
+import { Splashscreen } from './screens/splashscreen';
+import { Screen2 } from './screens/Identity';
 import PinScreen from './screens/PinScreen'
 
 

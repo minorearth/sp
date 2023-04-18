@@ -12,37 +12,18 @@ import { ColorSchemeName, Pressable } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import PinScreen from '../screens/PinScreen';
 import DetailsScreen from '../screens/DetailsScreen';
 import EventsScreen from '../screens/EventsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
-import NotificationScreen from '../screens/NotificationScreen';
 import HiddenEventsScreen from '../screens/HiddenEventsScreen';
 import { GetTaskCompletedUserList } from '../screens/ScreenEventHistory';
-import { useEffect } from 'react';
-import { setName } from '../redux/store';
-
-
-
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import { useDispatch, useSelector } from 'react-redux';
-// import { setTaskCompleted, getTaskCompletedUserList } from '../API/api';
 
 export default function Navigation({ colorScheme }) {
   const identityPassed = useSelector(state => state.userdata.identityPassed)
   const accesspassed = useSelector(state => state.userdata.access)
-
-  const setUserName = useDispatch()
-  useEffect(() => {
-
-    // setUserName(setName({firstname:'Иван', lastname:'Иванович', surname:'Иванов'}))
-    // setTaskCompleted('10Н','Петр Петрович Петров','999')
-    // getTaskCompletedUserList('11Т','12312')
-
-
-  }, [])
-
 
   if (identityPassed && accesspassed) {
     return (<NavigationContainer
@@ -63,7 +44,6 @@ function RootNavigator() {
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="Details" component={DetailsScreen} options={{ title: 'Описание мероприятия!' }} />
       <Stack.Screen name="ScreenEventHistory" component={GetTaskCompletedUserList} options={{ title: 'История выполнения задачи!' }} />
-
     </Stack.Navigator>
   );
 }
@@ -102,7 +82,7 @@ function BottomTabNavigator() {
         name="TabTwo"
         component={SettingsScreen}
         options={{
-          title: 'Фильтры',
+          title: 'Настройки',
           tabBarLabel: () => { return null },
           tabBarIcon: ({ color }) => <TabBarIcon name="gears" color={color} />,
         }}
@@ -116,16 +96,11 @@ function BottomTabNavigator() {
           tabBarIcon: ({ color }) => <TabBarIcon name="clock-o" color={color} />,
         }}
       />       */}
-
-
     </BottomTab.Navigator>
   );
 }
 //
 
-/**
- * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
- */
 function TabBarIcon(props) {
   return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
 }

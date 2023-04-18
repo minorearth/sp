@@ -1,15 +1,10 @@
-import { StatusBar } from 'expo-status-bar';
 import { Platform, StyleSheet, SafeAreaView, TextInput, Button, Alert } from 'react-native';
 import { useState, useEffect } from 'react';
-
 import { Text, View } from '../components/Themed';
 import { useDispatch, useSelector } from 'react-redux'
-import { setaccess, setauthpassed } from '../redux/userdataSlice'
-import { setperson, setidentity } from "../redux/userdataSlice";
-
+import { setaccess, setauthpassed,setidentity } from '../redux/userdataSlice'
 
 export const checkPin = async (pin) => {
-
   var myHeaders = new Headers();
   myHeaders.append("X-Hasura-Role", "anonymous");
   myHeaders.append("content-type", "application/json");
@@ -21,54 +16,30 @@ export const checkPin = async (pin) => {
   const response = await fetch(`https://inform250.school1298.ru/api/rest/checkpin?pin=${encodeURIComponent(pin)}`, requestOptions).then(
     response => response.json())
   return response
-
 }
 
-
-
 export default function PinScreen() {
-
   const dispatch = useDispatch()
-
-  let [isLoading, setIsLoading] = useState(true);
-  let [error, setError] = useState();
-  let [response, setResponse] = useState();
-
-  // const [pinText, SetPinText] = useState('12345')
   const [pinText, SetPinText] = useState('')
-
   const onChangeText = (text) => {
-
     SetPinText(text)
   }
-
-
-
-  // const setidentityD = useDispatch()
-
-
   const checkAccess = async () => {
-
-
     const resp = await checkPin(pinText)
     if (resp['new_eventsusers'].length != 0) {
-
       return dispatch(setaccess(true))
-      // setidentityD(setidentity(true))
-      // return 's'
     }
-
     Alert.alert(
       "Ошибка",
       "Неверный PIN",
       [
         { text: "Ну и ладно :(" }
       ])
-
   }
 
   const identityPassed = useSelector(state => state.userdata.identityPassed)
   const accesspassed = useSelector(state => state.userdata.access)
+  const setidentityD = useDispatch()
 
   if (identityPassed && !accesspassed) {
     return (
@@ -80,14 +51,25 @@ export default function PinScreen() {
           value={pinText}
         />
         <View style={styles.fixToText}>
+          <View style={{padding:5,backgroundColor: '#bee8ff'}}>
           <Button
             title="OK"
             color='#0A4563'
+            // width={100}
             onPress={() => checkAccess()}
+          />          
+          </View>
+          <View style={{padding:5,backgroundColor: '#bee8ff'}}>
+          <Button
+            title="Назад"
+            color='#0A4563'
+            onPress={() => {setidentityD(setidentity(false))}}
+          
           />
-        </View>
+          </View>
 
-        {/* <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} /> */}
+
+        </View>
       </View>
     );
   } else return null
@@ -102,7 +84,6 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   input: {
-    // flex:2,
     height: 40,
     margin: 12,
     borderWidth: 1,
@@ -124,7 +105,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#FBEEC1'
+    backgroundColor: '#FBEEC1',
   },
 });
-// Тест слияния веток
