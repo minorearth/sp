@@ -34,7 +34,8 @@ export default function PinScreen() {
   let [error, setError] = useState();
   let [response, setResponse] = useState();
 
-  const [pinText, SetPinText] = useState('12345')
+  // const [pinText, SetPinText] = useState('12345')
+  const [pinText, SetPinText] = useState('')
 
   const onChangeText = (text) => {
 
@@ -106,7 +107,9 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     padding: 10,
-    width: '50%',
+    width: '40%',
+    borderRadius:5,
+    textAlign:"center"
   },
   title: {
     fontSize: 20,

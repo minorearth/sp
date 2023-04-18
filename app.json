@@ -12,10 +12,6 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    // "updates": {
-    //   "fallbackToCacheTimeout": 0,
-    //   "url": "https://u.expo.dev/8c4ee8e3-af23-4c10-9a31-ab32a8b3e62d"
-    // },
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -23,22 +19,15 @@
       "supportsTablet": true
     },
     "android": {
-      // "adaptiveIcon": {
-      //   // "foregroundImage": "./assets/images/icon.png",
-      //   // "backgroundColor": "#ffffff"
-      // },
       "package": "com.dayfireacad.myapp"
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "8c4ee8e3-af23-4c10-9a31-ab32a8b3e62d"
+      }
     }
-    // "extra": {
-    //   "eas": {
-    //     "projectId": "8c4ee8e3-af23-4c10-9a31-ab32a8b3e62d"
-    //   }
-    // },
-    // "runtimeVersion": {
-    //   "policy": "sdkVersion"
-    // }
   }
 }

@@ -22,10 +22,10 @@ export const ParallelSwitch = (props) => {
     }, [isEnabled])
 
  
-
+    const RefreshItemsD = useDispatch()
     const toggleSwitch = () => {
         setIsEnabled(previousState => !previousState)
-        // console.log('asdasd')
+        RefreshItemsD(setrefreshItems())
 
     
     };

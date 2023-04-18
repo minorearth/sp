@@ -7,6 +7,7 @@ import { ClassSwitch } from '../components/classwitch'
 import { FilterBar } from '../components/filterBar'
 import { Event } from '../components/Event'
 import { setitems } from '../redux/userdataSlice';
+import { setrefreshItems } from '../redux/filterSlice';
 import Notification, { schedulePushNotification } from '../notification'
 import { getEvents } from '../API/api';
 
@@ -29,11 +30,11 @@ export default function EventsScreen({ navigation }) {
     const result = await getEvents()
     setitemsD(setitems(DataClean(result)))
     setIsLoading(false);
-    refreshData()
+    // refreshData()
   }
 
   const refreshData = () => {
-    
+    // console.log(isLoading)
     if (!isLoading&&HiddenItems != undefined && result != undefined) {
       const ClassParallel = extractClassParallel(selectFilter.className)
       setResponse(filterAll(result, selectFilter, ClassParallel, access, HiddenItems, false));
@@ -41,18 +42,30 @@ export default function EventsScreen({ navigation }) {
 
   }
 
-  useEffect(() => {
-    refreshData()
-  }, [refreshItems]);
 
+  const RefreshItemsD = useDispatch()
   useEffect(() => {
     loadData()
+    const subscribe= navigation.addListener('tabPress',(e)=>{
+      
+      RefreshItemsD(setrefreshItems())
+
+
+    })
+
   }, []);
+
+  useEffect(() => {
+    refreshData()
+  }, [refreshItems,isLoading]);
 
 
 
   return (
     <View style={styles.container}>
+      {/* <TouchableOpacity onPress={()=>setIsLoading(state=>!state)}>
+        <Text>sdasd</Text>
+        </TouchableOpacity> */}
       <View style={styles.filter}>
         <FilterBar />
         <ClassSwitch />

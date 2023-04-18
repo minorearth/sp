@@ -158,7 +158,6 @@ export const extractClassParallel = (className) => {
 const isVisible = (event, DateStart, DateEnd, filter, ClassParallel, access, HiddenItems, hide) => {
 
     hiddenI = HiddenItems[event.Id] == undefined ? false : true
-    // console.log(hide, hiddenI)
     if (hide && hiddenI) {
         return true
     } else if (hide && !hiddenI) {
@@ -179,7 +178,7 @@ const isVisible = (event, DateStart, DateEnd, filter, ClassParallel, access, Hid
     const MyParallelInPrarallels = ClassParallel != undefined ? CheckParallel({ [ClassParallel]: true }, event.Parallel) : false
     const superfilter = filter.myClassToggle ? MyParallelInPrarallels || classInClasses : filtersCorrParallels
 
-    event.Id == '375' && console.log(superfilter, EventAccess, hiddenI, eventDateS, eventDateE, DateStart, DateEnd)
+    // event.Id == '375' && console.log(superfilter, EventAccess, hiddenI, eventDateS, eventDateE, DateStart, DateEnd)
 
     return (
         (

@@ -5,7 +5,7 @@ import * as Clipboard from 'expo-clipboard';
 
 export default function DetailsScreen({route}) {
   const copyToClipboard = async () => {
-    await Clipboard.setStringAsync('hello world');
+    await Clipboard.setStringAsync(route.params);
   };
   return (
     <View style={styles.container}>

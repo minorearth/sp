@@ -24,7 +24,7 @@ export default function SettingsScreen() {
 
   return (
 
-    <ScrollView >
+    // <ScrollView >
       <View style={styles.container}>
 
         <View style={styles.paral}><Text style={styles.title}>Параллели</Text></View>
@@ -71,7 +71,7 @@ export default function SettingsScreen() {
 
         </TouchableOpacity>
       </View>
-    </ScrollView >
+    // </ScrollView >
 
   );
 }
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
   },
   textinput: {
     alignItems: 'center',
-    width: 100,
+    // width: 100,
     height: 40,
     margin: 10,
     backgroundColor: "#bee8ff",

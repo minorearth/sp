@@ -18,13 +18,11 @@ export const getTaskCompletedUserList = async (classid, taskid) => {
         .then(response => response.json())
         .then(result => result)
         .catch(error => { });
-    console.log(res)
     return res
 }
 
 
 export const getEvents = async () => {
-    console.log('API called')
     const res = await fetch("https://school1298.ru/cl/teachers/calendar.json",
         {
             method: 'GET',

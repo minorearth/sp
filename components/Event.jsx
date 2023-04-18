@@ -67,7 +67,6 @@ export const Event = ({ item, navigation }) => {
                 {
                     text: "Да",
                     onPress: () => {
-                        // console.log(item.item.Id, name, classTitle)
                         InsertTask(item.item.Id, name, classTitle)
                         HideItem()
                     },
@@ -80,7 +79,7 @@ export const Event = ({ item, navigation }) => {
     }
 
     const RemoveAlert = () => {
-        Alert.alert('Предупреждение', 'Скрыть?',
+        Alert.alert('Скрыть мероприятие', 'Мероприятие будет скрыто. Вы сможете увидеть его в скрытых мероприятиях. Скрыть?',
             [
                 {
                     text: "Да",
@@ -93,10 +92,11 @@ export const Event = ({ item, navigation }) => {
     }
 
     const NavigateToHist = async (id, classname) => {
-        console.log(classname, id)
         const hist = await getTaskCompletedUserList(classname, id)
         navigation.navigate('ScreenEventHistory', hist)
     }
+
+    const access = useSelector(state => state.userdata.person)
 
     return (<View style={!item.item.Visibility.includes('Учащиеся') ? { ...styles.box, backgroundColor: '#8397fb' } : { ...styles.box }}>
         <View>
@@ -120,7 +120,7 @@ export const Event = ({ item, navigation }) => {
                 </View >
             </View>
         </View>
-        <TouchableOpacity onPress={() => navigation.navigate('Details', item.item.Description2)}>
+        <TouchableOpacity onPress={() => navigation.navigate('Details', access=='Учитель'?item.item.Description2:item.item.Description)}>
             <View style={styles.what1}><Text style={styles.what}>{det + item.item.Title}</Text></View>
         </TouchableOpacity>
         <View style={styles.line}>
@@ -128,9 +128,10 @@ export const Event = ({ item, navigation }) => {
             <View style={styles.who3}><Text style={styles.class}>{FormatClass(item.item.Class)}</Text></View>
         </View>
         <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 5, }}>
-            <TouchableOpacity onPress={() => NavigateToHist(item.item.Id, classTitle)}>
+            {access=='Учитель'&&<TouchableOpacity onPress={() => NavigateToHist(item.item.Id, classTitle)}>
                 <FontAwesome name="list-alt" size={24} color="black" />
-            </TouchableOpacity >
+            </TouchableOpacity >}
+            
 
 
             <View style={styles.who1}>
@@ -195,6 +196,7 @@ const styles = StyleSheet.create({
         fontStyle: 'italic',
         marginRight: 5,
         marginLeft: 5,
+        alignSelf: "flex-end"
     },
     data: {
         fontSize: 13,
