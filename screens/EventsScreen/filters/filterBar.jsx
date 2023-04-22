@@ -1,13 +1,10 @@
 import React from 'react'
-import { StyleSheet, FlatList, ActivityIndicator, Text, View, ScrollView, TouchableOpacity } from 'react-native';
-import { useEffect, useState } from 'react';
+import { ScrollView } from 'react-native';
+import { useState } from 'react';
 import { FilterBtn } from './filterBtn'
-
-
 
 export const FilterBar = () => {
     const [FilterState, setFilterState] = useState('Сегодня')
-
 
     return (
         <ScrollView horizontal>
@@ -18,24 +15,7 @@ export const FilterBar = () => {
             <FilterBtn label='Все' onClick={setFilterState}  filterState={FilterState}/>
             <FilterBtn label='Прошедшие' onClick={setFilterState}  filterState={FilterState}/>
         </ScrollView >
-
-
     )
 
 
 }
-
-
-const styles = StyleSheet.create(
-
-    {
-
-        filter1: {
-            backgroundColor: '#bee8ff'
-        },
-
-
-
-    }
-
-)

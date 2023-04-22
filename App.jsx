@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react'
 import { Text } from 'react-native'
 import { Screen2 } from './screens/onBoard/identity/Identity';
-import PinScreen from './screens/onBoard/PinScreen'
+import {PinScreen} from './screens/onBoard/PinScreen/PinScreen'
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -22,7 +22,6 @@ export default function App() {
           <Screen2 />
           <PinScreen/>
           <Navigation/>
-          <StatusBar />
         </SafeAreaProvider>
       </PersistGate>
     </Provider >

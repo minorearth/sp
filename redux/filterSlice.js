@@ -15,6 +15,7 @@ export const filterSlice = createSlice({
   reducers: {
     setfilter: (state, action) => {
       state.value = action.payload
+      state.refreshItems = !state.refreshItems
     },
     setrefreshItems: (state, action) => {
       state.refreshItems = !state.refreshItems
@@ -24,9 +25,9 @@ export const filterSlice = createSlice({
     },
     toggleMyclass: (state, action) => {
       state.myClassToggle = action.payload
+      state.refreshItems = !state.refreshItems
     },
     setParallels: (state, action) => {
-
       state.parallels[Object.keys(action.payload)[0]] = action.payload[Object.keys(action.payload)[0]]
     },
   },

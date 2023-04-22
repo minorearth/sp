@@ -1,5 +1,4 @@
 
-
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ISOdateParse, filterAll, FormatParallel, FormatClass, DataClean, extractClassParallel } from '../../utils/utils'

@@ -33,3 +33,19 @@ export const getEvents = async () => {
     return res
 
 }
+
+
+export const checkPin = async (pin) => {
+    var myHeaders = new Headers();
+    myHeaders.append("X-Hasura-Role", "anonymous");
+    myHeaders.append("content-type", "application/json");
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow'
+    };
+    const response = await fetch(`https://inform250.school1298.ru/api/rest/checkpin?pin=${encodeURIComponent(pin)}`, requestOptions).then(
+      response => response.json())
+    return response
+  }
+  
