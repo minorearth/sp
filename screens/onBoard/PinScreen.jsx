@@ -1,8 +1,7 @@
-import { Platform, StyleSheet, SafeAreaView, TextInput, Button, Alert } from 'react-native';
+import { Platform, StyleSheet, SafeAreaView, TextInput, Button, Alert,Text, View  } from 'react-native';
 import { useState, useEffect } from 'react';
-import { Text, View } from '../components/Themed';
 import { useDispatch, useSelector } from 'react-redux'
-import { setaccess, setauthpassed,setidentity } from '../redux/userdataSlice'
+import { setaccess, setauthpassed,setidentity } from '../../redux/userdataSlice'
 
 export const checkPin = async (pin) => {
   var myHeaders = new Headers();

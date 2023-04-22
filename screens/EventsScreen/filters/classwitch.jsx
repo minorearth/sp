@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from "react";
 import { View, Switch, StyleSheet,Text } from "react-native";
 import { useDispatch } from "react-redux";
-import {toggleMyclass,setrefreshItems} from '../redux/filterSlice'
+import {toggleMyclass,setrefreshItems} from '../../../redux/filterSlice'
 
 
 export const ClassSwitch = (props) => {

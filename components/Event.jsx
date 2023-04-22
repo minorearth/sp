@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
-import { Period, filterAll, FormatParallel, FormatClass, RightNow } from '../utils'
+import { Period, filterAll, FormatParallel, FormatClass, RightNow } from '../utils/utils'
 import { StyleSheet, FlatList, ActivityIndicator, Text, View, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { sethiddenitems } from '../redux/userdataSlice';
 import { setrefreshItems } from '../redux/filterSlice';
-import { getTaskCompletedUserList } from '../API/api';
-import { schedulePushNotification } from '../notification'
+import { getTaskCompletedUserList } from '../api/api';
+import { schedulePushNotification } from '../screens/NotificationScreen/notification'
 import * as Notifications from "expo-notifications";
 
 const InsertTask = (Id, UserName, className) => {
@@ -150,15 +150,12 @@ const styles = StyleSheet.create({
     filter: {
         backgroundColor: '#bee8ff',
     },
-
-
     filterbtn: {
         borderRadius: 5,
         backgroundColor: '#787878',
         margin: 5,
         padding: 5
     },
-
 
     what: {
         fontSize: 18,
@@ -179,7 +176,6 @@ const styles = StyleSheet.create({
         fontSize: 13,
         fontStyle: 'italic',
         marginRight: 5,
-
     },
     what1: {
         flex: 1,

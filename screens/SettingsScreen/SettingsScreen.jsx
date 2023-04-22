@@ -1,22 +1,15 @@
-import { StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, TextInput, TouchableOpacity,Text, View } from 'react-native';
 import { useEffect, useState } from 'react';
-
-
-import { Text, View } from '../components/Themed';
-import { ScrollView } from 'react-native';
-import { ParallelSwitch } from '../components/ParallelSwitch'
-import { ClassPicker } from '../components/classPicker'
+import { ParallelSwitch } from './ParallelSwitch'
+import { ClassPicker } from './classPicker'
 import { useSelector, useDispatch } from 'react-redux';
-import { setidentity, setaccess, setName } from '../redux/userdataSlice'
-import * as Notifications from "expo-notifications";
+import { setidentity, setaccess, setName } from '../../redux/userdataSlice'
 
 export default function SettingsScreen() {
-
   const setidentityD = useDispatch()
   const setaccessD = useDispatch()
   const setNameD = useDispatch()
   const name = useSelector(state => state.userdata.name)
-
   const DropAuth = () => {
     setidentityD(setidentity(false))
     setaccessD(setaccess(false))

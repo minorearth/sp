@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Switch, StyleSheet, Text } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { setParallels, setrefreshItems } from "../redux/filterSlice"
+import { setParallels, setrefreshItems } from "../../redux/filterSlice"
 
 // crap
 

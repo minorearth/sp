@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, FlatList, ActivityIndicator, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { useEffect, useState } from 'react';
-import { FilterBtn } from '../components/filterBtn'
+import { FilterBtn } from './filterBtn'
 
 
 

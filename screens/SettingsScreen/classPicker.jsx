@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Text, TextInput } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { setClassName } from '../redux/filterSlice'
+import { setClassName } from '../../redux/filterSlice'
 
 export const ClassPicker = () => {
     const setClassD = useDispatch()

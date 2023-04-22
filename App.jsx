@@ -1,25 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-
 import useCachedResources from './hooks/useCachedResources';
-import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 import { persistor } from './redux/store';
 import store from './redux/store';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react'
 import { Text } from 'react-native'
-import { Splashscreen } from './screens/splashscreen';
-import { Screen2 } from './screens/Identity';
-import PinScreen from './screens/PinScreen'
-
-
+import { Screen2 } from './screens/onBoard/identity/Identity';
+import PinScreen from './screens/onBoard/PinScreen'
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
-  const colorScheme = useColorScheme();
-
-
 
   if (!isLoadingComplete) {
     return null;
@@ -27,11 +19,9 @@ export default function App() {
     return (<Provider store={store}>
       <PersistGate loading={<Text>Loading...</Text>} persistor={persistor}>
         <SafeAreaProvider>
-          {/* {false && <Splashscreen />} */}
           <Screen2 />
           <PinScreen/>
-
-          <Navigation colorScheme={colorScheme} />
+          <Navigation/>
           <StatusBar />
         </SafeAreaProvider>
       </PersistGate>

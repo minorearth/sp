@@ -2,8 +2,8 @@ import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setfilter } from '../redux/filterSlice';
-import { setrefreshItems } from '../redux/filterSlice';
+import { setfilter } from '../../../redux/filterSlice';
+import { setrefreshItems } from '../../../redux/filterSlice';
 
 
 export const FilterBtn = (props) => {
