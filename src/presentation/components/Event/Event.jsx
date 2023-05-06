@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react'
-import { Period, FormatParallel, FormatClass, } from '../../../utils/utils'
+import { Period, FormatParallel, FormatClass, } from '../../../domain/utils'
 import { StyleSheet,   Text, View,  TouchableOpacity } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { useViewModel } from './ViewModel';
@@ -7,13 +6,6 @@ import { AlertDialog } from '../alert';
 
 export const Event = ({ item, navigation }) => {
     const vm=useViewModel()
-
-    useEffect(() => {
-        // vm.scheduleNotification(item)
-    }
-        , [])
-    
-
     return (<View style={!item.item.Visibility.includes('Учащиеся') ? { ...styles.box, backgroundColor: '#8397fb' } : { ...styles.box }}>
         <View>
             <View style={{ flexDirection: "row", justifyContent: "space-between" }}>

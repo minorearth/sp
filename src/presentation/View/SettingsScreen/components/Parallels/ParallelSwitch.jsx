@@ -1,6 +1,6 @@
 import { View, Switch, StyleSheet, Text } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { setParallels } from "../../../redux/filterSlice"
+import { setParallels } from "../../../../redux/filterSlice"
 
 export const ParallelSwitch = ({ label } ) => {
     const setParallelD = useDispatch()

@@ -1,24 +1,24 @@
 
 import { View, StyleSheet, Text, Button } from "react-native";
-import {useIdentity} from './IdentityVM'
+import {useViewModel} from './ViewModel'
 
 export const Screen2 = () => {
-    const Identity=useIdentity()
-    if (!Identity.identityPassed) {
+    const vm=useViewModel()
+    if (!vm.identityPassed) {
         return (
             <View style={styles.screen2}>
                 <View style={styles.teacher}>
                     <Button style={styles.teacher}
                         title="Учитель"
                         color='#6a99b3'
-                        onPress={() => Identity.setUserIdentity('Учитель')}>
+                        onPress={() => vm.setUserIdentity('Учитель')}>
                     </Button>
                 </View>
                 <View style={styles.purple}>
                     <Button
                         title="Ученик"
                         color='#6a99b3'
-                        onPress={() => Identity.setUserIdentity('Ученик')}>
+                        onPress={() => vm.setUserIdentity('Ученик')}>
                     </Button>
                 </View>
             

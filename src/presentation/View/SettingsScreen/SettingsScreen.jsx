@@ -1,39 +1,26 @@
 import { StyleSheet, TouchableOpacity, Text, View } from 'react-native';
-import { ClassPicker } from './className.jsx'
-import { useDispatch } from 'react-redux';
-import { setidentity, setaccess } from '../../../../src/presentation/redux/userdataSlice.js'
-import { ParallelsBar } from './Parallels/ParellelsBar.jsx'
-import { UserName } from './userName.jsx';
+import { ParallelsBar } from './components/Parallels/ParellelsBar.jsx'
+import { Input } from './components/Input.jsx';
+import { useViewModel } from './ViewModel.jsx';
 
 export default function SettingsScreen() {
-  const setidentityD = useDispatch()
-  const setaccessD = useDispatch()
-
-  const DropAuth = () => {
-    setidentityD(setidentity(false))
-    setaccessD(setaccess(false))
-  }
-
+  const vm = useViewModel()
   return (
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.exitBtnContainer}
-        onPress={DropAuth}
+        onPress={vm.DropAuth}
       >
-        <Text style={styles.exitbtn}>Выйти</Text>
+      <Text style={styles.exitbtn}>Выйти</Text>
       </TouchableOpacity>
-
       <Text style={styles.inicialize}>Введите фамилию, имя</Text>
-      <UserName />
-
+      <Input name={vm.name} setUserName={vm.setUserName} width='80%' />
       <Text style={styles.inicialize}>Выберите класс</Text>
       <Text style={{ fontStyle: 'italic' }}>Класс с буквой без пробела, например, 10Т. Буква кириллицей</Text>
-      <ClassPicker />
-      
+      <Input name={vm.className} setUserName={vm.setClass} width='20%' />
       <Text style={styles.inicialize}>Параллели</Text>
       <ParallelsBar></ParallelsBar>
     </View>
-
   );
 }
 

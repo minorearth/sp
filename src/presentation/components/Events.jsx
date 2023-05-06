@@ -3,7 +3,7 @@ import { Event } from './Event/Event'
 import Notification from '../View/NotificationScreen/notification'
 import { View, FlatList,StyleSheet } from 'react-native'
 
-export const Events = ({response,navigation}) => {
+export const Events = ({response, navigation}) => {
     return (
         <View style={styles.events}>
             <FlatList

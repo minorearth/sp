@@ -1,6 +1,6 @@
 // export const RightNow = new Date('2022-08-31T22:00:00.000Z')
 export const RightNow = new Date()
-const offset = new Date().getTimezoneOffset()
+export const offset = new Date().getTimezoneOffset()
 RightNow.setTime(RightNow.getTime() - offset * 60 * 1000)
 const TodayS = new Date(RightNow.toDateString())
 TodayS.setTime(TodayS.getTime() - offset * 60 * 1000)
@@ -96,6 +96,7 @@ export const calcPeriodE = (TodayS, TodayE, filter) => {
 }
 
 export const filterAll = (events, filter, ClassParallel, access, HiddenItems, hide) => {
+    console.log(filter, ClassParallel, access, HiddenItems, hide)
     var DateStart = new Date()
     var DateEnd = new Date()
     DateStart.setTime(calcPeriodS(TodayS, filter.value))
@@ -139,7 +140,7 @@ const CheckAcceess = (visibility, access) => {
 }
 
 // fullDate для создания нотификаций
-const fullDate = (day, time) => {
+export const fullDate = (day, time) => {
     if (time == null || !time.includes(':')) {
         return 'null'
     }
@@ -149,20 +150,6 @@ const fullDate = (day, time) => {
     return ret
 }
 
-export const DataClean = (events) => {
-    const res = {}
-    res["value"] = []
-    const data2 = events.value
-    for (var event in data2) {
-        var eventDateS = new Date(data2[event].DateStart);
-        var eventDateE = new Date(data2[event].DateEnd);
-        // data2[event].Id == '373' && console.log('3', eventDateS, eventDateE, data2[event].DateStart, data2[event].DateStart)
-        eventDateS.setTime(eventDateS.getTime() - offset * 60 * 1000)
-        eventDateE.setTime(eventDateE.getTime() - offset * 60 * 1000)
-        res["value"] = [...res["value"], { ...data2[event], "DateStart": eventDateS, 'DateEnd': eventDateE, "fullDate": fullDate(eventDateS, data2[event].Time) }]
-    }
-    return res
-}
 
 export const extractClassParallel = (className) => {
 

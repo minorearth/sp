@@ -2,26 +2,6 @@ import { createSlice } from '@reduxjs/toolkit'
 
 
 
-const fetchUsers = () => {
-  return function (dispatch) {
-   
-    var myHeaders = new Headers();
-    myHeaders.append("X-Hasura-Role", "anonymous");
-    myHeaders.append("content-type", "application/json");
-    var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        redirect: 'follow'
-    };
-    fetch(`https://inform250.school1298.ru/api/rest/new?classid=11&username=rrrr&taskid=177777`, requestOptions)
-}
-
-
-
-  
-}
-
-
 export const filterSlice = createSlice({
   name: 'filter',
   initialState: {

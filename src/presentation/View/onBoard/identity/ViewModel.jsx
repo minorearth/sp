@@ -2,10 +2,11 @@ import { useState,useEffect } from "react"
 import { useDispatch,useSelector } from "react-redux";
 import { setperson, setidentity, setaccess } from "../../../redux/userdataSlice";
 
-export const useIdentity=()=>{
+export const useViewModel=()=>{
         useEffect(() => {
             setidentityD(setidentity(false))
         }, [])
+        
         const identityPassed = useSelector(state => state.userdata.identityPassed)
         const setpersonD = useDispatch()
         const setidentityD = useDispatch()

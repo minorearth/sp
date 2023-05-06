@@ -1,7 +1,7 @@
 import { StyleSheet, View  } from 'react-native';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { filterAll } from '../../utils/utils'
+import { filterAll } from '../../domain/utils'
 import { Events } from '../components/Events'
 
 export default function HiddenEventsScreen({ navigation }) {

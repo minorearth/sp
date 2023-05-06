@@ -1,14 +1,9 @@
 import { StyleSheet, TextInput, } from 'react-native';
-import { useDispatch,useSelector } from 'react-redux';
-import { setName } from '../../redux/userdataSlice'
 
-export const UserName = () => {
-    const setNameD = useDispatch()
-    const name = useSelector(state => state.userdata.name)
-
+export const Input = ({name, setUserName,width}) => {
     return (
-        <TextInput style={styles.textinput}
-            onChangeText={(text) => setNameD(setName(text))}
+        <TextInput style={{...styles.textinput, width: width}}
+            onChangeText={(text) => setUserName(text)}
             value={name}
         >
         </TextInput>
@@ -16,10 +11,8 @@ export const UserName = () => {
 
 }
 
-
 const styles = StyleSheet.create({
     textinput: {
-        width: '80%',
         fontSize: 18,
         backgroundColor: "#FFFFFF",
         height: 40,
@@ -29,6 +22,4 @@ const styles = StyleSheet.create({
         textAlign: "center",
         borderRadius: 5
     },
-
-
 });
