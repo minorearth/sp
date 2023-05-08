@@ -2,7 +2,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import EventsScreen from '../View/EventsScreen/EventsScreen';
 import SettingsScreen from '../View/SettingsScreen/SettingsScreen';
-import HiddenEventsScreen from '../View/HiddenEventsScreen';
+import HiddenEventsScreen from '../View/HiddenEventsScreen/HiddenEventsScreen';
 
 const BottomTab = createBottomTabNavigator();
 

@@ -1,42 +1,41 @@
-import { Period, FormatParallel, FormatClass, } from '../../../domain/utils'
-import { StyleSheet,   Text, View,  TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { useViewModel } from './ViewModel';
 import { AlertDialog } from '../alert';
 
-export const Event = ({ item, navigation }) => {
-    const vm=useViewModel()
-    return (<View style={!item.item.Visibility.includes('Учащиеся') ? { ...styles.box, backgroundColor: '#8397fb' } : { ...styles.box }}>
+export const Event = ({ item: { item }}) => {
+    const vm = useViewModel()
+    return (<View style={!item.showToKids ? { ...styles.box, backgroundColor: '#8397fb' } : { ...styles.box }}>
         <View>
             <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-                <FontAwesome name="eye-slash" size={24} color="black" onPress={()=>{AlertDialog(()=>vm.HideItem(item.item.Id),'removetask')}} />
-                {vm.access != 'Учитель' && <FontAwesome name="send" size={24} color="black" onPress={()=>AlertDialog(()=>vm.InsertTask(item.item.Id),'inserttask')} />}
+                <FontAwesome name="eye-slash" size={24} color="black" onPress={() => { AlertDialog(() => vm.HideItem(item.Id), 'removetask') }} />
+                {vm.access != 'Учитель' && <FontAwesome name="send" size={24} color="black" onPress={() => AlertDialog(() => vm.InsertTask(item.Id), 'inserttask')} />}
             </View>
             <View>
                 <View style={styles.data1}>
-                    <Text style={styles.data}> {Period(item.item)}</Text>
+                    <Text style={styles.data}>{item.Period}</Text>
                 </View>
                 <View style={styles.where1} >
-                    <Text style={styles.where}>{item.item.Address}</Text>
+                    <Text style={styles.where}>{item.Address}</Text>
                 </View >
             </View>
         </View>
-        <TouchableOpacity onPress={() => navigation.navigate('Details', vm.access == 'Учитель' ? item.item.Description2 : item.item.Description)}>
-            <View style={styles.what1}><Text style={styles.what}>{item.item.Title}</Text></View>
+        <TouchableOpacity onPress={() => vm.NavigateToDetails(item.Description2, item.Description) }>
+            <View style={styles.what1}><Text style={styles.what}>{item.Title}</Text></View>
         </TouchableOpacity>
         <View style={styles.line}>
-            <View style={styles.who2}><Text style={styles.parallel}>{FormatParallel(item.item.Parallel)}</Text></View>
-            <View style={styles.who3}><Text style={styles.class}>{FormatClass(item.item.Class)}</Text></View>
+            <View style={styles.who2}><Text style={styles.parallel}>{item.Parallels}</Text></View>
+            <View style={styles.who3}><Text style={styles.class}>{item.Classes + item.Id}</Text></View>
         </View>
         <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 5, }}>
-            {vm.access == 'Учитель' && <TouchableOpacity onPress={() => vm.NavigateToHist(item.item.Id)}>
+            {vm.access == 'Учитель' && <TouchableOpacity onPress={() => vm.NavigateToHist(item.Id)}>
                 <FontAwesome name="list-alt" size={24} color="black" />
             </TouchableOpacity >}
-            <View style={styles.who1}>
-                <View style={styles.borderline}>
-                    <Text style={styles.who}>{item.item.MainMan.Title}</Text>
-                </View>
+
+            <View style={styles.borderline}>
+                <Text style={styles.who}>{item.MainMan.Title}</Text>
             </View>
+
         </View>
 
     </View>)
@@ -111,12 +110,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'flex-end',
         marginTop: 5,
-    },
-    who1: {
-        // flex: 1,
-        // alignItems: 'flex-end',
-        // marginTop: 5,
-
     },
     data1: {
         flex: 1,

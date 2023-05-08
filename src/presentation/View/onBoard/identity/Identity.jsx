@@ -1,8 +1,8 @@
 
-import { View, StyleSheet, Text, Button } from "react-native";
+import { View, StyleSheet, Button } from "react-native";
 import {useViewModel} from './ViewModel'
 
-export const Screen2 = () => {
+export const Indentity = () => {
     const vm=useViewModel()
     if (!vm.identityPassed) {
         return (

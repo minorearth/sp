@@ -1,24 +1,15 @@
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
-import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { setfilter } from '../../../redux/filterSlice';
-import { setrefreshItems } from '../../../redux/filterSlice';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 
-export const FilterBtn = ({ onClick,filterState,label }) => {
-    const setFilterD = useDispatch()
-    const setFilter = () => {
-        setFilterD(setfilter(label))
-        onClick(label)
-    }
 
-    return (<View style={filterState == label ? styles.buttonPressed : styles.button}>
-        <TouchableOpacity
-            onPress={setFilter}
-        >
-            <Text style={styles.filterbtn}>{label}</Text>
-        </TouchableOpacity></View>
+export const FilterBtn = ({ onPeriodFilterPressed, PeriodFilterState, label }) => {
+    return (
+        <View style={PeriodFilterState == label ? styles.buttonPressed : styles.button}>
+            <TouchableOpacity onPress={() => onPeriodFilterPressed(label)}>
+                <Text style={styles.filterbtn}>{label}</Text>
+            </TouchableOpacity>
+        </View>
     )
 }
 

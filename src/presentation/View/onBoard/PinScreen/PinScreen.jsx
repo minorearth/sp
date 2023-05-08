@@ -1,32 +1,32 @@
 import { StyleSheet, TextInput, Button,  Text, View } from 'react-native';
-import { usePinScreen } from './PinScreenVM';
+import { useViewModel } from './ViewModel';
 
 export const PinScreen = () => {
-  const PinScreen = usePinScreen()
+  const vm = useViewModel()
 
 
-  if (PinScreen.identityPassed && !PinScreen.accesspassed) {
+  if (vm.identityPassed && !vm.accesspassed) {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Введите PIN-код</Text>
         <TextInput
           style={styles.input}
-          onChangeText={PinScreen.onChangeText}
-          value={PinScreen.pinText}
+          onChangeText={vm.onChangeText}
+          value={vm.pinText}
         />
         <View style={styles.fixToText}>
           <View style={{ padding: 5, backgroundColor: '#bee8ff' }}>
             <Button
               title="OK"
               color='#0A4563'
-              onPress={() => PinScreen.checkAccess()}
+              onPress={() => vm.checkAccess()}
             />
           </View>
           <View style={{ padding: 5, backgroundColor: '#bee8ff' }}>
             <Button
               title="Назад"
               color='#0A4563'
-              onPress={() => { PinScreen.returnBack() }}
+              onPress={() => { vm.returnBack() }}
             />
           </View>
         </View>

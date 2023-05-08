@@ -5,14 +5,11 @@ import { useViewModel } from './ViewModel';
 import { Events } from '../../components/Events';
 
 export default function EventsScreen({ navigation }) {
-  const detailsScreen=useViewModel(navigation)
+  const vm = useViewModel()
   return (
     <View style={styles.container}>
-      <View style={styles.filter}>
-        <FilterBar />
-        <ClassSwitch />
-      </View>
-      <Events navigation={navigation} response={detailsScreen.response}/>
+      <FilterBar />
+      <Events response={vm.response} />
     </View>
   );
 }
@@ -36,9 +33,7 @@ const styles = StyleSheet.create({
     borderRightWidth: 5,
   },
 
-  filter: {
-    backgroundColor: '#bee8ff',
-  },
+
 
 
   filterbtn: {

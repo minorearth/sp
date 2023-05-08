@@ -1,11 +1,11 @@
 
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { setaccess, setidentity } from '../../../../../src/presentation/redux/userdataSlice'
-import { checkPin } from '../../../../model/api/api';
+import { setaccess, setidentity } from '../../../redux/userdataSlice'
+import { checkPin } from '../../../../model/api';
 import { Alert } from 'react-native';
 
-export const usePinScreen = () => {
+export const useViewModel = () => {
     const setAccessD = useDispatch()
     const setidentityD = useDispatch()
     const identityPassed = useSelector(state => state.userdata.identityPassed)

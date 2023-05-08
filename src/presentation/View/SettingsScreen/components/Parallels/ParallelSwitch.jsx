@@ -1,10 +1,8 @@
 import { View, Switch, StyleSheet, Text } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
-import { setParallels } from "../../../../redux/filterSlice"
+import { useViewModel } from "../../ViewModel";
 
 export const ParallelSwitch = ({ label } ) => {
-    const setParallelD = useDispatch()
-    const isEnabled = useSelector(state => state.filter.parallels[label])
+    const vm=useViewModel(label)
 
     return (
         <View style={styles.container}>
@@ -12,10 +10,10 @@ export const ParallelSwitch = ({ label } ) => {
             <View style={styles.switch}>
                 <Switch
                     trackColor={{ false: "#767577", true: "#0A4563" }}
-                    thumbColor={isEnabled ? "#FFFFFF" : "#FFFFFF"}
+                    thumbColor={vm.isEnabled ? "#FFFFFF" : "#FFFFFF"}
                     ios_backgroundColor="#3e3e3e"
-                    onValueChange={()=>setParallelD(setParallels({ [label]: !isEnabled }))}
-                    value={isEnabled}
+                    onValueChange={()=>vm.setParallel(label)}
+                    value={vm.isEnabled}
                 />
             </View>
         </View>

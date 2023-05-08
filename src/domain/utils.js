@@ -8,7 +8,7 @@ const TodayE = new Date(TodayS.toDateString())
 TodayE.setTime(TodayE.getTime() + 24 * 60 * 60 * 1000 - offset * 60 * 1000)
 
 
-export const NotificationDateTime=(fullDate)=>{
+export const NotificationDateTime = (fullDate) => {
     const notificationOffset = 15
 
     if (fullDate != 'null') {
@@ -36,21 +36,6 @@ export const ISOdateParse = (IsoDate) => {
     return timecur
 }
 
-
-export const Period = (item) => {
-    var now = new Date(item.DateStart);
-    const timecurS = now.toISOString().substring(0, 10)
-    var now = new Date(item.DateEnd);
-    const timecurE = now.toISOString().substring(0, 10)
-    if (timecurE != '1970-01-01') {
-        return `c  ${item.Time == null ? '' : item.Time}  ${timecurS}  по ${item.EndTime == null ? '' : item.EndTime} ${timecurE}`
-    }
-    else {
-        return `${item.Time == null ? '' : item.Time}  ${timecurS}`
-    }
-
-
-}
 
 export const FormatParallel = (data) => {
     const feed = data == null ? ' для всех' : String(data)
@@ -95,13 +80,13 @@ export const calcPeriodE = (TodayS, TodayE, filter) => {
     }
 }
 
-export const filterAll = (events, filter, ClassParallel, access, HiddenItems, hide) => {
-    console.log(filter, ClassParallel, access, HiddenItems, hide)
+export const filterAll = (events, filter, access, hide) => {
+    const ClassParallel = !hide ? extractClassParallel(filter.className) : ""
     var DateStart = new Date()
     var DateEnd = new Date()
     DateStart.setTime(calcPeriodS(TodayS, filter.value))
     DateEnd.setTime(calcPeriodE(TodayS, TodayE, filter.value))
-    return { 'value': events.value.filter(item => isVisible(item, DateStart, DateEnd, filter, ClassParallel, access, HiddenItems, hide)) }
+    return events.filter(item => isVisible(item, DateStart, DateEnd, filter, ClassParallel, access, hide)) 
 }
 
 const Checkclass = (className, ClassList) => {
@@ -156,9 +141,8 @@ export const extractClassParallel = (className) => {
     return className != '' ? className.split('').filter(letter => '1234567890'.includes(letter)).join('') : undefined
 }
 
-const isVisible = (event, DateStart, DateEnd, filter, ClassParallel, access, HiddenItems, hide) => {
-
-    hiddenI = HiddenItems[event.Id] == undefined ? false : true
+const isVisible = (event, DateStart, DateEnd, filter, ClassParallel, access, hide) => {
+    const hiddenI = event.hidden
     if (hide && hiddenI) {
         return true
     } else if (hide && !hiddenI) {
@@ -166,11 +150,11 @@ const isVisible = (event, DateStart, DateEnd, filter, ClassParallel, access, Hid
     } else if (!hide && hiddenI) {
         return false
     }
+
     var eventDateS = new Date(event.DateStart);
     var eventDateE = new Date(event.DateEnd);
     const EventAccess = CheckAcceess(event.Visibility, access)
     const filtersCorrParallels = CheckParallel(filter.parallels, event.Parallel)
-    //Вот тут
     var classInClasses = filter.myClassToggle && Checkclass(filter.className, event.Class)
     const MyParallelInPrarallels = ClassParallel != undefined ? CheckParallel({ [ClassParallel]: true }, event.Parallel) : false
     const superfilter = filter.myClassToggle ? MyParallelInPrarallels || classInClasses : filtersCorrParallels
@@ -184,9 +168,6 @@ const isVisible = (event, DateStart, DateEnd, filter, ClassParallel, access, Hid
                 && eventDateE.getTime() < DateEnd.getTime())
         )
         && superfilter && EventAccess)
-
-
-
 }
 
 

@@ -1,9 +1,5 @@
-import { StyleSheet, TouchableOpacity } from 'react-native';
-import { useEffect, useState } from 'react';
+import { StyleSheet } from 'react-native';
 import { View, Text } from 'react-native';
-
-
-
 
 export const GetTaskCompletedUserList = (props) => {
     const userName = props.route.params.new_taskscomlpeted
@@ -11,7 +7,6 @@ export const GetTaskCompletedUserList = (props) => {
         <View style={styles.first}><Text style={styles.one}>Выполнившие задачу:</Text></View>
         <View style={styles.box}>{userName.map(item => (<View style={styles.maintext}><Text style={styles.text}>{item.username}</Text></View>))}</View>
     </View>)
-
 }
 
 const styles = StyleSheet.create({
@@ -55,6 +50,5 @@ const styles = StyleSheet.create({
         padding: 3,
         borderBottomColor: '#209fdf',
         borderBottomWidth: 3,
-
     }
 });

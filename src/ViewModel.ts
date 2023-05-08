@@ -2,6 +2,9 @@ import { FontAwesome } from '@expo/vector-icons';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setitems } from './presentation/redux/userdataSlice';
+import { getCleanEvents } from './domain/Events';
 
 export default function useViewModel() {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
@@ -9,11 +12,14 @@ export default function useViewModel() {
     async function loadResourcesAndDataAsync() {
       try {
         SplashScreen.preventAutoHideAsync();
+
         await Font.loadAsync({
           ...FontAwesome.font,
           'space-mono': require('../src/assets/fonts/SpaceMono-Regular.ttf'),
         });
         await new Promise(resolve => setTimeout(resolve, 3000));
+
+
 
       } catch (e) {
         console.warn(e);

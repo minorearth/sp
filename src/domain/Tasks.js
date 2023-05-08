@@ -1,4 +1,4 @@
-import {InsertTask} from '../model/api/api'
+import {InsertTask} from '../model/api'
 
 
 export const InsertTaskUsecase = (Id, UserName, className) => {

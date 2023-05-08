@@ -1,21 +1,32 @@
 import React from 'react'
-import { ScrollView } from 'react-native';
-import { useState } from 'react';
+import { ScrollView, StyleSheet,View } from 'react-native';
 import { FilterBtn } from './filterBtn'
+import { useViewModel } from './ViewModel';
+import { ClassSwitch } from './classwitch';
 
 export const FilterBar = () => {
-    const [FilterState, setFilterState] = useState('Сегодня')
-
+    const vm = useViewModel()
     return (
-        <ScrollView horizontal>
-            <FilterBtn label='Сегодня' onClick={setFilterState}  filterState={FilterState}/>
-            <FilterBtn label='Завтра' onClick={setFilterState}  filterState={FilterState}/>
-            <FilterBtn label='Неделя' onClick={setFilterState}  filterState={FilterState}/>
-            <FilterBtn label='Месяц' onClick={setFilterState}  filterState={FilterState}/>
-            <FilterBtn label='Все' onClick={setFilterState}  filterState={FilterState}/>
-            <FilterBtn label='Прошедшие' onClick={setFilterState}  filterState={FilterState}/>
-        </ScrollView >
+        <View style={styles.filter}>
+            <ScrollView horizontal>
+                <FilterBtn label='Сегодня' onPeriodFilterPressed={vm.onPeriodFilterPressed} filterState={vm.PeriodFilterState} />
+                <FilterBtn label='Завтра' onPeriodFilterPressed={vm.onPeriodFilterPressed} filterState={vm.PeriodFilterState} />
+                <FilterBtn label='Неделя' onPeriodFilterPressed={vm.onPeriodFilterPressed} filterState={vm.PeriodFilterState} />
+                <FilterBtn label='Месяц' onPeriodFilterPressed={vm.onPeriodFilterPressed} filterState={vm.PeriodFilterState} />
+                <FilterBtn label='Все' onPeriodFilterPressed={vm.onPeriodFilterPressed} filterState={vm.PeriodFilterState} />
+                <FilterBtn label='Прошедшие' onPeriodFilterPressed={vm.onPeriodFilterPressed} filterState={vm.PeriodFilterState} />
+            </ScrollView >
+            <ClassSwitch classSwitchEnabled={vm.classSwitchEnabled} onClassSwitchPress={vm.onClassSwitchPress} />
+        </View>
     )
 
 
 }
+
+const styles = StyleSheet.create({
+
+    filter: {
+        backgroundColor: '#bee8ff',
+    },
+
+})
