@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { filterAll } from '../../../domain/utils'
+import { filterAll } from '../../../domain/Eventsfilter'
 
 export const useViewModel=()=>{
     const result = useSelector((state) => state.userdata.items)

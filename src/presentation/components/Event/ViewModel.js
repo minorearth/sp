@@ -2,26 +2,22 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { InsertTaskUsecase } from '../../../domain/Tasks'
-import { NotificationDateTime } from '../../../domain/utils'
+import { NotificationDateTime } from '../../../domain/Eventsfilter'
 import { LR } from '../../View/NotificationScreen/notification'
 import { getTaskCompletedUserList } from '../../../model/api';
 import { useNavigation } from '@react-navigation/native';
 import { setitems } from '../../redux/userdataSlice'
 import { setrefreshItems } from '../../redux/filterSlice';
 import { HideTask } from '../../../domain/Events';
-import { Period} from '../../../domain/utils'
+import { Period} from '../../../domain/Eventsfilter'
 
 
 export const useViewModel = () => {
     const scheduleNotification = (item) => {
-        const shdate = NotificationDateTime(item.item.fullDate)
+        const shdate = NotificationDateTime(item.item.fullSDate)
         shdate != undefined && LR(shdate, item.item.Title)
     }
 
-    useEffect(() => {
-        // scheduleNotification(item)
-    }
-        , [])
     const events = useSelector((state) => state.userdata.items)
     const access = useSelector(state => state.userdata.person)
     const name = useSelector(state => state.userdata.name)

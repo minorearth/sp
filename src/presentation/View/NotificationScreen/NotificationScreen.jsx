@@ -1,7 +1,7 @@
 import { StyleSheet, TouchableOpacity, FlatList, Text, View } from 'react-native';
 import { useEffect, useState } from 'react';
 import * as Notifications from "expo-notifications";
-import {getDateString} from '../../utils/utils'
+import {getDateString} from '../../../domain/datetimeutils'
 import { NotificationRequest } from 'expo-notifications';
 
 export default function NotificationScreen() {

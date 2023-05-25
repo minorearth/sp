@@ -11,8 +11,8 @@ Notifications.setNotificationHandler({
   }),
 });
 
-export const LR = async (fullDate,title) => {
-  await schedulePushNotification(fullDate, title);
+export const LR = async (fullSDate,title) => {
+  await schedulePushNotification(fullSDate, title);
 }
 
 

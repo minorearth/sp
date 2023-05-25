@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setitems,setloaded } from '../../../../src/presentation/redux/userdataSlice';
 import { setrefreshItems } from '../../../../src/presentation/redux/filterSlice';
 import { getCleanEvents } from '../../../domain/Events'
-import { filterAll } from '../../../domain/utils';
+import { filterAll } from '../../../domain/Eventsfilter';
 import { useNavigation } from '@react-navigation/native';
 
 export const useViewModel = () => {

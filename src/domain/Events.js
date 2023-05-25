@@ -1,5 +1,5 @@
 import { getEvents } from '../model/api'
-import { offset, fullDate} from './utils'
+import { offset } from './datetimeutils'
 import { GetHiddenTaskR } from '../model/repository'
 import { HideTaskR } from '../model/repository'
 
@@ -12,49 +12,64 @@ export const FormatParallel = (data) => {
 
 export const FormatClass = (data) => {
   const feed = data.length == 0 ? 'Не указаны' : String(data.map(item => item.Title))
-  return 'Классы: ' + feed
+  return `Классы: ${feed}`
 }
 
 
 
-export const Period = (DateStart,DateEnd,startTime,EndTime) => {
+export const Period = (DateStart, DateEnd, startTime, EndTime) => {
   var now = new Date(DateStart);
+  now.setTime(now.getTime()+24*60*60000)
   const timecurS = now.toISOString().substring(0, 10)
   var now = new Date(DateEnd);
+  now.setTime(now.getTime()+24*60*60000)
   const timecurE = now.toISOString().substring(0, 10)
   if (timecurE != '1970-01-01') {
-      return `c  ${startTime == null ? '' : startTime}  ${timecurS}  по ${EndTime == null ? '' : EndTime} ${timecurE}`
+    return `c  ${startTime == null ? '' : startTime}  ${timecurS}  по ${EndTime == null ? '' : EndTime} ${timecurE}`
   }
   else {
-      return `${startTime == null ? '' : startTime}  ${timecurS}`
+    return `${startTime == null ? '' : startTime}  ${timecurS}`
   }
-
-
 }
+
+
+export const fullSDateTimeUNIX = (date, time) => {
+  if (time == null || !(time.includes(':')||time.includes('.'))) {
+    return 'null'
+  }
+  const separator=time.includes(':')?':':'.'
+  const ret = new Date(date)
+  const [hour, minutes] = time.split(separator).map(x => Number(x))
+  return date.getTime() + (hour * 60 + minutes) * 60000 -offset*60000
+}
+
 
 const DataClean = async (events) => {
   const hiddenTasks = await GetHiddenTaskR()
-  // const res = {}
-  // res["value"] = []
   res = []
   const data2 = events.value
-  for (var event in data2) {
-    var eventDateS = new Date(data2[event].DateStart);
-    var eventDateE = new Date(data2[event].DateEnd);
-    // data2[event].Id == '190' && console.log('3', eventDateS, eventDateE, data2[event].DateStart, data2[event].DateStart)
-    eventDateS.setTime(eventDateS.getTime() - offset * 60 * 1000)
-    eventDateE.setTime(eventDateE.getTime() - offset * 60 * 1000)
-    // if (data2[event].Id=='350'){console.log(hiddenTasks[data2[event].Id],event)}
+  for (let event of data2) {
+    const eventDateS = new Date(event.DateStart);
+    const eventDateE = new Date(event.DateEnd);
 
-    res = [...res, { ...data2[event], 
-      "DateStart": eventDateS, 
-      'DateEnd': eventDateE, 
-      "fullDate": fullDate(eventDateS, data2[event].Time) ,
-      "hidden": hiddenTasks[data2[event].Id]!=undefined?hiddenTasks[data2[event].Id]:false,
-      "Period": Period(data2[event].DateStart,data2[event].DateEnd,data2[event].Time,data2[event].EndTime),
-      "Parallels": FormatParallel(data2[event].Parallel),
-      "Classes": FormatClass(data2[event].Class),
-      "showToKids": data2[event].Visibility!=null&&data2[event].Visibility.includes('Учащиеся')?true:false,
+    res = [...res, {
+      "Address": event.Address,
+      "Class": event.Class,
+      "Description":event.Description,
+      "Description2":event.Description2,
+      "EndTime":event.EndTime,
+      "Mainman":event.MainMan.Title,
+      "Parallel":event.Parallel,
+      "Title":event.Title,
+      "Visibility":event.Visibility,
+      "DateStart": eventDateS.getTime()-offset*60000,
+      'DateEnd': eventDateE.getTime()-offset*60000,
+      "fullSDate": fullSDateTimeUNIX(eventDateS, event.Time),
+      "hidden": hiddenTasks[event.Id] != undefined ? hiddenTasks[event.Id] : false,
+      "Period": Period(event.DateStart, event.DateEnd, event.Time, event.EndTime),
+      "Parallels": FormatParallel(event.Parallel),
+      "Classes": FormatClass(event.Class),
+      "showToKids": event.Visibility != null && event.Visibility.includes('Учащиеся') ? true : false,
 
     }]
   }
@@ -66,14 +81,14 @@ export const getCleanEvents = async () => {
   return await DataClean(result)
 }
 
-const HideInEvents = (id,events) => {
-  let item2={...events.filter(item=>item.Id==id)[0], 'hidden': true}
-  return [...events.filter(item=>item.Id!=id), item2]
- 
+const HideInEvents = (id, events) => {
+  let item2 = { ...events.filter(item => item.Id == id)[0], 'hidden': true }
+  return [...events.filter(item => item.Id != id), item2]
+
 }
 
 
-export const HideTask = async (id,events) => {
+export const HideTask = async (id, events) => {
   await HideTaskR(id)
-  return HideInEvents(id,events)
+  return HideInEvents(id, events)
 }

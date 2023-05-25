@@ -33,7 +33,7 @@ export const Event = ({ item: { item }}) => {
             </TouchableOpacity >}
 
             <View style={styles.borderline}>
-                <Text style={styles.who}>{item.MainMan.Title}</Text>
+                <Text style={styles.who}>{item.Mainman}</Text>
             </View>
 
         </View>
