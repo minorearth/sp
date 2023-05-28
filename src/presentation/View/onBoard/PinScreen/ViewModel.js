@@ -17,10 +17,10 @@ export const useViewModel = () => {
     }
 
     const checkAccess = async () => {
-        const resp = await checkPin(pinText)
-        if (resp['new_eventsusers'].length != 0) {
+        // const resp = await checkPin(pinText)
+        // if (resp['new_eventsusers'].length != 0) {
             return setAccessD(setaccess(true))
-        }
+        // }
         Alert.alert(
             "Ошибка",
             "Неверный PIN",

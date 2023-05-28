@@ -1,9 +1,10 @@
+import React from 'react'
 import { StyleSheet, TouchableOpacity, Text, View } from 'react-native';
 import { ParallelsBar } from './components/Parallels/ParellelsBar.jsx'
 import { Input } from './components/Input.jsx';
 import { useViewModel } from './ViewModel.jsx';
 
-export default function SettingsScreen() {
+export function SettingsScreen() {
   const vm = useViewModel()
   return (
     <View style={styles.container}>
@@ -14,7 +15,7 @@ export default function SettingsScreen() {
       <Text style={styles.exitbtn}>Выйти</Text>
       </TouchableOpacity>
       <Text style={styles.inicialize}>Введите фамилию, имя</Text>
-      <Input name={vm.name} setUserName={vm.setUserName} width='80%' />
+      <Input name={vm.name} testID="userName" setUserName={vm.setUserName} width='80%' />
       <Text style={styles.inicialize}>Выберите класс</Text>
       <Text style={{ fontStyle: 'italic' }}>Класс с буквой без пробела, например, 10Т. Буква кириллицей</Text>
       <Input name={vm.className} setUserName={vm.setClass} width='20%' />

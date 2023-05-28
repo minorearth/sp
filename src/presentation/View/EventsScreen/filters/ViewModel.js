@@ -4,7 +4,7 @@ import { setfilter,toggleMyclass } from '../../../redux/filterSlice';
 
 export const useViewModel = () => {
 
-    const PeriodFilterState = useSelector(state => state.filter.value)
+    const PeriodFilterState = useSelector(state => state.filter.period)
     const setFilterD = useDispatch()
     const onPeriodFilterPressed = (label) => {
         setFilterD(setfilter(label))

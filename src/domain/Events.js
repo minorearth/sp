@@ -21,7 +21,7 @@ export const Period = (DateStart, DateEnd, startTime, EndTime) => {
   var now = new Date(DateStart);
   now.setTime(now.getTime()+24*60*60000)
   const timecurS = now.toISOString().substring(0, 10)
-  var now = new Date(DateEnd);
+  now = new Date(DateEnd);
   now.setTime(now.getTime()+24*60*60000)
   const timecurE = now.toISOString().substring(0, 10)
   if (timecurE != '1970-01-01') {
@@ -33,26 +33,26 @@ export const Period = (DateStart, DateEnd, startTime, EndTime) => {
 }
 
 
-export const fullSDateTimeUNIX = (date, time) => {
+export const fullSDateTimeUNIX = (dateUNIX, time) => {
   if (time == null || !(time.includes(':')||time.includes('.'))) {
     return 'null'
   }
   const separator=time.includes(':')?':':'.'
-  const ret = new Date(date)
   const [hour, minutes] = time.split(separator).map(x => Number(x))
-  return date.getTime() + (hour * 60 + minutes) * 60000 -offset*60000
+  return dateUNIX + (hour * 60 + minutes) * 60000 -offset*60000
 }
 
 
 const DataClean = async (events) => {
   const hiddenTasks = await GetHiddenTaskR()
-  res = []
+  let res = []
   const data2 = events.value
   for (let event of data2) {
     const eventDateS = new Date(event.DateStart);
     const eventDateE = new Date(event.DateEnd);
 
     res = [...res, {
+      "id":event.Id,
       "Address": event.Address,
       "Class": event.Class,
       "Description":event.Description,
@@ -64,7 +64,7 @@ const DataClean = async (events) => {
       "Visibility":event.Visibility,
       "DateStart": eventDateS.getTime()-offset*60000,
       'DateEnd': eventDateE.getTime()-offset*60000,
-      "fullSDate": fullSDateTimeUNIX(eventDateS, event.Time),
+      "fullSDate": fullSDateTimeUNIX(eventDateS.getTime(), event.Time),
       "hidden": hiddenTasks[event.Id] != undefined ? hiddenTasks[event.Id] : false,
       "Period": Period(event.DateStart, event.DateEnd, event.Time, event.EndTime),
       "Parallels": FormatParallel(event.Parallel),
@@ -82,8 +82,8 @@ export const getCleanEvents = async () => {
 }
 
 const HideInEvents = (id, events) => {
-  let item2 = { ...events.filter(item => item.Id == id)[0], 'hidden': true }
-  return [...events.filter(item => item.Id != id), item2]
+  let item2 = { ...events.filter(item => item.id == id)[0], 'hidden': true }
+  return [...events.filter(item => item.id != id), item2]
 
 }
 

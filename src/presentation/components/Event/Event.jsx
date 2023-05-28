@@ -8,8 +8,8 @@ export const Event = ({ item: { item }}) => {
     return (<View style={!item.showToKids ? { ...styles.box, backgroundColor: '#8397fb' } : { ...styles.box }}>
         <View>
             <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-                <FontAwesome name="eye-slash" size={24} color="black" onPress={() => { AlertDialog(() => vm.HideItem(item.Id), 'removetask') }} />
-                {vm.access != 'Учитель' && <FontAwesome name="send" size={24} color="black" onPress={() => AlertDialog(() => vm.InsertTask(item.Id), 'inserttask')} />}
+                <FontAwesome name="eye-slash" size={24} color="black" onPress={() => { AlertDialog(() => vm.HideItem(item.id), 'removetask') }} />
+                {vm.access != 'Учитель' && <FontAwesome name="send" size={24} color="black" onPress={() => AlertDialog(() => vm.InsertTask(item.id), 'inserttask')} />}
             </View>
             <View>
                 <View style={styles.data1}>
@@ -25,10 +25,10 @@ export const Event = ({ item: { item }}) => {
         </TouchableOpacity>
         <View style={styles.line}>
             <View style={styles.who2}><Text style={styles.parallel}>{item.Parallels}</Text></View>
-            <View style={styles.who3}><Text style={styles.class}>{item.Classes + item.Id}</Text></View>
+            <View style={styles.who3}><Text style={styles.class}>{item.Classes + item.id}</Text></View>
         </View>
         <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 5, }}>
-            {vm.access == 'Учитель' && <TouchableOpacity onPress={() => vm.NavigateToHist(item.Id)}>
+            {vm.access == 'Учитель' && <TouchableOpacity onPress={() => vm.NavigateToHist(item.id)}>
                 <FontAwesome name="list-alt" size={24} color="black" />
             </TouchableOpacity >}
 

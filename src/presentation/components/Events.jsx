@@ -10,7 +10,7 @@ export const Events = ({response}) => {
             <FlatList
                 data={response}
                 renderItem={(item) => <Event item={item} />}
-                keyExtractor={(item) => item.ID}
+                keyExtractor={(item) => item.id}
                 vertical
                 refreshing={true}
                 contentContainerStyle={{ paddingBottom: 200 }}
