@@ -1,6 +1,5 @@
 
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
 import { InsertTaskUsecase } from '../../../domain/Tasks'
 import { NotificationDateTime } from '../../../domain/Eventsfilter'
 import { LR } from '../../View/NotificationScreen/notification'
@@ -9,7 +8,6 @@ import { useNavigation } from '@react-navigation/native';
 import { setitems } from '../../redux/userdataSlice'
 import { setrefreshItems } from '../../redux/filterSlice';
 import { HideTask } from '../../../domain/Events';
-import { Period} from '../../../domain/Eventsfilter'
 
 
 export const useViewModel = () => {
@@ -38,7 +36,19 @@ export const useViewModel = () => {
 
     const navigation = useNavigation()
     const NavigateToHist = async (id) => {
+        if (classTitle=='') {
+            alert('Не задан класс в настройках')
+            return 
+        }  
+        
         const hist = await getTaskCompletedUserList(classTitle, id)
+        if (hist=='Что-то пошло не так') {
+            alert('Что-то пошло не так...')
+            return 
+        }  
+
+        
+        
         navigation.navigate('ScreenEventHistory', hist)
     }
 

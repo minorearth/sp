@@ -1,3 +1,4 @@
+import React from 'react'
 import { StyleSheet, TextInput, Button,  Text, View } from 'react-native';
 import { useViewModel } from './ViewModel';
 
@@ -13,6 +14,8 @@ export const PinScreen = () => {
           style={styles.input}
           onChangeText={vm.onChangeText}
           value={vm.pinText}
+          testID="test:id/pinInput"
+
         />
         <View style={styles.fixToText}>
           <View style={{ padding: 5, backgroundColor: '#bee8ff' }}>
@@ -20,6 +23,8 @@ export const PinScreen = () => {
               title="OK"
               color='#0A4563'
               onPress={() => vm.checkAccess()}
+              testID="test:id/login"
+
             />
           </View>
           <View style={{ padding: 5, backgroundColor: '#bee8ff' }}>

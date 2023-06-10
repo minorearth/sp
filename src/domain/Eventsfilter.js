@@ -54,11 +54,10 @@ export const isVisible = (event, filter, access, showHidden) => {
     }
     const eventAccess = getEventAccess(event.showToKids, access)
     const parallelsAndClassfilter = getParallelsAndClassfilter(filter.parallels, event.Parallel,filter.myClassName, filter.MyClassParallel, event.Class, filter.myClassToggle)
-    if (event.id==388) {
-        console.log(event.DateStart, event.DateEnd, filter.filterDateS,filter.filterDateE,eventAccess,parallelsAndClassfilter)
-        console.log(filter.parallels, event.Parallel,filter.myClassName, filter.MyClassParallel, event.Class, filter.myClassToggle)
-    }
-    console.log(access, showHidden)
+    // if (event.id==388) {
+    //     console.log(event.DateStart, event.DateEnd, filter.filterDateS,filter.filterDateE,eventAccess,parallelsAndClassfilter)
+    //     console.log(filter.parallels, event.Parallel,filter.myClassName, filter.MyClassParallel, event.Class, filter.myClassToggle)
+    // }
     
     return (
         (

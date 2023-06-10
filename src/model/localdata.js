@@ -7,7 +7,7 @@ export const HideTask = async (Id) => {
 }
 
 export const GetHiddenTask = async () => {
-    const hiddenTasks = await AsyncStorage.getItem('@HiddenTasks')
+    const hiddenTasks = await AsyncStorage.getItem('@HiddenTasks')||"{}"
     return JSON.parse(hiddenTasks)
 }
 

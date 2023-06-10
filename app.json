@@ -1,0 +1,16 @@
+{
+  "expo": {
+    "name": "my-app",
+    "slug": "my-app",
+    "version": "1.1.0",
+    "sdkVersion": "46.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "android": {
+      "package": "com.dayfireacad.myapp"
+    }
+  }
+}

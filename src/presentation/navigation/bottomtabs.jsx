@@ -1,7 +1,8 @@
+import React from 'react';
 import { FontAwesome } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import EventsScreen from '../View/EventsScreen/EventsScreen';
-import SettingsScreen from '../View/SettingsScreen/SettingsScreen';
+import {SettingsScreen} from '../View/SettingsScreen/SettingsScreen';
 import HiddenEventsScreen from '../View/HiddenEventsScreen/HiddenEventsScreen';
 
 const BottomTab = createBottomTabNavigator();
@@ -12,31 +13,37 @@ export const BottomTabNavigator = () => {
             initialRouteName="TabOne"
         >
             <BottomTab.Screen
-                name="TabOne"
+                name="EventsTab"
+
                 component={EventsScreen}
+                
+
                 options={({ navigation }) => ({
                     title: 'Мероприятия',
                     tabBarLabel: () => { return null },
-                    tabBarIcon: () => <TabBarIcon name="window-restore" />,
+                    tabBarIcon: () => <TabBarIcon name="window-restore" testID="test:id/eventsTab"/>,
 
                 })}
             />
             <BottomTab.Screen
                 name="HiddenEventsScreen"
+                
+
                 component={HiddenEventsScreen}
                 options={{
                     title: 'Скрытые мероприятия',
                     tabBarLabel: () => { return null },
-                    tabBarIcon: () => <TabBarIcon name="eye-slash" />,
+                    tabBarIcon: () => <TabBarIcon name="eye-slash" testID="test:id/hidden"/>,
                 }}
             />
             <BottomTab.Screen
-                name="TabTwo"
+                name="SettingsTab"
                 component={SettingsScreen}
+                
                 options={{
                     title: 'Настройки',
                     tabBarLabel: () => { return null },
-                    tabBarIcon: () => <TabBarIcon name="gears" />,
+                    tabBarIcon: () => <TabBarIcon name="gears" testID="test:id/settings"/>,
                 }}
             />
             {/* <BottomTab.Screen

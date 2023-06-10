@@ -10,7 +10,7 @@ export const getTaskCompletedUserList = async (classid, taskid) => {
     const res = await fetch(`https://inform250.school1298.ru/api/rest/gettaskexecutors?classid=${encodeURIComponent(classid)}&taskid=${encodeURIComponent(taskid)}`, requestOptions)
         .then(response => response.json())
         .then(result => result)
-        .catch(error => { });
+        .catch(error => 'Что-то пошло не так');
     return res
 }
 

@@ -1,4 +1,5 @@
 
+import React from "react";
 import { View, StyleSheet, Button } from "react-native";
 import {useViewModel} from './ViewModel'
 
@@ -10,15 +11,24 @@ export const Indentity = () => {
                 <View style={styles.teacher}>
                     <Button style={styles.teacher}
                         title="Учитель"
+                        name="username2"
                         color='#6a99b3'
-                        onPress={() => vm.setUserIdentity('Учитель')}>
+                        onPress={() => vm.setUserIdentity('Учитель')}
+                        testID="test:id/teacherRole"
+                        >
                     </Button>
                 </View>
-                <View style={styles.purple}>
+                <View style={styles.purple} data-testid="submit2" >
                     <Button
                         title="Ученик"
+                        name="username" 
+                        ref={()=>"123456"}
                         color='#6a99b3'
-                        onPress={() => vm.setUserIdentity('Ученик')}>
+                        onPress={() => vm.setUserIdentity('Ученик')}
+                        data-testid="submit"
+                        testID="test:id/studentRole"
+                        
+                        >
                     </Button>
                 </View>
             

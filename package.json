@@ -1,12 +1,11 @@
 {
   "name": "my-app",
   "version": "1.1.0",
-  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "expo start",
+    "start": "expo start --dev-client",
     "start2": "expo start --tunnel",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web",
     "test": "jest"
   },
@@ -20,21 +19,23 @@
     ],
     "transform": {
       "\\.[jt]sx?$": "babel-jest"
-    }
+    },
+    "runAllTestsFirst": false,
+    "autoEnable": false,
+    "showCoverageOnLoad": false
   },
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",
     "@expo/webpack-config": "^0.17.0",
     "@react-native-async-storage/async-storage": "~1.17.3",
-    "@react-native-clipboard/clipboard": "^1.11.1",
+    "@react-native-clipboard/clipboard": "^1.11.2",
     "@react-navigation/bottom-tabs": "^6.0.5",
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/native-stack": "^6.1.0",
     "@reduxjs/toolkit": "^1.9.0",
-    "expo": "~46.0.16",
+    "@wdio/globals": "^8.10.7",
+    "expo": "~46.0.21",
     "expo-asset": "~8.6.3",
-    "expo-clipboard": "~3.1.0",
-    "expo-constants": "~13.2.4",
     "expo-device": "~4.3.0",
     "expo-font": "~10.2.1",
     "expo-linking": "~3.2.4",
@@ -49,7 +50,7 @@
     "jest-expo": "^48.0.2",
     "react": "18.0.0",
     "react-dom": "18.0.0",
-    "react-native": "0.69.6",
+    "react-native": "0.69.9",
     "react-native-safe-area-context": "4.3.1",
     "react-native-screens": "~3.15.0",
     "react-native-web": "~0.18.7",
@@ -67,11 +68,14 @@
     "@types/react": "~18.0.0",
     "@types/react-native": "~0.69.1",
     "babel-jest": "^29.5.0",
+    "detox": "^20.9.1",
     "eslint": "^8.41.0",
     "eslint-plugin-jest": "^27.2.1",
     "eslint-plugin-react": "^7.32.2",
     "react-test-renderer": "18.0.0",
-    "typescript": "~4.3.5"
+    "typescript": "~4.3.5",
+    "wdio-wait-for": "^3.0.4",
+    "webdriverio": "^8.10.5"
   },
   "private": true
 }

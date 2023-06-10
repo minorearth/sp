@@ -3,9 +3,9 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 
 
-export const FilterBtn = ({ onPeriodFilterPressed, PeriodFilterState, label }) => {
+export const FilterBtn = ({ onPeriodFilterPressed, PeriodFilterState, label,testID }) => {
     return (
-        <View style={PeriodFilterState == label ? styles.buttonPressed : styles.button}>
+        <View style={PeriodFilterState == label ? styles.buttonPressed : styles.button} testID={testID}>
             <TouchableOpacity onPress={() => onPeriodFilterPressed(label)}>
                 <Text style={styles.filterbtn}>{label}</Text>
             </TouchableOpacity>

@@ -1,3 +1,4 @@
+import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { useViewModel } from './ViewModel';
@@ -5,11 +6,13 @@ import { AlertDialog } from '../alert';
 
 export const Event = ({ item: { item }}) => {
     const vm = useViewModel()
-    return (<View style={!item.showToKids ? { ...styles.box, backgroundColor: '#8397fb' } : { ...styles.box }}>
+    return (<View style={!item.showToKids ? { ...styles.box, backgroundColor: '#8397fb' } : { ...styles.box }}
+    testID={`test:id/event${item.id}`}
+    >
         <View>
             <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                 <FontAwesome name="eye-slash" size={24} color="black" onPress={() => { AlertDialog(() => vm.HideItem(item.id), 'removetask') }} />
-                {vm.access != 'Учитель' && <FontAwesome name="send" size={24} color="black" onPress={() => AlertDialog(() => vm.InsertTask(item.id), 'inserttask')} />}
+                {vm.access != 'Учитель' && <FontAwesome name="send" size={24} testID={`test:id/sendBtn${item.id}`} color="black" onPress={() => AlertDialog(() => vm.InsertTask(item.id), 'inserttask')} />}
             </View>
             <View>
                 <View style={styles.data1}>
@@ -21,14 +24,14 @@ export const Event = ({ item: { item }}) => {
             </View>
         </View>
         <TouchableOpacity onPress={() => vm.NavigateToDetails(item.Description2, item.Description) }>
-            <View style={styles.what1}><Text style={styles.what}>{item.Title}</Text></View>
+            <View style={styles.what1}><Text style={styles.what} testID={`test:id/title${item.id}`}>{item.Title}</Text></View>
         </TouchableOpacity>
         <View style={styles.line}>
             <View style={styles.who2}><Text style={styles.parallel}>{item.Parallels}</Text></View>
             <View style={styles.who3}><Text style={styles.class}>{item.Classes + item.id}</Text></View>
         </View>
         <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 5, }}>
-            {vm.access == 'Учитель' && <TouchableOpacity onPress={() => vm.NavigateToHist(item.id)}>
+            {vm.access == 'Учитель' && <TouchableOpacity onPress={() => vm.NavigateToHist(item.id)} testID={`test:id/history${item.id}`}>
                 <FontAwesome name="list-alt" size={24} color="black" />
             </TouchableOpacity >}
 

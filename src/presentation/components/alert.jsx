@@ -18,6 +18,7 @@ export const AlertDialog = (action,message) => {
             {
                 text: "Да",
                 onPress: action,
+                
             }, {
                 text: "Нет",
                 onPress: () => { },

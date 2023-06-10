@@ -12,14 +12,14 @@ export function SettingsScreen() {
         style={styles.exitBtnContainer}
         onPress={vm.DropAuth}
       >
-      <Text style={styles.exitbtn}>Выйти</Text>
+        <Text style={styles.exitbtn} testID='test:id/logout'>Выйти</Text>
       </TouchableOpacity>
       <Text style={styles.inicialize}>Введите фамилию, имя</Text>
-      <Input name={vm.name} testID="userName" setUserName={vm.setUserName} width='80%' />
+      <Input name={vm.name} setUserName={vm.setUserName} width='80%'  testId='test:id/userName'/>
       <Text style={styles.inicialize}>Выберите класс</Text>
       <Text style={{ fontStyle: 'italic' }}>Класс с буквой без пробела, например, 10Т. Буква кириллицей</Text>
-      <Input name={vm.className} setUserName={vm.setClass} width='20%' />
-      <Text style={styles.inicialize}>Параллели</Text>
+      <Input name={vm.className} setUserName={vm.setClass} width='20%' testId='test:id/className'/>
+      <Text style={styles.inicialize}>Параллrели</Text>
       <ParallelsBar></ParallelsBar>
     </View>
   );

@@ -3,12 +3,12 @@ import { StyleSheet, TextInput, } from 'react-native';
 import PropTypes from 'prop-types';
 
 
-export const Input = ({name, setUserName,width}) => {
+export const Input = ({name, setUserName,width,testId}) => {
     return (
         <TextInput style={{...styles.textinput, width: width} }
             onChangeText={(text) => setUserName(text)}
             value={name}
-            testID="userName"
+            testID={testId}
         >
         </TextInput>
     )

@@ -1,14 +1,16 @@
+import React from 'react'
 import { StyleSheet, TouchableOpacity,Text, View  } from 'react-native';
 
-import * as Clipboard from 'expo-clipboard';
+// import * as Clipboard from 'expo-clipboard';
+import Clipboard from '@react-native-clipboard/clipboard';
 
 export default function DetailsScreen({route:{params}}) {
-  const copyToClipboard = async () => {
-    await Clipboard.setStringAsync(params);
+  const copyToClipboard =  (params) => {
+    Clipboard.setString('asdasd');
   };
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={copyToClipboard} style={styles.link}>
+      <TouchableOpacity onPress={()=>copyToClipboard(params)} style={styles.link}>
         <Text style={styles.linkText}>Копировать текст</Text>
       </TouchableOpacity>
       <Text style={styles.title}>{params}</Text>

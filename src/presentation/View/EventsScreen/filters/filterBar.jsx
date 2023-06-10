@@ -13,8 +13,8 @@ export const FilterBar = () => {
                 <FilterBtn label='Завтра' onPeriodFilterPressed={vm.onPeriodFilterPressed} filterState={vm.PeriodFilterState} />
                 <FilterBtn label='Неделя' onPeriodFilterPressed={vm.onPeriodFilterPressed} filterState={vm.PeriodFilterState} />
                 <FilterBtn label='Месяц' onPeriodFilterPressed={vm.onPeriodFilterPressed} filterState={vm.PeriodFilterState} />
-                <FilterBtn label='Все' onPeriodFilterPressed={vm.onPeriodFilterPressed} filterState={vm.PeriodFilterState} />
-                <FilterBtn label='Прошедшие' onPeriodFilterPressed={vm.onPeriodFilterPressed} filterState={vm.PeriodFilterState} />
+                <FilterBtn label='Все' onPeriodFilterPressed={vm.onPeriodFilterPressed} filterState={vm.PeriodFilterState} testID="test:id/fiterAll" />
+                <FilterBtn label='Прошедшие' onPeriodFilterPressed={vm.onPeriodFilterPressed} filterState={vm.PeriodFilterState} testID="test:id/completed" />
             </ScrollView >
             <ClassSwitch classSwitchEnabled={vm.classSwitchEnabled} onClassSwitchPress={vm.onClassSwitchPress} />
         </View>
